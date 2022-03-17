@@ -1,12 +1,16 @@
 import React from "react";
+
 import MealItem from "./MealItem";
+import Card from '../../shared/components/UIElements/Card';
 import './MealsList..css';
 
 
 const MealsList = props => {
     if (props.items.length === 0) {
         return <div className="center">
-            <h2>No meals found.</h2>
+            <Card>
+                <h2>No meals found.</h2>
+            </Card>
         </div>
     }
     return (
