@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Icon, { ShoppingCartOutlined } from '@ant-design/icons';
+
 
 import './NavLinks.css';
 
@@ -9,7 +11,7 @@ const NavLinks = props => {
             <NavLink to="/about">אודות</NavLink>
         </li>
         <li>
-            <NavLink to="/cart">עגלה</NavLink>
+            <NavLink to="/cart">  <ShoppingCartOutlined /> עגלה    </NavLink>
         </li>
         <li>
             <NavLink to="/u1/orders">ההזמנות שלי</NavLink>
