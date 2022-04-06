@@ -6,7 +6,10 @@ import './NavLinks.css';
 const NavLinks = props => {
     return <ul className="nav-links">
         <li>
-            <NavLink to="/" exact>תפריט</NavLink>
+            <NavLink to="/about">אודות</NavLink>
+        </li>
+        <li>
+            <NavLink to="/cart">עגלה</NavLink>
         </li>
         <li>
             <NavLink to="/u1/orders">ההזמנות שלי</NavLink>
@@ -15,13 +18,10 @@ const NavLinks = props => {
             <NavLink to="/myprofile">איזור אישי</NavLink>
         </li>
         <li>
+            <NavLink to="/meals">תפריט</NavLink>
+        </li>
+        <li>
             <NavLink to="/auth">הרשמה והתחברות</NavLink>
-        </li>
-        <li>
-            <NavLink to="/cart">עגלה</NavLink>
-        </li>
-        <li>
-            <NavLink to="/about">אודות</NavLink>
         </li>
     </ul>
 };
