@@ -12,11 +12,9 @@ const MyOrderItem = props => {
         <List.Item>
             <Card className="cardi">
                 <div className="meal-item__info">
-                    <h2 >{props.mealsamount === 1 ? 'פריט' : 'פריטים'}
-                        {' ש"ח '}
-                        {props.totalprice}
-                        {props.date}
-                    </h2>
+                    <h2 > {props.mealsamount === 1 ? 'פריט' : 'פריטים'} {props.mealsamount} {'בהזמנה'} </h2>
+                    <h2 >{' שולם  '} {props.totalprice} {'שח'} </h2>
+                    <h2 > {props.date} {'הוזמן בתאריך'}   </h2>
                 </div>
             </Card>
         </List.Item >

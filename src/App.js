@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 
 import './App.css'
@@ -11,10 +11,11 @@ import MyOrders from './orders/pages/MyOrders';
 import About from './about/pages/About';
 import MyProfile from './MyProfile/pages/MyProfile';
 import Auth from './auth/pages/Auth';
+import CartProvider from './store/CartProvider';
 
 const App = () => {
   return (
-    <React.Fragment>
+    <CartProvider>
       <Route >
         <MainNavigation />
       </Route>
@@ -37,10 +38,13 @@ const App = () => {
         <Route path="/auth" >
           <Auth />
         </Route>
+        <Route path="/">
+          <Redirect to="/meals" />
+        </Route>
       </main>
       <Footer />
 
-    </React.Fragment>
+    </CartProvider>
   );
 };
 

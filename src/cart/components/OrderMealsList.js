@@ -1,9 +1,13 @@
 import React from 'react';
 
+
+
 import Card from '../../shared/components/UIElements/Card';
 import OrderMealItem from '../components/OrderMealItem'
 
 const OrderMealsList = props => {
+
+
 
     if (props.items.length === 0) {
         return <div className="center">
@@ -12,7 +16,10 @@ const OrderMealsList = props => {
             </Card>
         </div>
     }
+
     return (
+
+
         <ul className="meals-list">
             {props.items.map(order_meal => (
                 <OrderMealItem
@@ -22,6 +29,8 @@ const OrderMealsList = props => {
                     name={order_meal.name}
                     price={order_meal.price}
                     amount={order_meal.amount}
+                    add={props.add}
+                    reduce={props.reduce}
                 />
             ))}
         </ul>

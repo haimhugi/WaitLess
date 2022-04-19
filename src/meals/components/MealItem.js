@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './MealItem.css';
 import Avater from '../../shared/components/UIElements/Avatar';
 import Card from '../../shared/components/UIElements/Card';
+import MealItemForm from "./MealItemForm";
 
 const MealItem = props => {
     return (
@@ -19,6 +20,9 @@ const MealItem = props => {
                         </h3>
                     </div>
                 </Link>
+                <div>
+                    <MealItemForm id={props.id} />
+                </div>
             </Card>
         </li>
 
