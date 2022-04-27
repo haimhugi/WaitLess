@@ -1,7 +1,42 @@
 .ant-list-item {
-  display: block;
+  display: flex;
   text-align: center !important;
+  background-color:transparent;
+  align-items: stretch;
+  text-align: center;
+  border:dimgray;
+  width: -10%;
+  height: -10%;
 }
+.ant-list-item button{
+  border: #4059AD;
+  background-color: #4059AD;
+  text-align: center;
+  vertical-align:middle;
+  font-size: large;
+  color: white;
+  padding: 2%;
+  margin: -5%;
+border: transparent;
+width: fit-content;
+direction: rtl;
+flex: 1;
+}
+.ant-list-item button:hover{
+  
+  background-color: transparent;
+  color: #4059AD;
+  transition: 0.5s;
+  border: #4059AD;
+  
+}
+/* .ant-list-item:hover{
+  display: block;
+  background-color: azure;
+  color: #4059AD;
+  opacity: 0.8;
+  transition: 0.5s;
+} */
 h2 {
   text-align: center !important;
 }
