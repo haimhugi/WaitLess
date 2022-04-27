@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, Radio } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
+
 import { List } from 'antd';
 import Card from '../../shared/components/UIElements/Card';
 
