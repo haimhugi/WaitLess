@@ -24,6 +24,7 @@ const MealsList = props => {
                     description={meal.description}
                     price={meal.price}
                     reviewCount={meal.reviews}
+                    category={meal.category}
                 />
             ))}
         </ul>

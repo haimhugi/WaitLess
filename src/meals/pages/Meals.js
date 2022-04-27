@@ -11,7 +11,8 @@ const Meals = () => {
             name: 'שקשוקה',
             description: 'מוגשת חמה עם עגבניות טריות וטעימות ממש מנה מומלצת וטעימה , בנוסף מגיע עם לחם כפרי תהנו!',
             price: 54,
-            reviews: 3
+            reviews: 3,
+            category: 'shakshokot'
         },
         {
             id: 'u2',
@@ -19,7 +20,8 @@ const Meals = () => {
             name: 'טוסט',
             description: 'מוגשת חמה עם עגבניות טריות וטעימות ממש מנה מומלצת וטעימה , בנוסף מגיע עם לחם כפרי תהנו!',
             price: 24,
-            reviews: 8
+            reviews: 8,
+            category: 'toasts'
         },
         {
             id: 'u3',
@@ -27,7 +29,8 @@ const Meals = () => {
             name: 'סלט',
             description: 'מוגשת חמה עם עגבניות טריות וטעימות ממש מנה מומלצת וטעימה , בנוסף מגיע עם לחם כפרי תהנו!',
             price: 43,
-            reviews: 2
+            reviews: 2,
+            category: 'salads'
         },
         {
             id: 'u4',
@@ -35,7 +38,8 @@ const Meals = () => {
             name: 'ארוחת בוקר יחיד',
             description: 'מוגשת חמה עם עגבניות טריות וטעימות ממש מנה מומלצת וטעימה , בנוסף מגיע עם לחם כפרי תהנו!',
             price: 43,
-            reviews: 12
+            reviews: 12,
+            category: 'breakfasts'
         },
 
     ]

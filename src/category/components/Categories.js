@@ -1,7 +1,14 @@
 import React from 'react';
-import { List, Divider } from 'antd';
+import { useContext } from 'react';
+
+import { List, Button } from 'antd';
+
+
+import './Categories.css'
+import CategoryContext from '../../store/category-context';
 
 const data = [
+    'הכל',
     'ארוחות בוקר',
     'ארוחות ילדים',
     'ראשונות',
@@ -16,16 +23,31 @@ const data = [
     'קינוחים',
 ];
 
+
+
+
+
+
+
 const Categories = props => {
+
+    const categoryCtx = useContext(CategoryContext);
+    console.log('context is ' + categoryCtx.pickedCategory);
+
+
+
     return (
         <div>
-            <Divider orientation="right">קטגוריות</Divider>
+            <h2 orientation="right">קטגוריות</h2>
             <List
-                style={{ textAlign: 'right' }}
+                className='list'
                 size="large"
                 bordered
+                display='block'
                 dataSource={data}
-                renderItem={item => <List.Item>{item}</List.Item>}
+                renderItem={item => <List.Item >
+                    <Button onClick={() => categoryCtx.changeCategory(item)}>{item}</Button>
+                </List.Item>}
             />
         </div>
     );

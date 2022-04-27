@@ -43,7 +43,6 @@ const Cart = (props) => {
                 <span>סכום סופי</span>
             </div>
             <div className={classes.actions}>
-
                 {hasItems && <button className={classes.button}>לתשלום וסיום ההזמנה</button>}
             </div>
         </React.Fragment>
