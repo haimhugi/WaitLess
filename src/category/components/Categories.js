@@ -42,10 +42,8 @@ const Categories = props => {
             <List
                 className='list'
                 size="large"
-                bordered
-                display='block'
                 dataSource={data}
-                renderItem={item => <List.Item >
+                renderItem={item => <List.Item>
                     <Button onClick={() => categoryCtx.changeCategory(item)}>{item}</Button>
                 </List.Item>}
             />

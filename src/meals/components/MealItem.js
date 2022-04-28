@@ -20,7 +20,7 @@ const MealItem = props => {
 
     const cartCtx = useContext(CartContext);
 
-    const price = `שקל ${props.price.toFixed(2)}`;
+    const price = `₪ ${props.price.toFixed(2)}`;
 
     const addToCartHandler = amount => {
         cartCtx.addItem({
