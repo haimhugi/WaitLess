@@ -66,7 +66,7 @@ const App = () => {
               <Route path="/auth" >
                 <Auth />
               </Route>
-              : <Route path="/" >
+              : <Route path="/auth" >
                 <Auth />
               </Route>}
             {LoggedInCtx.isLoggedIn ?
