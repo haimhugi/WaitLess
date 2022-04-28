@@ -1,4 +1,5 @@
 import CartContext from '../../../store/cart-context';
+import LoggedInContext from '../../../store/loggedIn-context';
 
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -9,24 +10,32 @@ import './NavLinks.css';
 
 const NavLinks = props => {
     const cart = useContext(CartContext);
+    const loggedInCtx = useContext(LoggedInContext);
+    const logoutHandler = () => {
+        loggedInCtx.changeLoggedIn(false);
+    }
+
     return <ul className="nav-links">
         <li>
+            {loggedInCtx.isLoggedIn && <NavLink onClick={logoutHandler} to="/auth" >התנתקות</NavLink>}
+        </li>
+        {loggedInCtx.isLoggedIn && <li>
             <NavLink to="/about">אודות</NavLink>
-        </li>
-        <li>
+        </li>}
+        {loggedInCtx.isLoggedIn && <li>
             <NavLink id="cartLink" to="/cart">  <ShoppingCartOutlined /> {cart.items.reduce((a, b) => a = a + b.amount, 0)} עגלה    </NavLink>
-        </li>
-        <li>
+        </li>}
+        {loggedInCtx.isLoggedIn && <li>
             <NavLink to="/u1/orders">ההזמנות שלי</NavLink>
-        </li>
-        <li>
+        </li>}
+        {loggedInCtx.isLoggedIn && <li>
             <NavLink to="/myprofile">איזור אישי</NavLink>
-        </li>
-        <li>
+        </li>}
+        {loggedInCtx.isLoggedIn && <li>
             <NavLink to="/meals">תפריט</NavLink>
-        </li>
+        </li>}
         <li>
-            <NavLink to="/auth">הרשמה והתחברות</NavLink>
+            {!loggedInCtx.isLoggedIn && <NavLink to="/auth">הרשמה והתחברות</NavLink>}
         </li>
     </ul>
 };

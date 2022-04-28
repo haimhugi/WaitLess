@@ -13,50 +13,62 @@ import MyProfile from './MyProfile/pages/MyProfile';
 import Auth from './auth/pages/Auth';
 import CartProvider from './store/CartProvider';
 import CategoryContext from './store/category-context';
+import LoggedInContext from './store/loggedIn-context';
 
 const App = () => {
 
   const [pickedCategory, setPickedCategory] = useState('all');
+  const [loggedIn, setLoggedIn] = useState(false);
+
 
   const changeCategoryHandler = newCategory => {
     setPickedCategory(newCategory);
   }
 
+  const changeLoggedInHandler = newState => {
+    setLoggedIn(newState);
+  }
+
   return (
-    <CartProvider>
-      <CategoryContext.Provider value={{
-        pickedCategory: pickedCategory,
-        changeCategory: changeCategoryHandler
-      }}>
-        <Route >
-          <MainNavigation />
-        </Route>
-        <main>
-          <Route path="/meals" exact >
-            <Grid />
+    <LoggedInContext.Provider value={{
+      isLoggedIn: loggedIn,
+      changeLoggedIn: changeLoggedInHandler
+    }}>
+      <CartProvider>
+        <CategoryContext.Provider value={{
+          pickedCategory: pickedCategory,
+          changeCategory: changeCategoryHandler
+        }}>
+          <Route >
+            <MainNavigation />
           </Route>
-          <Route path="/cart" exact>
-            <Cart />
-          </Route>
-          <Route path="/:u1/orders" exact >
-            <MyOrders />
-          </Route>
-          <Route path="/about" >
-            <About />
-          </Route>
-          <Route path="/myprofile" >
-            <MyProfile />
-          </Route>
-          <Route path="/auth" >
-            <Auth />
-          </Route>
-          <Route path="/">
-            <Redirect to="/meals" />
-          </Route>
-        </main>
-        <Footer />
-      </CategoryContext.Provider>
-    </CartProvider>
+          <main>
+            <Route path="/meals" exact >
+              <Grid />
+            </Route>
+            <Route path="/cart" exact>
+              <Cart />
+            </Route>
+            <Route path="/:u1/orders" exact >
+              <MyOrders />
+            </Route>
+            <Route path="/about" >
+              <About />
+            </Route>
+            <Route path="/myprofile" >
+              <MyProfile />
+            </Route>
+            <Route path="/auth" >
+              <Auth />
+            </Route>
+            <Route path="/">
+              <Redirect to="/meals" />
+            </Route>
+          </main>
+          <Footer />
+        </CategoryContext.Provider>
+      </CartProvider>
+    </LoggedInContext.Provider>
   );
 };
 

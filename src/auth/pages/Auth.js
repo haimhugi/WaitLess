@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import './Auth.css'
 import Card from '../../shared/components/UIElements/Card';
-
+import LoggedInContext from '../../store/loggedIn-context';
 
 
 const Auth = () => {
+    const history = useHistory();
+    const LoggedInCtx = useContext(LoggedInContext);
+    console.log(' LoggedInCtx context is ' + LoggedInCtx.isLoggedIn);
+
 
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+        //do validation on values
+        LoggedInCtx.changeLoggedIn(true);
+        history.push("/meals");
     };
 
     return (
