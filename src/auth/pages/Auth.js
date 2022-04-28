@@ -6,9 +6,11 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import './Auth.css'
 import Card from '../../shared/components/UIElements/Card';
 import LoggedInContext from '../../store/loggedIn-context';
+import CategoryContext from '../../store/category-context';
 
 
 const Auth = () => {
+    const CartCtx = useContext(CategoryContext);
     const history = useHistory();
     const LoggedInCtx = useContext(LoggedInContext);
     console.log(' LoggedInCtx context is ' + LoggedInCtx.isLoggedIn);
@@ -17,6 +19,7 @@ const Auth = () => {
     const onFinish = (values) => {
         //do validation on values
         LoggedInCtx.changeLoggedIn(true);
+        CartCtx.changeCategory('all');
         history.push("/meals");
     };
 
