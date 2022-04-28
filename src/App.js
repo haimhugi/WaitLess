@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 
@@ -29,6 +29,10 @@ const App = () => {
     setLoggedIn(newState);
   }
 
+  const LoggedInCtx = useContext(LoggedInContext);
+
+
+
   return (
     <LoggedInContext.Provider value={{
       isLoggedIn: loggedIn,
@@ -58,12 +62,20 @@ const App = () => {
             <Route path="/myprofile" >
               <MyProfile />
             </Route>
-            <Route path="/auth" >
-              <Auth />
-            </Route>
-            <Route path="/">
-              <Redirect to="/meals" />
-            </Route>
+            {LoggedInCtx.isLoggedIn ?
+              <Route path="/auth" >
+                <Auth />
+              </Route>
+              : <Route path="/" >
+                <Auth />
+              </Route>}
+            {LoggedInCtx.isLoggedIn ?
+              <Route path="/">
+                <Redirect to="/meals" />
+              </Route>
+              : <Route path="/">
+                <Redirect to="/auth" />
+              </Route>}
           </main>
           <Footer />
         </CategoryContext.Provider>
