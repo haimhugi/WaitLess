@@ -1,9 +1,14 @@
 import React from "react";
+import { useContext } from "react";
 
 import MealsList from "../components/MealsList";
 import Card from "../../shared/components/UIElements/Card";
+import CategoryContext from "../../store/category-context";
 
 const Meals = () => {
+
+    const categoryCtx = useContext(CategoryContext);
+
     const MEALS = [
         {
             id: 'u1',
@@ -12,7 +17,7 @@ const Meals = () => {
             description: 'מוגשת חמה עם עגבניות טריות וטעימות ממש מנה מומלצת וטעימה , בנוסף מגיע עם לחם כפרי תהנו!',
             price: 54,
             reviews: 3,
-            category: 'shakshokot'
+            category: 'שקשוקות'
         },
         {
             id: 'u2',
@@ -21,7 +26,7 @@ const Meals = () => {
             description: 'מוגשת חמה עם עגבניות טריות וטעימות ממש מנה מומלצת וטעימה , בנוסף מגיע עם לחם כפרי תהנו!',
             price: 24,
             reviews: 8,
-            category: 'toasts'
+            category: 'טוסטים'
         },
         {
             id: 'u3',
@@ -30,7 +35,7 @@ const Meals = () => {
             description: 'מוגשת חמה עם עגבניות טריות וטעימות ממש מנה מומלצת וטעימה , בנוסף מגיע עם לחם כפרי תהנו!',
             price: 43,
             reviews: 2,
-            category: 'salads'
+            category: 'סלטים'
         },
         {
             id: 'u4',
@@ -39,11 +44,14 @@ const Meals = () => {
             description: 'מוגשת חמה עם עגבניות טריות וטעימות ממש מנה מומלצת וטעימה , בנוסף מגיע עם לחם כפרי תהנו!',
             price: 43,
             reviews: 12,
-            category: 'breakfasts'
+            category: 'ארוחות בוקר'
         },
 
     ]
-
+    if (categoryCtx.pickedCategory !== 'הכל') {
+        let filteredMeals = MEALS.filter(meal => { return meal.category === categoryCtx.pickedCategory })
+        return <Card> <MealsList items={filteredMeals} /> </Card>
+    }
     return <Card> <MealsList items={MEALS} /> </Card>
 };
 

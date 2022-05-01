@@ -22,6 +22,8 @@ const App = () => {
 
 
   const changeCategoryHandler = newCategory => {
+    //let meals = MEALS.filter(item => item.category === '')
+    //ToDo - לעשות מערך של מוצרים בקטגוריות העכשוויות וברגע שמשנים קטגוריה המערך של המוצרים בקטגרויות העכשוויות ישתנה לפי הלחיצה ואז לבמקום לרנדר את כל המוצרים לפי כל הארוחות נרדר רק את המוצרים של הקטגרוריות העכשוויות
     setPickedCategory(newCategory);
   }
 
