@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 const CategoryContext = createContext({
-    pickedCategory: 'all'
+    pickedCategory: 'הכל'
 });
 
 export default CategoryContext;

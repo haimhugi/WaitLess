@@ -19,7 +19,7 @@ const Auth = () => {
     const onFinish = (values) => {
         //do validation on values
         LoggedInCtx.changeLoggedIn(true);
-        CartCtx.changeCategory('all');
+        CartCtx.changeCategory('הכל');
         history.push("/meals");
     };
 

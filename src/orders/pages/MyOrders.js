@@ -6,7 +6,7 @@ import './MyOrders.css';
 import { Divider } from 'antd';
 
 
-
+/*
 const MY_ORDERS = [
     {
         id: 'mo1',
@@ -36,15 +36,16 @@ const MY_ORDERS = [
         mealsamount: 1
         //mealslist : [all the meals in the order];
     },
-
 ]
+*/
+
 const MyOrders = () => {
 
     return (
 
         <Card>
             <Divider className='divider' orientation='right'>ההזמנות שלי</Divider>
-            <MyOrdersList items={MY_ORDERS} />
+            <MyOrdersList />
         </Card>);
 
 };

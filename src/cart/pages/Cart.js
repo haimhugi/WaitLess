@@ -1,13 +1,22 @@
 import CartContext from '../../store/cart-context'
 
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
+
+
 import CartItem from '../components/CartItem';
 import classes from './Cart.module.css';
+import OrderContext from '../../store/orders-context';
 
 
 
-const Cart = (props) => {
+const Cart = () => {
+
+    const history = useHistory();
+
     const cartCtx = useContext(CartContext);
+    const ordersCtx = useContext(OrderContext);
 
     const totalAmount = `₪${cartCtx.totalAmount.toFixed(2)}`;
     const hasItems = cartCtx.items.length > 0;
@@ -19,6 +28,23 @@ const Cart = (props) => {
     const cartItemAddHandler = (item) => {
         cartCtx.addItem({ ...item, amount: 1 });
     };
+    const createOrderHandler = () => {
+
+        console.log('all orders in ordersCtx ', ordersCtx);
+
+        const unique_id = uuid();
+        const small_id = unique_id.slice(0, 8);
+
+        ordersCtx.ordersList.current[0].addOrder({
+            orderId: small_id,
+            date: new Date().toLocaleString() + "",
+            totalPayed: cartCtx.totalAmount,
+            mealsAmount: cartCtx.items.length,
+            mealsList: cartCtx.items
+        })
+
+        history.push("/u1/orders");
+    }
 
     const cartItems = (
         <ul className={classes['cart-items']}>
@@ -43,7 +69,7 @@ const Cart = (props) => {
                 <span>סכום סופי</span>
             </div>
             <div className={classes.actions}>
-                {hasItems && <button className={classes.button}>לתשלום וסיום ההזמנה</button>}
+                {hasItems && <button onClick={createOrderHandler} className={classes.button}>לתשלום וסיום ההזמנה</button>}
             </div>
         </React.Fragment>
     );
