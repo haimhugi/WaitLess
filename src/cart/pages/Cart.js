@@ -1,10 +1,10 @@
 import CartContext from '../../store/cart-context'
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
-
+import Card from '../../shared/components/UIElements/Card';
 import CartItem from '../components/CartItem';
 import classes from './Cart.module.css';
 import OrderContext from '../../store/orders-context';
@@ -42,9 +42,20 @@ const Cart = () => {
             mealsAmount: cartCtx.items.length,
             mealsList: cartCtx.items
         })
+        let size = cartCtx.items.length
+        for (let i = 0; i < size; i++) {
+            cartCtx.removeItem(cartCtx.items[i].id);
+        }
+
+
+
 
         history.push("/u1/orders");
     }
+
+    useEffect(() => {
+        console.log('this is cartCtx in cart' + JSON.stringify(cartCtx));
+    }, [cartCtx]);
 
     const cartItems = (
         <ul className={classes['cart-items']}>
@@ -60,6 +71,16 @@ const Cart = () => {
             ))}
         </ul>
     );
+    const divStyle = {
+        width: '100%'
+    };
+    if (cartCtx.items.length === 0) {
+        return <div style={divStyle}>
+            <Card>
+                <h2>אין מוצרים בעגלה</h2>
+            </Card>
+        </div >
+    }
 
     return (
         <React.Fragment>

@@ -8,9 +8,11 @@ import { List } from 'antd';
 
 const MyOrdersList = props => {
     const ordersCtx = useContext(OrderContext);
-    console.log('the ordersList is ' + JSON.stringify(ordersCtx.ordersList.current));
+    // console.log('the ordersList is ' + JSON.stringify(ordersCtx.ordersList.current));
+    //console.log('the length of ordersList is ' + ordersCtx.ordersList.current.length);
 
-    if (ordersCtx.ordersList.length === 0) {
+
+    if (ordersCtx.ordersList.current.length === 1) {
         return <div className="center">
             <Card>
                 <h2>אין הזמנות קודמות</h2>

@@ -23,19 +23,7 @@ const App = () => {
   const cartCtx = useContext(CartContext);
 
 
-  const ordersCtx = useContext(OrderContext);
-  /*
-    const addNewOrderHandler = newOrder => {
-      console.log('order List HAHAHAHAHAHAHA before update ' + JSON.stringify(ordersList));
-      let newOrders = [...ordersList];
-      newOrders.push(newOrder);
-      console.log('new orders before update' + JSON.stringify(newOrders));
-      setOrdersList(newOrders);
-  
-      // newOrders.map(order => (cartCtx.removeItem(order.orderId)))
-  
-    }
-  */
+
   const changeCategoryHandler = newCategory => {
     setPickedCategory(newCategory);
   }
@@ -44,21 +32,11 @@ const App = () => {
     setLoggedIn(newState);
   }
 
-  /*
-    const [ordersList, setOrdersList] = useState([{
-      orderId: 'o1',
-      date: '',
-      totalPayed: 0,
-      mealsAmount: 0,
-      mealsList: [],
-      addOrder: addNewOrderHandler,
-    }]);
-  */
+
   const addNewOrderHandler = newOrder => {
     let newOrders = [...ordersList.current];
     newOrders.push(newOrder);
     ordersList.current = newOrders;
-    console.log('ordersList.current  changed' + JSON.stringify(ordersList.current));
   }
 
   let ordersList = useRef([{
@@ -74,14 +52,8 @@ const App = () => {
   const [pickedCategory, setPickedCategory] = useState('הכל');
   const [loggedIn, setLoggedIn] = useState(false);
 
-  /*
-  useEffect(() => {
-    console.log('ordersList  changed' + JSON.stringify(ordersList));
-  }, [ordersList]);
-*/
-  useEffect(() => {
-    console.log('ordersList.current  changed' + JSON.stringify(ordersList.current));
-  }, [ordersList]);
+
+
 
   useEffect(() => {
     console.log('this is cartCtx in app after changed' + JSON.stringify(cartCtx));
