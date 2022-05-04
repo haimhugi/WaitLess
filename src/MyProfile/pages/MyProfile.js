@@ -1,10 +1,44 @@
-import React from 'react';
-
-import Card from '../../shared/components/UIElements/Card';
+import React, { useState, useEffect } from 'react'
+import { Button } from 'antd';
 import { Row, Col } from 'antd';
 
 
+
+import Card from '../../shared/components/UIElements/Card';
+import PersonalDetailsControl from '../components/PersonalDetailsControl';
+import CreditCardsControl from '../components/CreditCardsControl';
+import DeleteAccountControl from '../components/DeleteAccountControl';
+
+
 const MyProfile = () => {
+
+
+    const pickedValHandler = newPickedVal => {
+        setPickedValueInMyProfile(newPickedVal);
+    }
+
+    const [pickedValueInMyProfile, setPickedValueInMyProfile] = useState('פרטים אישיים');
+
+    useEffect(() => {
+        console.log('changed to ' + pickedValueInMyProfile)
+    }, [pickedValueInMyProfile]);
+
+    return (
+        <Card>
+            <h1>איזור אישי</h1>
+            <Row >
+                <Col span={6} push={18}>
+                    <h1><Button onClick={() => pickedValHandler('פרטים אישיים')} >פרטים אישיים</Button></h1>
+                    <h1><Button onClick={() => pickedValHandler('כרטיסי אשראי')} >כרטיסי אשראי</Button></h1>
+                    <h1><Button onClick={() => pickedValHandler('מחיקת חשבון')} >מחיקת חשבון</Button> </h1>
+                </Col>
+                {pickedValueInMyProfile === 'פרטים אישיים' && <PersonalDetailsControl />}
+                {pickedValueInMyProfile === 'כרטיסי אשראי' && <CreditCardsControl />}
+                {pickedValueInMyProfile === 'מחיקת חשבון' && <DeleteAccountControl />}
+            </Row>
+        </Card>
+    )
+    /*
     return (
         <Card>
             <h1>איזור אישי</h1>
@@ -31,7 +65,7 @@ const MyProfile = () => {
                 </Col>
             </Row>
         </Card>
-    );
+    );*/
 };
 
 export default MyProfile;

@@ -14,9 +14,7 @@ const MyOrdersList = props => {
 
     if (ordersCtx.ordersList.current.length === 1) {
         return <div className="center">
-            <Card>
-                <h2>אין הזמנות קודמות</h2>
-            </Card>
+            <h2>אין הזמנות קודמות</h2>
         </div>
     }
     return (

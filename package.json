@@ -9,6 +9,7 @@
     "react": "^16.11.0",
     "react-bootstrap": "^2.3.0",
     "react-dom": "^16.14.0",
+    "react-editext": "^4.2.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "5.3.0",
     "react-scripts": "^2.1.3",
