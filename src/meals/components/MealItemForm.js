@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import Input from '../../shared/components/UIElements/Input'
 import classes from './MealItemForm.module.css'

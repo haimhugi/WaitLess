@@ -2,7 +2,7 @@ import React from 'react';
 
 import Card from '../../shared/components/UIElements/Card';
 import MyOrdersList from '../components/MyOrdersList';
-import './MyOrders.css';
+import './Myorders.css'
 import { Divider } from 'antd';
 
 

@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import React, { useReducer } from "react";
 
 import CartContext from "./cart-context";
 
