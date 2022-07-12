@@ -14,6 +14,7 @@ import Auth from './auth/pages/Auth';
 import CartProvider from './store/CartProvider';
 import CategoryContext from './store/category-context';
 import LoggedInContext from './store/loggedIn-context';
+import RegisterContext from './store/register-context';
 import OrderContext from './store/orders-context';
 import CartContext from './store/cart-context';
 
@@ -30,6 +31,10 @@ const App = () => {
 
   const changeLoggedInHandler = newState => {
     setLoggedIn(newState);
+  }
+
+  const changeRegisterHandler = newState => {
+    setRegister(newState);
   }
 
 
@@ -51,6 +56,8 @@ const App = () => {
 
   const [pickedCategory, setPickedCategory] = useState('הכל');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [register, setRegister] = useState(false);
+
 
 
 
@@ -61,8 +68,13 @@ const App = () => {
 
 
 
-
   const LoggedInCtx = useContext(LoggedInContext);
+  const RegisterCtx = useContext(RegisterContext);
+
+
+  useEffect(() => {
+    console.log('this is RegisterCtx in app after changed ' + JSON.stringify(register));
+  }, [register]);
 
 
 
@@ -71,54 +83,56 @@ const App = () => {
       isLoggedIn: loggedIn,
       changeLoggedIn: changeLoggedInHandler
     }}>
-      <OrderContext.Provider
-        value={{
-          ordersList: ordersList
-        }}>
-        <CartProvider>
-          <CategoryContext.Provider value={{
-            pickedCategory: pickedCategory,
-            changeCategory: changeCategoryHandler
+      <RegisterContext.Provider value={{
+        wantRegister: register,
+        changeRegister: changeRegisterHandler
+      }}>
+        <OrderContext.Provider
+          value={{
+            ordersList: ordersList
           }}>
-            <Route >
-              <MainNavigation />
-            </Route>
-            <main>
-              <Route path="/meals" exact >
-                <Grid />
+          <CartProvider>
+            <CategoryContext.Provider value={{
+              pickedCategory: pickedCategory,
+              changeCategory: changeCategoryHandler
+            }}>
+              <Route >
+                <MainNavigation />
               </Route>
-              <Route path="/cart" exact>
-                <Cart />
-              </Route>
-              <Route path="/:u1/orders" exact >
-                <MyOrders />
-              </Route>
-              <Route path="/about" >
-                <About />
-              </Route>
-              <Route path="/myprofile" >
-                <MyProfile />
-              </Route>
-              {LoggedInCtx.isLoggedIn ?
+              <main>
+                <Route path="/meals" exact >
+                  <Grid />
+                </Route>
+                <Route path="/cart" exact>
+                  <Cart />
+                </Route>
+                <Route path="/:u1/orders" exact >
+                  <MyOrders />
+                </Route>
+                <Route path="/about" >
+                  <About />
+                </Route>
+                <Route path="/myprofile" >
+                  <MyProfile />
+                </Route>
                 <Route path="/auth" >
                   <Auth />
                 </Route>
-                : <Route path="/auth" >
-                  <Auth />
-                </Route>}
-              {LoggedInCtx.isLoggedIn ?
-                <Route path="/">
-                  <Redirect to="/meals" />
-                </Route>
-                : <Route path="/">
-                  <Redirect to="/auth" />
-                </Route>}
-            </main>
-            <Footer />
-          </CategoryContext.Provider>
-        </CartProvider>
-      </OrderContext.Provider>
+                {LoggedInCtx.isLoggedIn ?
+                  <Route path="/">
+                    <Redirect to="/meals" />
+                  </Route>
+                  : <Route path="/">
+                    <Redirect to="/auth" />
+                  </Route>}
+              </main>
+              <Footer />
+            </CategoryContext.Provider>
+          </CartProvider>
+        </OrderContext.Provider>
+      </RegisterContext.Provider>
     </LoggedInContext.Provider>
+
   );
 };
 

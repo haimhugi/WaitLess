@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 
 import OrderContext from '../../store/orders-context';
 import MyOrderItem from './MyOrderItem';
-import Card from '../../shared/components/UIElements/Card';
 import { List } from 'antd';
 
 
