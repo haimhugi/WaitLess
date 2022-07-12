@@ -1,30 +1,28 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import 'antd/dist/antd.css';
 import { Col, Row, Button } from 'antd';
 
 import Modal from '../../shared/components/UIElements/Modal';
 
-import tablePickContext from '../../store/tablePick-context';
 
 
 
 
-const TablePick = () => {
+const TablePick = props => {
 
-    const TablePickCtx = useContext(tablePickContext);
 
 
     const tablePickHandler = tableNum => {
         //update table number on user
         console.log(tableNum);
-        TablePickCtx.changeTablePick(false);
+        props.onClose();
     }
 
 
 
     return (
-        <Modal onClose={tablePickHandler}>
+        <Modal onClose={props.onClose}>
             <h1>בחר שולחן</h1>
             <Row>
                 <Col span={6}>

@@ -38,7 +38,7 @@ const MainNavigation = props => {
           <Link to="/meals">WaitLess</Link>
         </h1>
         <nav className='main-navigation__header-nav'>
-          <NavLinks />
+          <NavLinks onLogout={props.onLogout} />
         </nav>
       </MainHeader>
     </React.Fragment>

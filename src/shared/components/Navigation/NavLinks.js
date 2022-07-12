@@ -13,6 +13,7 @@ const NavLinks = props => {
     const loggedInCtx = useContext(LoggedInContext);
     const logoutHandler = () => {
         loggedInCtx.changeLoggedIn(false);
+        props.onLogout();
     }
 
     return <ul className="nav-links">

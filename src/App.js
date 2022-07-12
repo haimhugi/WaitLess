@@ -20,7 +20,6 @@ import LoggedInContext from './store/loggedIn-context';
 import RegisterContext from './store/register-context';
 import OrderContext from './store/orders-context';
 import CartContext from './store/cart-context';
-import tablePickContext from './store/tablePick-context.js';
 
 
 const App = () => {
@@ -42,8 +41,11 @@ const App = () => {
     setRegister(newState);
   }
 
-  const changeTablePickHandler = newState => {
-    setPickTableIsShown(newState);
+  const changeTablePickToTrue = () => {
+    setPickTableIsShown(true);
+  };
+  const hideTablePick = () => {
+    setPickTableIsShown(false);
   };
 
 
@@ -88,7 +90,6 @@ const App = () => {
 
 
   const LoggedInCtx = useContext(LoggedInContext);
-  const tablePickCtx = useContext(tablePickContext);
 
 
   return (
@@ -100,55 +101,51 @@ const App = () => {
         wantRegister: register,
         changeRegister: changeRegisterHandler
       }}>
-        <tablePickContext.Provider value={{
-          pickTable: pickTableIsShown,
-          changeTablePick: changeTablePickHandler
-        }}>
-          <OrderContext.Provider
-            value={{
-              ordersList: ordersList
+
+        <OrderContext.Provider
+          value={{
+            ordersList: ordersList
+          }}>
+          <CartProvider>
+            <CategoryContext.Provider value={{
+              pickedCategory: pickedCategory,
+              changeCategory: changeCategoryHandler
             }}>
-            <CartProvider>
-              <CategoryContext.Provider value={{
-                pickedCategory: pickedCategory,
-                changeCategory: changeCategoryHandler
-              }}>
-                <Route >
-                  <MainNavigation />
+              <Route >
+                <MainNavigation onLogout={changeTablePickToTrue} />
+              </Route>
+              <main>
+                <Route path="/meals" exact >
+                  <Grid />
+                  {pickTableIsShown && <TablePick onClose={hideTablePick} />}
                 </Route>
-                <main>
-                  <Route path="/meals" exact >
-                    <Grid />
-                    {tablePickCtx.pickTable && <TablePick />}
+                <Route path="/cart" exact>
+                  <Cart />
+                </Route>
+                <Route path="/:u1/orders" exact >
+                  <MyOrders />
+                </Route>
+                <Route path="/about" >
+                  <About />
+                </Route>
+                <Route path="/myprofile" >
+                  <MyProfile />
+                </Route>
+                <Route path="/auth" >
+                  <Auth />
+                </Route>
+                {LoggedInCtx.isLoggedIn ?
+                  <Route path="/">
+                    <Redirect to="/meals" />
                   </Route>
-                  <Route path="/cart" exact>
-                    <Cart />
-                  </Route>
-                  <Route path="/:u1/orders" exact >
-                    <MyOrders />
-                  </Route>
-                  <Route path="/about" >
-                    <About />
-                  </Route>
-                  <Route path="/myprofile" >
-                    <MyProfile />
-                  </Route>
-                  <Route path="/auth" >
-                    <Auth />
-                  </Route>
-                  {LoggedInCtx.isLoggedIn ?
-                    <Route path="/">
-                      <Redirect to="/meals" />
-                    </Route>
-                    : <Route path="/">
-                      <Redirect to="/auth" />
-                    </Route>}
-                </main>
-                <Footer />
-              </CategoryContext.Provider>
-            </CartProvider>
-          </OrderContext.Provider>
-        </tablePickContext.Provider>
+                  : <Route path="/">
+                    <Redirect to="/auth" />
+                  </Route>}
+              </main>
+              <Footer />
+            </CategoryContext.Provider>
+          </CartProvider>
+        </OrderContext.Provider>
       </RegisterContext.Provider>
     </LoggedInContext.Provider>
 
