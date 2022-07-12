@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from 'react';
 
 import MealsList from "../components/MealsList";
 import Card from "../../shared/components/UIElements/Card";

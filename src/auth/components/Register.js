@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import 'antd/dist/antd.css';
-import { Button, Checkbox, Form, Input, Select } from 'antd';
+import { Button, Checkbox, Form, Input } from 'antd';
 
 import LoggedInContext from '../../store/loggedIn-context';
 import CategoryContext from '../../store/category-context';

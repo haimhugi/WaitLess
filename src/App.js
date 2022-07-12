@@ -11,12 +11,17 @@ import MyOrders from './orders/pages/MyOrders';
 import About from './about/pages/About';
 import MyProfile from './MyProfile/pages/MyProfile';
 import Auth from './auth/pages/Auth';
+
+import TablePick from './meals/components/TablePick';
+
 import CartProvider from './store/CartProvider';
 import CategoryContext from './store/category-context';
 import LoggedInContext from './store/loggedIn-context';
 import RegisterContext from './store/register-context';
 import OrderContext from './store/orders-context';
 import CartContext from './store/cart-context';
+import tablePickContext from './store/tablePick-context.js';
+
 
 const App = () => {
 
@@ -36,6 +41,10 @@ const App = () => {
   const changeRegisterHandler = newState => {
     setRegister(newState);
   }
+
+  const changeTablePickHandler = newState => {
+    setPickTableIsShown(newState);
+  };
 
 
   const addNewOrderHandler = newOrder => {
@@ -57,6 +66,10 @@ const App = () => {
   const [pickedCategory, setPickedCategory] = useState('הכל');
   const [loggedIn, setLoggedIn] = useState(false);
   const [register, setRegister] = useState(false);
+  const [pickTableIsShown, setPickTableIsShown] = useState(true);
+
+
+
 
 
 
@@ -66,16 +79,16 @@ const App = () => {
     console.log('this is cartCtx in app after changed' + JSON.stringify(cartCtx));
   }, [cartCtx]);
 
+  useEffect(() => {
+    console.log('this is pickTableIsShown in app after changed ' + JSON.stringify(pickTableIsShown));
+  }, [pickTableIsShown]);
+
+
+
 
 
   const LoggedInCtx = useContext(LoggedInContext);
-  const RegisterCtx = useContext(RegisterContext);
-
-
-  useEffect(() => {
-    console.log('this is RegisterCtx in app after changed ' + JSON.stringify(register));
-  }, [register]);
-
+  const tablePickCtx = useContext(tablePickContext);
 
 
   return (
@@ -87,49 +100,55 @@ const App = () => {
         wantRegister: register,
         changeRegister: changeRegisterHandler
       }}>
-        <OrderContext.Provider
-          value={{
-            ordersList: ordersList
-          }}>
-          <CartProvider>
-            <CategoryContext.Provider value={{
-              pickedCategory: pickedCategory,
-              changeCategory: changeCategoryHandler
+        <tablePickContext.Provider value={{
+          pickTable: pickTableIsShown,
+          changeTablePick: changeTablePickHandler
+        }}>
+          <OrderContext.Provider
+            value={{
+              ordersList: ordersList
             }}>
-              <Route >
-                <MainNavigation />
-              </Route>
-              <main>
-                <Route path="/meals" exact >
-                  <Grid />
+            <CartProvider>
+              <CategoryContext.Provider value={{
+                pickedCategory: pickedCategory,
+                changeCategory: changeCategoryHandler
+              }}>
+                <Route >
+                  <MainNavigation />
                 </Route>
-                <Route path="/cart" exact>
-                  <Cart />
-                </Route>
-                <Route path="/:u1/orders" exact >
-                  <MyOrders />
-                </Route>
-                <Route path="/about" >
-                  <About />
-                </Route>
-                <Route path="/myprofile" >
-                  <MyProfile />
-                </Route>
-                <Route path="/auth" >
-                  <Auth />
-                </Route>
-                {LoggedInCtx.isLoggedIn ?
-                  <Route path="/">
-                    <Redirect to="/meals" />
+                <main>
+                  <Route path="/meals" exact >
+                    <Grid />
+                    {tablePickCtx.pickTable && <TablePick />}
                   </Route>
-                  : <Route path="/">
-                    <Redirect to="/auth" />
-                  </Route>}
-              </main>
-              <Footer />
-            </CategoryContext.Provider>
-          </CartProvider>
-        </OrderContext.Provider>
+                  <Route path="/cart" exact>
+                    <Cart />
+                  </Route>
+                  <Route path="/:u1/orders" exact >
+                    <MyOrders />
+                  </Route>
+                  <Route path="/about" >
+                    <About />
+                  </Route>
+                  <Route path="/myprofile" >
+                    <MyProfile />
+                  </Route>
+                  <Route path="/auth" >
+                    <Auth />
+                  </Route>
+                  {LoggedInCtx.isLoggedIn ?
+                    <Route path="/">
+                      <Redirect to="/meals" />
+                    </Route>
+                    : <Route path="/">
+                      <Redirect to="/auth" />
+                    </Route>}
+                </main>
+                <Footer />
+              </CategoryContext.Provider>
+            </CartProvider>
+          </OrderContext.Provider>
+        </tablePickContext.Provider>
       </RegisterContext.Provider>
     </LoggedInContext.Provider>
 
