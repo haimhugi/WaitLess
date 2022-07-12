@@ -50,7 +50,7 @@ const signup = async (req, res, next) => {
         email,
         password,
         orders: [],
-        table: 0
+        onTable: 0
     });
 
     try {
@@ -95,6 +95,42 @@ const login = async (req, res, next) => {
     });
 };
 
+const updateTable = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return next(
+            new HttpError('Invalid inputs passed, please check your data.', 422)
+        );
+    }
+    const table = req.body.table;
+    const userId = req.params.pid;
+    let user;
+    try {
+        user = await User.findById(userId);
+    } catch (err) {
+        const error = new HttpError(
+            'Something went wrong, could not update order.',
+            500
+        );
+        return next(error);
+    }
+    user.table = table;
+
+    try {
+        await user.save();
+    } catch (err) {
+        const error = new HttpError(
+            'Something went wrong, could not update order.',
+            500
+        );
+        return next(error);
+    }
+
+    res.status(200).json({ user: user.toObject({ getters: true }) });
+};
+
+
 exports.getUsers = getUsers;
 exports.signup = signup;
 exports.login = login;
+exports.updateTable = updateTable;

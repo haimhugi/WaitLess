@@ -62,16 +62,18 @@ const createOrder = async (req, res, next) => {
         );
     }
 
-    const { orderNumber, mealsNumber, totalPrice, date, meals, creator } = req.body;
+    const { orderNumber, ordersNumber, totalPrice, date, orders, onTable, creator } = req.body;
 
 
 
     const createdOrder = new Order({
         orderNumber,
-        mealsNumber,
+        ordersNumber,
         totalPrice,
         date,
-        meals,
+        orders,
+        onTable,
+        status: 'In preparation',
         creator
     });
 
@@ -150,7 +152,44 @@ const deleteOrder = async (req, res, next) => {
     res.status(200).json({ message: 'Deleted order.' });
 };
 
+
+const updateStatus = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return next(
+            new HttpError('Invalid inputs passed, please check your data.', 422)
+        );
+    }
+    const status = req.body.status;
+    const orderId = req.params.pid;
+    let order;
+    try {
+        order = await Order.findById(orderId);
+    } catch (err) {
+        const error = new HttpError(
+            'Something went wrong, could not update order.',
+            500
+        );
+        return next(error);
+    }
+    order.status = status;
+
+    try {
+        await order.save();
+    } catch (err) {
+        const error = new HttpError(
+            'Something went wrong, could not update order.',
+            500
+        );
+        return next(error);
+    }
+
+    res.status(200).json({ order: order.toObject({ getters: true }) });
+};
+
 exports.getOrderById = getOrderById;
 exports.getOrdersByUserId = getOrdersByUserId;
 exports.createOrder = createOrder;
 exports.deleteOrder = deleteOrder;
+exports.updateStatus = updateStatus;
+

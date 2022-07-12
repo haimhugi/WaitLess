@@ -8,6 +8,8 @@ const orderSchema = new Schema({
     totalPrice: { type: String, required: true },
     date: { type: String, required: true },
     meals: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Meal' }],
+    onTable: { type: String, required: true, minlength: 0 },
+    status: { type: String, required: true },
     creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User' }
 });
 

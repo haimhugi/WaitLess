@@ -19,4 +19,12 @@ router.post(
 
 router.post('/login', usersController.login);
 
+router.patch(
+    '/update-table/:pid',
+    [
+        check('table').not().isEmpty(),
+    ],
+    usersController.updateTable
+);
+
 module.exports = router;
