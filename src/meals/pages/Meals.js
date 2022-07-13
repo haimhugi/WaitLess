@@ -4,7 +4,9 @@ import MealsList from "../components/MealsList";
 import Card from "../../shared/components/UIElements/Card";
 import CategoryContext from "../../store/category-context";
 
-const Meals = () => {
+const Meals = props => {
+
+
 
     const categoryCtx = useContext(CategoryContext);
 
@@ -51,7 +53,7 @@ const Meals = () => {
         let filteredMeals = MEALS.filter(meal => { return meal.category === categoryCtx.pickedCategory })
         return <Card> <MealsList items={filteredMeals} /> </Card>
     }
-    return <Card> <MealsList items={MEALS} /> </Card>
+    return <Card> <MealsList isAdmin={props.isAdmin} items={MEALS} /> </Card>
 };
 
 export default Meals;

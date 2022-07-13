@@ -1,11 +1,13 @@
 import React from 'react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import { List, Button } from 'antd';
 
 
 import './Categories.css'
 import CategoryContext from '../../store/category-context';
+import AddCategory from './AddCategory';
+
 
 const data = [
     'הכל',
@@ -31,6 +33,16 @@ const data = [
 
 const Categories = props => {
 
+
+    const [addCategoryOn, setAddCategoryOn] = useState(false);
+
+    const showAddCategoryOn = () => {
+        setAddCategoryOn(true);
+    }
+    const hideAddCategoryOn = () => {
+        setAddCategoryOn(false);
+    }
+
     const categoryCtx = useContext(CategoryContext);
     console.log('context is ' + categoryCtx.pickedCategory);
 
@@ -43,11 +55,17 @@ const Categories = props => {
                 className='list'
                 size="large"
                 dataSource={data}
-                renderItem={item => <List.Item>
-                    <Button onClick={() => categoryCtx.changeCategory(item)}>{item}</Button>
+                renderItem={item =>
+                    <List.Item>
+                        <Button onClick={() => categoryCtx.changeCategory(item)}>{item}</Button>
+                    </List.Item>}
+            >
+                {props.isAdmin && <List.Item >
+                    <Button className='addCategory' onClick={showAddCategoryOn}>הוסף קטגוריה</Button>
                 </List.Item>}
-            />
-        </div>
+            </List>
+            {addCategoryOn && props.isAdmin && <AddCategory onClose={hideAddCategoryOn} />}
+        </div >
     );
 };
 

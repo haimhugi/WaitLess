@@ -25,7 +25,7 @@ const MainNavigation = props => {
       {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
       <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}>
         <nav className='main-navigation__drawer-nav'>
-          <NavLinks />
+          <NavLinks isAdmin={props.isAdmin} />
         </nav>
       </SideDrawer>
       <MainHeader>
@@ -38,7 +38,7 @@ const MainNavigation = props => {
           <Link to="/meals">WaitLess</Link>
         </h1>
         <nav className='main-navigation__header-nav'>
-          <NavLinks onLogout={props.onLogout} />
+          <NavLinks isAdmin={props.isAdmin} onLogout={props.onLogout} />
         </nav>
       </MainHeader>
     </React.Fragment>

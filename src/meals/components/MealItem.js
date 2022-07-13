@@ -1,7 +1,10 @@
-import { useContext } from "react";
-
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from 'react-router-dom'
+
+import { Rate } from "antd";
+import "antd/dist/antd.css";
+
+
 import './MealItem.css';
 import Avater from '../../shared/components/UIElements/Avatar';
 import Card from '../../shared/components/UIElements/Card';
@@ -45,8 +48,20 @@ const MealItem = props => {
                     <div>{price}</div>
                 </Link>
                 <div>
-                    <MealItemForm id={props.id} onAddToCart={addToCartHandler} />
+                    <MealItemForm
+                        key={props.id}
+                        id={props.id}
+                        image={props.image}
+                        name={props.name}
+                        description={props.description}
+                        price={props.price}
+                        reviewCount={props.reviews}
+                        category={props.category}
+                        onAddToCart={addToCartHandler}
+                        isAdmin={props.isAdmin}
+                    />
                 </div>
+                <Rate disabled defaultValue={5} />
             </Card>
         </li>
     )

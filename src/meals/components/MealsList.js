@@ -25,6 +25,7 @@ const MealsList = props => {
                     price={meal.price}
                     reviewCount={meal.reviews}
                     category={meal.category}
+                    isAdmin={props.isAdmin}
                 />
             ))}
         </ul>

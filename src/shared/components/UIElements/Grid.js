@@ -7,15 +7,15 @@ import Categories from '../../../category/components/Categories'
 import Meals from '../../../meals/pages/Meals';
 
 
-const Grid = () => {
+const Grid = props => {
     return (
         <div>
             <Row>
                 <Col span={6} push={18}>
-                    <Categories />
+                    <Categories isAdmin={props.isAdmin} />
                 </Col>
                 <Col span={18} pull={6}>
-                    <Meals />
+                    <Meals isAdmin={props.isAdmin} />
                 </Col>
             </Row>
         </div>
