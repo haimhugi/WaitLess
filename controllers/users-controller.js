@@ -50,7 +50,8 @@ const signup = async (req, res, next) => {
         email,
         password,
         orders: [],
-        onTable: 0
+        onTable: 0,
+        //isAdmin:false
     });
 
     try {
