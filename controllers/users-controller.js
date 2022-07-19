@@ -103,25 +103,25 @@ const updateTable = async (req, res, next) => {
             new HttpError('Invalid inputs passed, please check your data.', 422)
         );
     }
-    const table = req.body.table;
+    const onTable = req.body.onTable;
     const userId = req.params.pid;
     let user;
     try {
         user = await User.findById(userId);
     } catch (err) {
         const error = new HttpError(
-            'Something went wrong, could not update order.',
+            'Something went wrong, could not update table.',
             500
         );
         return next(error);
     }
-    user.table = table;
+    user.onTable = onTable;
 
     try {
         await user.save();
     } catch (err) {
         const error = new HttpError(
-            'Something went wrong, could not update order.',
+            'Something went wrong, could not save update onTable.',
             500
         );
         return next(error);

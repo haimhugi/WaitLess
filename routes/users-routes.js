@@ -22,7 +22,7 @@ router.post('/login', usersController.login); //לטפל
 router.patch(
     '/update-table/:pid',
     [
-        check('table').not().isEmpty(),
+        check('onTable').not().isEmpty(),
     ],
     usersController.updateTable
 );
