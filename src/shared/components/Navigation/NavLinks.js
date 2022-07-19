@@ -13,7 +13,7 @@ const NavLinks = props => {
     const loggedInCtx = useContext(LoggedInContext);
     const logoutHandler = () => {
         console.log(props.isAdmin);
-        loggedInCtx.changeLoggedIn(false);
+        loggedInCtx.changeToLoggedOut();
         props.onLogout();
     }
 

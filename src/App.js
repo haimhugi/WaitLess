@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect, useRef, useCallback } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 
@@ -38,9 +38,15 @@ const App = () => {
     setPickedCategory(newCategory);
   }
 
-  const changeLoggedInHandler = newState => {
-    setLoggedIn(newState);
-  }
+  const login = useCallback(uid => {
+    setLoggedIn(true);
+    setUserId(uid);
+  }, [])
+
+  const logout = useCallback(() => {
+    setLoggedIn(false);
+    setUserId(null);
+  }, []);
 
   const changeRegisterHandler = newState => {
     setRegister(newState);
@@ -79,6 +85,8 @@ const App = () => {
   const [register, setRegister] = useState(false);
   const [pickTableIsShown, setPickTableIsShown] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [userId, setUserId] = useState(false);
+
 
   /*
     useEffect(() => {
@@ -102,7 +110,8 @@ const App = () => {
   return (
     <LoggedInContext.Provider value={{
       isLoggedIn: loggedIn,
-      changeLoggedIn: changeLoggedInHandler
+      changeToLoggedIn: login,
+      changeToLoggedOut: logout
     }}>
       <RegisterContext.Provider value={{
         wantRegister: register,

@@ -51,7 +51,7 @@ const Register = () => {
 
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
-        LoggedInCtx.changeLoggedIn(true);
+        LoggedInCtx.changeToLoggedIn(true);
         CartCtx.changeCategory('הכל');
         history.push("/meals");
     };
