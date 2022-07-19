@@ -18,7 +18,7 @@ import TablePick from './meals/components/TablePick';
 import CartProvider from './store/CartProvider';
 import CategoryContext from './store/category-context';
 import StatusContext from './store/status-context';
-import LoggedInContext from './store/loggedIn-context';
+import { AuthContext } from './store/auth-context';
 import RegisterContext from './store/register-context';
 import OrderContext from './store/orders-context';
 import CartContext from './store/cart-context';
@@ -52,12 +52,13 @@ const App = () => {
     setRegister(newState);
   }
 
-  const changeTablePickToTrue = () => {
+  const changeTablePickToTrue = useCallback(() => {
     setPickTableIsShown(true);
-  };
-  const hideTablePick = () => {
+  }, []);
+
+  const hideTablePick = useCallback(() => {
     setPickTableIsShown(false);
-  };
+  }, []);
 
   const isAdminToTrue = () => {
     setIsAdmin(true);
@@ -82,10 +83,10 @@ const App = () => {
   const [pickedCategory, setPickedCategory] = useState('הכל');
   const [pickedOrderStatus, setOrderStatus] = useState('in preparation');
   const [loggedIn, setLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(false);
   const [register, setRegister] = useState(false);
   const [pickTableIsShown, setPickTableIsShown] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [userId, setUserId] = useState(false);
 
 
   /*
@@ -102,14 +103,19 @@ const App = () => {
     console.log('this is pickedOrderStatus in app after changed ' + JSON.stringify(pickedOrderStatus));
   }, [pickedOrderStatus]);
 
+  useEffect(() => {
+    console.log('this is pickTableIsShown in app after changed ' + JSON.stringify(pickTableIsShown));
+  }, [pickTableIsShown]);
 
 
-  const LoggedInCtx = useContext(LoggedInContext);
+
+  const AuthCtx = useContext(AuthContext);
 
 
   return (
-    <LoggedInContext.Provider value={{
+    <AuthContext.Provider value={{
       isLoggedIn: loggedIn,
+      userId: userId,
       changeToLoggedIn: login,
       changeToLoggedOut: logout
     }}>
@@ -131,7 +137,7 @@ const App = () => {
                 changeStatus: changeStatusHandler
               }}>
                 <Route >
-                  <MainNavigation isAdmin={isAdmin} onLogout={changeTablePickToTrue} />
+                  <MainNavigation isAdmin={isAdmin} TablePickToTrue={changeTablePickToTrue} />
                 </Route>
                 <main>
                   <Route path="/meals" exact >
@@ -156,7 +162,7 @@ const App = () => {
                   <Route path="/auth" >
                     <Auth />
                   </Route>
-                  {LoggedInCtx.isLoggedIn ?
+                  {AuthCtx.isLoggedIn ?
                     <Route path="/">
                       <Redirect to="/meals" />
                     </Route>
@@ -170,7 +176,7 @@ const App = () => {
           </CartProvider>
         </OrderContext.Provider>
       </RegisterContext.Provider>
-    </LoggedInContext.Provider>
+    </AuthContext.Provider>
 
   );
 };

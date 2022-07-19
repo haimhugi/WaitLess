@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Form, Input, Button, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined, LockFilled } from '@ant-design/icons';
 
 import Card from '../../shared/components/UIElements/Card';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 
-import LoggedInContext from '../../store/loggedIn-context';
+import AuthContext from '../../store/auth-context';
 import CategoryContext from '../../store/category-context';
 import RegisterContext from '../../store/register-context';
 
@@ -24,7 +24,7 @@ const Login = () => {
 
     const CartCtx = useContext(CategoryContext);
     const history = useHistory();
-    const LoggedInCtx = useContext(LoggedInContext);
+    const AuthCtx = useContext(AuthContext);
     const RegisterCtx = useContext(RegisterContext);
 
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -84,7 +84,7 @@ const Login = () => {
                     'Content-Type': 'application/json'
                 }
             );
-            LoggedInCtx.changeToLoggedIn(responseData.user.id);
+            AuthCtx.changeToLoggedIn(responseData.user.id);
             CartCtx.changeCategory('הכל');
             history.push("/meals");
             console.log('Success');

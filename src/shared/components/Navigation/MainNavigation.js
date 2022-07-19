@@ -9,10 +9,12 @@ import Backdrop from './../UIElements/Backdrop'
 
 
 const MainNavigation = props => {
+
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
   const openDrawerHandler = () => {
     setDrawerIsOpen(true);
+
   };
 
   const closeDrawerHandler = () => {
@@ -38,7 +40,7 @@ const MainNavigation = props => {
           <Link to="/meals">WaitLess</Link>
         </h1>
         <nav className='main-navigation__header-nav'>
-          <NavLinks isAdmin={props.isAdmin} onLogout={props.onLogout} />
+          <NavLinks isAdmin={props.isAdmin} TablePickToTrue={props.TablePickToTrue} />
         </nav>
       </MainHeader>
     </React.Fragment>

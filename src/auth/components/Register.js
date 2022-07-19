@@ -4,9 +4,14 @@ import { useHistory } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import { Button, Checkbox, Form, Input } from 'antd';
 
-import LoggedInContext from '../../store/loggedIn-context';
+import AuthContext from '../../store/auth-context';
 import CategoryContext from '../../store/category-context';
 import RegisterContext from '../../store/register-context';
+
+
+import { useHttpClient } from '../../shared/hooks/http-hook';
+
+
 
 
 const formItemLayout = {
@@ -44,16 +49,35 @@ const Register = () => {
 
     const CartCtx = useContext(CategoryContext);
     const history = useHistory();
-    const LoggedInCtx = useContext(LoggedInContext);
+    const AuthCtx = useContext(AuthContext);
     const RegisterCtx = useContext(RegisterContext);
+
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
     const [form] = Form.useForm();
 
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
-        LoggedInCtx.changeToLoggedIn(true);
-        CartCtx.changeCategory('הכל');
-        history.push("/meals");
+    const onFinish = async values => {
+
+        try {
+            await sendRequest(
+                'http://localhost:5001/api/users/signup',
+                'POST',
+                JSON.stringify({
+                    name: values.name,
+                    email: values.email,
+                    password: values.password
+                }),
+                {
+                    'Content-Type': 'application/json'
+                }
+            );
+
+            AuthCtx.changeToLoggedOut();
+            console.log('Received values of form: ', values);
+            AuthCtx.changeToLoggedIn(true);
+            CartCtx.changeCategory('הכל');
+            history.push("/meals");
+        } catch (err) { }
     };
 
     const changeRegisterToFalse = () => {

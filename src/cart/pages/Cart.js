@@ -30,7 +30,6 @@ const Cart = () => {
     };
     const createOrderHandler = () => {
 
-        console.log('all orders in ordersCtx ', ordersCtx);
 
         const unique_id = uuid();
         const small_id = unique_id.slice(0, 8);

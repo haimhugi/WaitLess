@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import 'antd/dist/antd.css';
 import { Col, Row, Button } from 'antd';
+
+import { useHttpClient } from '../../shared/hooks/http-hook';
+
+
+import AuthContext from '../../store/auth-context';
 
 import Modal from '../../shared/components/UIElements/Modal';
 
@@ -11,12 +16,26 @@ import Modal from '../../shared/components/UIElements/Modal';
 
 const TablePick = props => {
 
+    const AuthCtx = useContext(AuthContext);
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
 
-    const tablePickHandler = tableNum => {
-        //update table number on user
-        console.log(tableNum);
-        props.onClose();
+    const tablePickHandler = async (tableNum) => {
+
+        try {
+            await sendRequest(
+                `http://localhost:5001/api/users/update-table/${AuthCtx.userId}`,
+                'PATCH',
+                JSON.stringify({
+                    onTable: tableNum
+                }),
+                {
+                    'Content-Type': 'application/json'
+                }
+            );
+            console.log(tableNum);
+            props.onClose();
+        } catch (err) { }
     }
 
 
