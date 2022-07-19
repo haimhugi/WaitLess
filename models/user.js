@@ -9,7 +9,7 @@ const userSchema = new Schema({
     password: { type: String, required: true, minlength: 6 },
     orders: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Order' }],
     onTable: { type: String, required: false, minlength: 0 },
-    //isAdmin
+    isAdmin: { type: Boolean, required: true }
 
 });
 

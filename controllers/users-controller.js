@@ -51,7 +51,7 @@ const signup = async (req, res, next) => {
         password,
         orders: [],
         onTable: 0,
-        //isAdmin:false
+        isAdmin:false
     });
 
     try {
