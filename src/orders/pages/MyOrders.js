@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import Card from '../../shared/components/UIElements/Card';
 import MyOrdersList from '../components/MyOrdersList';
 import './Myorders.css'
 import { Divider } from 'antd';
+
+import { useHttpClient } from '../../shared/hooks/http-hook';
+
+import AuthContext from '../../store/auth-context';
 
 
 /*
@@ -41,10 +45,29 @@ const MY_ORDERS = [
 
 const MyOrders = () => {
 
+    const { sendRequest } = useHttpClient();
+    const [loadedOrders, setLoadedOrders] = useState();
+    const AuthCtx = useContext(AuthContext);
+
+    useEffect(() => {
+
+        const sendRequest = async () => {
+            try {
+                const response = await fetch(`http://localhost:5001/api/orders/user/${AuthCtx.userId}`);
+                const responseData = await response.json();
+                console.log(responseData);
+                setLoadedOrders(responseData.orders);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        sendRequest();
+    }, []);
+
     return (
         <Card>
             <Divider className='divider' orientation='right'>ההזמנות שלי</Divider>
-            <MyOrdersList />
+            <MyOrdersList loadedOrders={loadedOrders}/>
         </Card>);
 
 };

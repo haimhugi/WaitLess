@@ -19,7 +19,11 @@ const MyOrderItem = props => {
                     <p>   {'בהזמנה יש'}  {props.mealsAmount === 1 ? '' : props.mealsAmount}  {props.mealsAmount === 1 ? 'פריט' : 'פריטים'} {props.mealsAmount === 1 ? 'אחד' : ''}  </p>
                     <p>{' שולם  '} {props.totalPayed} {'שח'} </p>
                     <p > {props.date} {'הוזמן בתאריך'}   </p>
-                    <p> {'המוצרים שהזמנת הם:'} {' ' + props.mealsList.map(meal => (meal.name))}</p>
+                    <List > 
+                    {props.mealsList.map(meal => (
+                    <p dir='rtl'>{'המוצרים שהזמנת הם:'} {' ' + (meal) }</p>
+                    ))}
+                    </List>
                 </div>
             </Card>
         </List.Item>

@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 
 import OrderContext from '../../store/orders-context';
 import MyOrderItem from './MyOrderItem';
 import { List } from 'antd';
+import { useHttpClient } from '../../shared/hooks/http-hook';
+
+import AuthContext from '../../store/auth-context';
+
 
 
 const MyOrdersList = props => {
-    const ordersCtx = useContext(OrderContext);
-    // console.log('the ordersList is ' + JSON.stringify(ordersCtx.ordersList.current));
-    //console.log('the length of ordersList is ' + ordersCtx.ordersList.current.length);
-
-
-    if (ordersCtx.ordersList.current.length === 1) {
+    console.log(props.loadedOrders);
+    if (!props.loadedOrders) {
         return <div className="center">
             <h2>אין הזמנות קודמות</h2>
         </div>
@@ -21,14 +21,14 @@ const MyOrdersList = props => {
             size="large"
             bordered >
 
-            {ordersCtx.ordersList.current.map(order => (
+            {props.loadedOrders.map(order => (
                 <MyOrderItem
-                    key={order.orderId}
-                    id={order.orderId}
+                    key={order.orderNumber}
+                    id={order.id}
                     date={order.date}
-                    totalPayed={order.totalPayed}
+                    totalPayed={order.totalPrice}
                     mealsAmount={order.mealsAmount}
-                    mealsList={order.mealsList}
+                    mealsList={order.meals}
                 />
             ))}
         </List>
