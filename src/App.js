@@ -38,9 +38,10 @@ const App = () => {
     setPickedCategory(newCategory);
   }
 
-  const login = useCallback(uid => {
+  const login = useCallback((uid, admin) => {
     setLoggedIn(true);
     setUserId(uid);
+    setIsAdmin(admin);
   }, [])
 
   const logout = useCallback(() => {
@@ -116,6 +117,7 @@ const App = () => {
     <AuthContext.Provider value={{
       isLoggedIn: loggedIn,
       userId: userId,
+      isAdmin: isAdmin,
       changeToLoggedIn: login,
       changeToLoggedOut: logout
     }}>

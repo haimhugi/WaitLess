@@ -84,7 +84,8 @@ const Login = () => {
                     'Content-Type': 'application/json'
                 }
             );
-            AuthCtx.changeToLoggedIn(responseData.user.id);
+            console.log(responseData.user);
+            AuthCtx.changeToLoggedIn(responseData.user.id, responseData.user.isAdmin);
             CartCtx.changeCategory('הכל');
             history.push("/meals");
             console.log('Success');
