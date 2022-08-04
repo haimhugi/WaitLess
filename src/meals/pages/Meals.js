@@ -1,13 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { Button } from 'antd';
 
 import MealsList from "../components/MealsList";
 import Card from "../../shared/components/UIElements/Card";
 import CategoryContext from "../../store/category-context";
+import EditMeal from '../components/EditMeal';
 
 const Meals = props => {
 
+    const [open, setIsOpen] = useState(false);
+    const hideCreateForm = () => {
+        setIsOpen(false);
+    }
 
-
+    const openCreateForm = () =>
+    {
+        setIsOpen(true);
+    };
     const categoryCtx = useContext(CategoryContext);
 
     const MEALS = [
@@ -51,9 +60,32 @@ const Meals = props => {
     ]
     if (categoryCtx.pickedCategory !== 'הכל') {
         let filteredMeals = MEALS.filter(meal => { return meal.category === categoryCtx.pickedCategory })
-        return <Card> <MealsList items={filteredMeals} /> </Card>
+        return <Card> 
+            {props.isAdmin && <Button type="primary" danger onClick={openCreateForm}>הוסף מנה</Button>}
+                {open && <EditMeal
+                        id={""}
+                        image={""}
+                        name={""}
+                        description={""}
+                        price={""}
+                        category={""}
+                        onClose={hideCreateForm}
+                    />}
+                <MealsList isAdmin={props.isAdmin} items={filteredMeals} /> 
+            </Card>
     }
-    return <Card> <MealsList isAdmin={props.isAdmin} items={MEALS} /> </Card>
+    return <Card>
+        {props.isAdmin && <Button type="primary" danger onClick={openCreateForm}>הוסף מנה</Button>}
+                {open && <EditMeal
+                        id={""}
+                        image={""}
+                        name={""}
+                        description={""}
+                        price={""}
+                        category={""}
+                        onClose={hideCreateForm}
+                    />}
+         <MealsList isAdmin={props.isAdmin} items={MEALS} /> </Card>
 };
 
 export default Meals;
