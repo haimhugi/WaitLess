@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Button } from 'antd';
 import { Row, Col } from 'antd';
 
@@ -8,9 +8,29 @@ import Card from '../../shared/components/UIElements/Card';
 import PersonalDetailsControl from '../components/PersonalDetailsControl';
 import CreditCardsControl from '../components/CreditCardsControl';
 import DeleteAccountControl from '../components/DeleteAccountControl';
+import AuthContext from '../../store/auth-context';
 
 
 const MyProfile = () => {
+    const AuthCtx = useContext(AuthContext);
+    const [userName, setUserName] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+
+
+    useEffect(() => {
+
+        const sendRequest = async () => {
+            try {
+                const response = await fetch(`http://localhost:5001/api/users/${AuthCtx.userId}`);
+                const responseData = await response.json();
+                setUserName(JSON.stringify(responseData.user.name).replaceAll('"', ''));
+                setUserEmail(JSON.stringify(responseData.user.email).replaceAll('"', ''));
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        sendRequest();
+    }, []);
 
 
     const pickedValHandler = newPickedVal => {
@@ -32,7 +52,7 @@ const MyProfile = () => {
                     <h1><Button onClick={() => pickedValHandler('כרטיסי אשראי')} >כרטיסי אשראי</Button></h1>
                     <h1><Button onClick={() => pickedValHandler('מחיקת חשבון')} >מחיקת חשבון</Button> </h1>
                 </Col>
-                {pickedValueInMyProfile === 'פרטים אישיים' && <PersonalDetailsControl />}
+                {pickedValueInMyProfile === 'פרטים אישיים' && <PersonalDetailsControl userId={AuthCtx.userId} userEmail={userEmail} userName={userName} />}
                 {pickedValueInMyProfile === 'כרטיסי אשראי' && <CreditCardsControl />}
                 {pickedValueInMyProfile === 'מחיקת חשבון' && <DeleteAccountControl />}
             </Row>

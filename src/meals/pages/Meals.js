@@ -56,8 +56,8 @@ const Meals = props => {
             reviews: 12,
             category: 'ארוחות בוקר'
         },
-
     ]
+
     if (categoryCtx.pickedCategory !== 'הכל') {
         let filteredMeals = MEALS.filter(meal => { return meal.category === categoryCtx.pickedCategory })
         return <Card> 
