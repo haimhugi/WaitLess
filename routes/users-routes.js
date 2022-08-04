@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.get('/', usersController.getUsers);
 
+router.get('/:uid', usersController.getUserById);
+
 router.post(
     '/signup',
     [
@@ -17,7 +19,23 @@ router.post(
     usersController.signup
 );
 
-router.post('/login', usersController.login); //לטפל
+router.post('/login', usersController.login);
+
+router.patch(
+    '/update-name/:uid',
+    [
+        check('onTable').not().isEmpty(),
+    ],
+    usersController.updateName
+);
+
+router.patch(
+    '/update-email/:uid',
+    [
+        check('onTable').not().isEmpty(),
+    ],
+    usersController.updateEmail
+);
 
 router.patch(
     '/update-table/:pid',
