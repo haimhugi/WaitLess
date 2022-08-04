@@ -47,11 +47,13 @@ const Meals = props => {
             reviews: 12,
             category: 'ארוחות בוקר'
         },
-
     ]
+
     if (categoryCtx.pickedCategory !== 'הכל') {
         let filteredMeals = MEALS.filter(meal => { return meal.category === categoryCtx.pickedCategory })
-        return <Card> <MealsList items={filteredMeals} /> </Card>
+        return <Card>
+            <MealsList items={filteredMeals} />
+        </Card>
     }
     return <Card> <MealsList isAdmin={props.isAdmin} items={MEALS} /> </Card>
 };
