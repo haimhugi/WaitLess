@@ -7,6 +7,7 @@ import Input from '../../shared/components/UIElements/Input'
 import classes from './MealItemForm.module.css'
 import EditMeal from './EditMeal';
 
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const MealItemForm = props => {
 
@@ -18,6 +19,29 @@ const MealItemForm = props => {
     }
     const hideEditMealModal = () => {
         setEditMealOn(false);
+    }
+
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+    const patchMeal = async (values) => {
+            try {
+                await sendRequest(
+                    `http://localhost:5001/api/meals/${values.id}`,
+                    'PATCH',
+                    JSON.stringify({
+                        image: values.image,
+                        name: values.name,
+                        description: values.description,
+                        price: values.price,
+                        category: values.category
+                    }),
+                    {
+                        'Content-Type': 'application/json'
+                    }
+                );
+    
+                console.log('Received values of form: ', values);
+            } catch (err) { }
     }
 
     useEffect(() => {
@@ -67,6 +91,7 @@ const MealItemForm = props => {
                         price={props.price}
                         category={props.category}
                         onClose={hideEditMealModal}
+                        onSubmit={patchMeal}
                     />}
             </form>
         </React.Fragment>

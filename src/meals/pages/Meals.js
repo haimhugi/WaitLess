@@ -6,11 +6,38 @@ import Card from "../../shared/components/UIElements/Card";
 import CategoryContext from "../../store/category-context";
 import EditMeal from '../components/EditMeal';
 
+import { useHttpClient } from '../../shared/hooks/http-hook';
+
 const Meals = props => {
 
     const [open, setIsOpen] = useState(false);
     const hideCreateForm = () => {
         setIsOpen(false);
+    }
+
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+    const submitNewMeal = async (values) =>{
+        try {
+            await sendRequest(
+                'http://localhost:5001/api/meals/add-meal',
+                'POST',
+                JSON.stringify({
+                    image: values.image,
+                    name: values.name,
+                    description: values.description,
+                    price: values.price,
+                    category: values.category
+                }),
+                {
+                    'Content-Type': 'application/json'
+                }
+            );
+
+            console.log('Received values of form: ', values);
+        } catch (err) {
+            console.log(err);
+         }
     }
 
     const openCreateForm = () =>
@@ -70,6 +97,7 @@ const Meals = props => {
                         price={""}
                         category={""}
                         onClose={hideCreateForm}
+                        onSubmit={submitNewMeal}
                     />}
                 <MealsList isAdmin={props.isAdmin} items={filteredMeals} /> 
             </Card>
@@ -84,6 +112,7 @@ const Meals = props => {
                         price={""}
                         category={""}
                         onClose={hideCreateForm}
+                        onSubmit={submitNewMeal}
                     />}
          <MealsList isAdmin={props.isAdmin} items={MEALS} /> </Card>
 };

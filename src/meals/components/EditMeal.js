@@ -18,7 +18,7 @@ const EditMeal = props => {
     };
 
     return (
-        <Modal onClose={props.onClose}>
+        <Modal onClose={props.onClose} onSubmit={props.onSubmit}>
             <Form
                 name="basic"
                 labelCol={{
@@ -30,7 +30,7 @@ const EditMeal = props => {
                 initialValues={{
                     remember: true,
                 }}
-                onFinish={onFinish}
+                onFinish={props.onSubmit}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
@@ -107,7 +107,7 @@ const EditMeal = props => {
                         span: 16,
                     }}
                 >
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
                         Submit
                     </Button>
                     <Button type="danger" onClick={props.onClose}>
