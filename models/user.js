@@ -10,7 +10,6 @@ const userSchema = new Schema({
     orders: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Order' }],
     onTable: { type: String, required: false, minlength: 0 },
     isAdmin: { type: Boolean, required: true }
-
 });
 
 userSchema.plugin(uniqueValidator);

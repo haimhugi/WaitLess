@@ -11,7 +11,7 @@ const mealSchema = new Schema({
         numOfReviews: { type: Number, required: false },
         average: { type: Number, required: false }
     },
-    category: { type: mongoose.Types.ObjectId, required: true, ref: 'Category' }
+    category: { type: String, required: true },
 });
 
 module.exports = mongoose.model('Meal', mealSchema);
