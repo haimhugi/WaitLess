@@ -23,9 +23,11 @@ const MealsList = props => {
                     name={meal.name}
                     description={meal.description}
                     price={meal.price}
-                    reviewCount={meal.reviews}
+                    reviewAverage={meal.review.average}
+                    reviewCount={meal.review.numOfReviews}
                     category={meal.category}
                     isAdmin={props.isAdmin}
+                    setPageChange={props.setPageChange}
                 />
             ))}
         </ul>

@@ -29,7 +29,7 @@ const MealItem = props => {
         });
     };
 
-
+    console.log(props.reviewCount + 'props.reviewCount');
 
 
     return (
@@ -59,9 +59,10 @@ const MealItem = props => {
                         category={props.category}
                         onAddToCart={addToCartHandler}
                         isAdmin={props.isAdmin}
+                        setPageChange={props.setPageChange}
                     />
                 </div>
-                <Rate disabled defaultValue={5} />
+                <Rate disabled value={props.reviewAverage} />
             </Card>
         </li>
     )
