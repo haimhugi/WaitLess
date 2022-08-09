@@ -9,16 +9,15 @@ const EditMeal = props => {
 
     const onFinish = (values) => {
         console.log('Success:', values);
-        //send Patch to backend
+        props.onSubmit(values);
         props.onClose();
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
-
     return (
-        <Modal onClose={props.onClose} onSubmit={props.onSubmit}>
+        <Modal onClose={props.onClose}>
             <Form
                 name="basic"
                 labelCol={{
@@ -30,7 +29,7 @@ const EditMeal = props => {
                 initialValues={{
                     remember: true,
                 }}
-                onFinish={props.onSubmit}
+                onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
@@ -107,7 +106,7 @@ const EditMeal = props => {
                         span: 16,
                     }}
                 >
-                    <Button type="primary" htmlType="submit" onClick={props.onSubmit}>
+                    <Button type="primary" htmlType="submit" >
                         Submit
                     </Button>
                     <Button type="danger" onClick={props.onClose}>
