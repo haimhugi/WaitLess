@@ -47,10 +47,10 @@ const MealItemForm = props => {
 
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-    const patchMeal = async (values) => {
+    const patchMeal = async values => {
         try {
             await sendRequest(
-                `http://localhost:5001/api/meals/${values.id}`,
+                `http://localhost:5001/api/meals/${props.id}`,
                 'PATCH',
                 JSON.stringify({
                     image: values.image,
@@ -65,7 +65,11 @@ const MealItemForm = props => {
             );
 
             console.log('Received values of form: ', values);
-        } catch (err) { }
+        } catch (err) {
+            console.log("patch meal failed: " + err);
+         }
+         hideEditMealModal();
+         props.setPageChange(true);
     }
 
     useEffect(() => {
@@ -109,7 +113,7 @@ const MealItemForm = props => {
                 {!props.isAdmin && <button>הוסף מנה</button>}
                 {!amountIsValid && <p>בבקשה הכנס מספר מנות תקין בין 1 ל 20</p>}
                 {editMealOn && props.isAdmin &&
-                    <EditMeal
+                    <EditMeal onFinish={patchMeal}
                         id={props.id}
                         image={props.image}
                         name={props.name}
