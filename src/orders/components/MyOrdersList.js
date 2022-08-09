@@ -30,6 +30,8 @@ const MyOrdersList = props => {
                     totalPayed={order.totalPrice}
                     mealsNumber={order.mealsNumber}
                     mealsList={order.meals}
+                    status={order.status}
+                    onTable={order.onTable}
                 />
             ))}
         </List>
