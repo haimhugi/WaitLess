@@ -181,7 +181,7 @@ const Register = () => {
                 {...tailFormItemLayout}
             >
                 <Checkbox>
-                    I have read the <a href="">agreement</a>
+                    I have read the agreement<a href="https://www.law.cornell.edu/wex/agreement" target="_blank" rel="noreferrer noopener">agreement</a>
                 </Checkbox>
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
