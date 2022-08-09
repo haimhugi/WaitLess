@@ -10,7 +10,8 @@ import AuthContext from '../../store/auth-context';
 
 
 const MyOrdersList = props => {
-    console.log(props.loadedOrders);
+    console.log(JSON.stringify(props.loadedOrders) + ' JSON.stringify(props.loadedOrders)');
+
     if (!props.loadedOrders) {
         return <div className="center">
             <h2>אין הזמנות קודמות</h2>
@@ -23,11 +24,11 @@ const MyOrdersList = props => {
 
             {props.loadedOrders.map(order => (
                 <MyOrderItem
-                    key={order.orderNumber}
+                    key={order.id}
                     id={order.id}
                     date={order.date}
                     totalPayed={order.totalPrice}
-                    mealsAmount={order.mealsAmount}
+                    mealsNumber={order.mealsNumber}
                     mealsList={order.meals}
                 />
             ))}
