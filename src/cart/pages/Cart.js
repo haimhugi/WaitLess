@@ -1,13 +1,12 @@
 import CartContext from '../../store/cart-context'
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
 import Card from '../../shared/components/UIElements/Card';
 import CartItem from '../components/CartItem';
 import classes from './Cart.module.css';
-import OrderContext from '../../store/orders-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import AuthContext from '../../store/auth-context';
 
