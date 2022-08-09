@@ -29,14 +29,19 @@ const getMeals = async (req, res, next) => {
 };
 
 const createMeal = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        throw new HttpError('Invalid inputs passed , please check your data', 422);
-    }
-    const { id, image, name, description, price, category } = req.body;
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     throw new HttpError('Invalid inputs passed , please check your data', 422);
+    // }
+    const { image, name, description, price, category } = req.body;
+    console.log('image is ' + image + ' ');
+    console.log('name is ' + name + ' ');
+    console.log('description is ' + description + ' ');
+    console.log('price is ' + price + ' ');
+    console.log('category is ' + category + ' ');
+
 
     const createdMeal = new Meal({
-        id,
         image,
         name,
         description,
@@ -48,8 +53,9 @@ const createMeal = async (req, res, next) => {
     try {
         await createdMeal.save();
     } catch (err) {
-        const error = new HttpError('Creating meal failed,please try again', 500);
-        return next(error);
+        // const error = new HttpError('Creating meal failed,please try again', 500);
+        // return next(error);
+        console.log(err);
     }
 
     res.status(201).json({ meal: createdMeal });
