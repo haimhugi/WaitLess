@@ -46,7 +46,7 @@ const MY_ORDERS = [
 const MyOrders = () => {
 
     const { sendRequest } = useHttpClient();
-    const [loadedOrders, setLoadedOrders] = useState();
+    const [loadedOrders, setLoadedOrders] = useState('');
     const AuthCtx = useContext(AuthContext);
 
     useEffect(() => {
@@ -67,7 +67,7 @@ const MyOrders = () => {
     return (
         <Card>
             <Divider className='divider' orientation='right'>ההזמנות שלי</Divider>
-            <MyOrdersList loadedOrders={loadedOrders}/>
+            <MyOrdersList loadedOrders={loadedOrders} />
         </Card>);
 
 };

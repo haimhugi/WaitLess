@@ -1,6 +1,6 @@
 import CartContext from '../../store/cart-context'
 
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
@@ -8,15 +8,19 @@ import Card from '../../shared/components/UIElements/Card';
 import CartItem from '../components/CartItem';
 import classes from './Cart.module.css';
 import OrderContext from '../../store/orders-context';
+import { useHttpClient } from '../../shared/hooks/http-hook';
+import AuthContext from '../../store/auth-context';
 
 
 
 const Cart = () => {
 
+    const AuthCtx = useContext(AuthContext);
+
+
     const history = useHistory();
 
     const cartCtx = useContext(CartContext);
-    const ordersCtx = useContext(OrderContext);
 
     const totalAmount = `₪${cartCtx.totalAmount.toFixed(2)}`;
     const hasItems = cartCtx.items.length > 0;
@@ -28,29 +32,65 @@ const Cart = () => {
     const cartItemAddHandler = (item) => {
         cartCtx.addItem({ ...item, amount: 1 });
     };
-    const createOrderHandler = () => {
+
+    ///////////////////////////////////////////////
+    const { sendRequest } = useHttpClient();
 
 
+
+    const createOrderHandler = async (values) => {
+
+        const sendRequest1 = async () => {
+            try {
+                const response = await fetch(`http://localhost:5001/api/users/onTable/${AuthCtx.userId}`);
+                const responseData = await response.json();
+                //setUserTable(JSON.stringify(responseData.onTable));
+                return JSON.stringify(responseData.onTable);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        const resp = await sendRequest1();
+        const respo = resp.replaceAll('"', '');
+
+
+        console.log(values, "val1");
         const unique_id = uuid();
-        const small_id = unique_id.slice(0, 8);
+        const cartCtxIdsArr = [];
+        cartCtx.items.map(item => cartCtxIdsArr.push(item.id))
 
-        ordersCtx.ordersList.current[0].addOrder({
-            orderId: small_id,
-            date: new Date().toLocaleString() + "",
-            totalPayed: cartCtx.totalAmount,
-            mealsAmount: cartCtx.items.length,
-            mealsList: cartCtx.items
-        })
+        try {
+            await sendRequest(
+                'http://localhost:5001/api/orders',
+                'POST',
+                JSON.stringify({
+                    orderNumber: unique_id,
+                    mealsNumber: cartCtx.items.length.toString(),
+                    totalPrice: cartCtx.totalAmount.toString(),
+                    date: new Date().toLocaleString() + "",
+                    meals: cartCtxIdsArr,
+                    onTable: respo,
+                    creator: AuthCtx.userId
+                }),
+                {
+                    'Content-Type': 'application/json'
+                }
+            );
+        } catch (err) {
+            console.log(err);
+        }
+        // setIsOpen(false);
+        // setPageChange(true);
         let size = cartCtx.items.length
         for (let i = 0; i < size; i++) {
             cartCtx.removeItem(cartCtx.items[i].id);
         }
-
-
-
-
         history.push("/u1/orders");
     }
+
+    // useEffect(() => {
+    //     console.log('this is userTable' + userTable);
+    // }, [userTable]);
 
     useEffect(() => {
         console.log('this is cartCtx in cart' + JSON.stringify(cartCtx));
