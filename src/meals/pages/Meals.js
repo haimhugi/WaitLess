@@ -79,14 +79,6 @@ const Meals = props => {
     };
     const categoryCtx = useContext(CategoryContext);
 
-
-
-
-
-
-
-
-
     // const MEALS = [
     //     {
     //         id: 'u1',

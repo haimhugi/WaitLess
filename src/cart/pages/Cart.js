@@ -56,15 +56,28 @@ const Cart = () => {
         console.log(values, "val1");
         const unique_id = uuid();
         const cartCtxIdsArr = [];
-        cartCtx.items.map(item => cartCtxIdsArr.push(item.id))
-
+        cartCtx.items.map(item => {
+            let amount = item.amount;
+            while (amount > 0) {
+                cartCtxIdsArr.push(item.id)
+                amount--;
+            }
+        })
+        let mealsNum = cartCtx.items.length;
+        cartCtx.items.map(item => {
+            let amount = item.amount;
+            while (amount > 1) {
+                mealsNum++
+                amount--;
+            }
+        })
         try {
             await sendRequest(
                 'http://localhost:5001/api/orders',
                 'POST',
                 JSON.stringify({
                     orderNumber: unique_id,
-                    mealsNumber: cartCtx.items.length.toString(),
+                    mealsNumber: mealsNum.toString(),
                     totalPrice: cartCtx.totalAmount.toString(),
                     date: new Date().toLocaleString() + "",
                     meals: cartCtxIdsArr,
