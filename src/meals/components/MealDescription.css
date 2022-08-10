@@ -1,0 +1,12 @@
+.btn-close{
+    margin: auto;
+    padding: 5px;
+}
+.desc-card{
+    margin: auto;
+    border: 3px black;
+}
+h3{
+    direction: rtl;
+    text-align: right;
+}
