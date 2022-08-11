@@ -11,9 +11,6 @@ import RegisterContext from '../../store/register-context';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
-
-
-
 const formItemLayout = {
     labelCol: {
         xs: {
@@ -46,7 +43,6 @@ const tailFormItemLayout = {
 };
 
 const Register = () => {
-
     const CartCtx = useContext(CategoryContext);
     const history = useHistory();
     const AuthCtx = useContext(AuthContext);
@@ -56,8 +52,7 @@ const Register = () => {
 
     const [form] = Form.useForm();
 
-    const onFinish = async values => {
-
+    const onFinish = async (values) => {
         try {
             await sendRequest(
                 'http://localhost:5001/api/users/signup',
@@ -74,9 +69,10 @@ const Register = () => {
 
             AuthCtx.changeToLoggedOut();
             console.log('Received values of form: ', values);
-            AuthCtx.changeToLoggedIn(true);
-            CartCtx.changeCategory('הכל');
-            history.push("/meals");
+            //   AuthCtx.changeToLoggedIn(response._id, false);
+            //   CartCtx.changeCategory("הכל");
+            //   history.push("/meals");
+            changeRegisterToFalse();
         } catch (err) { }
     };
 
@@ -84,10 +80,7 @@ const Register = () => {
         RegisterCtx.changeRegister(false);
     };
 
-
-
     return (
-
         <Form
             {...formItemLayout}
             form={form}
@@ -166,8 +159,6 @@ const Register = () => {
             >
                 <Input.Password />
             </Form.Item>
-
-
 
             <Form.Item
                 name="agreement"
