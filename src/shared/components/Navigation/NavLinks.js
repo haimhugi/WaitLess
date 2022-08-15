@@ -1,7 +1,7 @@
 import CartContext from '../../../store/cart-context';
 import AuthContext from '../../../store/auth-context';
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink, useParams, useHistory } from 'react-router-dom';
 
 import { ShoppingCartOutlined } from '@ant-design/icons';
@@ -9,33 +9,41 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useHttpClient } from '../../hooks/http-hook';
 
 
-
 import './NavLinks.css';
 
 const NavLinks = props => {
 
     const userId = useParams().userId;
+    const history = useHistory();
 
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
     const cart = useContext(CartContext);
     const AuthCtx = useContext(AuthContext);
     const logoutHandler = async () => {
-        props.TablePickToTrue();
-        AuthCtx.changeToLoggedOut();
 
-        try {
-            await sendRequest(
-                `http://localhost:5001/api/users/update-table/${AuthCtx.userId}`,
-                'PATCH',
-                JSON.stringify({
-                    onTable: 0
-                }),
-                {
-                    'Content-Type': 'application/json'
-                }
-            );
-        } catch (err) { }
+        if (await window.confirm("Are you sure you want to logout?")) {
+            console.log('yes');
+            props.TablePickToTrue();
+
+            try {
+                await sendRequest(
+                    `http://localhost:5001/api/users/update-table/${AuthCtx.userId}`,
+                    'PATCH',
+                    JSON.stringify({
+                        onTable: 0
+                    }),
+                    {
+                        'Content-Type': 'application/json'
+                    }
+                );
+            } catch (err) { }
+            history.push("/auth");
+        }
+        else {
+            console.log('no');
+            history.goBack();
+        }
     }
 
     return <ul className="nav-links">
