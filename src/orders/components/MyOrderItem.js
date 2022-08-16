@@ -46,13 +46,14 @@ const MyOrderItem = props => {
                     <p > {props.status} {'סטטוס הזמנה'}   </p>
                     <List >
                         {mealsNameList.map(name => (
-                            <p style={{ display: "inline" }} key={name + ++i} dir='rtl'>{(name) + ','}</p>
+                            <a onClick={() => { console.log('clidked') }} style={{ display: "inline" }} key={name + ++i} dir='rtl'>{(name) + ','}</a>
                         ))}
                         <p style={{ display: "inline" }} dir='rtl'>{' המוצרים שהזמנת הם: '}</p>
+                        <p dir='rtl'>{'  לכתיבת ביקורת לחץ על שם המנה ⬆'}</p>
                     </List>
                 </div>
             </Card>
-        </List.Item>
+        </List.Item >
     );
 };
 

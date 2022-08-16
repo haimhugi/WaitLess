@@ -105,9 +105,11 @@ const Categories = props => {
                     dataSource={CATEGORIES}
                     renderItem={item =>
                         <List.Item>
-                            <Tooltip className='deleteCategory' title="delete" >
-                                <Button onClick={() => deleteCategoryReq(item)} danger type="primary" shape="circle" icon={<DeleteOutlined />} />
-                            </Tooltip>
+                            {props.isAdmin &&
+                                <Tooltip className='deleteCategory' title="delete" >
+                                    <Button onClick={() => deleteCategoryReq(item)} danger type="primary" shape="circle" icon={<DeleteOutlined />} />
+                                </Tooltip>
+                            }
                             <Button className='category' onClick={() => categoryCtx.changeCategory(item)}>
                                 {item}
                             </Button>
