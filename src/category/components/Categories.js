@@ -1,13 +1,16 @@
 import React from 'react';
 import { useContext, useState, useEffect } from 'react';
 
-import { List, Button } from 'antd';
+import { List, Button, Tooltip } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 
 
 import './Categories.css'
 import CategoryContext from '../../store/category-context';
 import AddCategory from './AddCategory';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import { useHttpClient } from '../../shared/hooks/http-hook';
+
 
 
 // const data = [
@@ -63,11 +66,27 @@ const Categories = props => {
         setAddCategoryOn(true);
     }
     const hideAddCategoryOn = () => {
+        setPageChange(true);
         setAddCategoryOn(false);
     }
 
     const categoryCtx = useContext(CategoryContext);
     console.log('context is ' + categoryCtx.pickedCategory);
+
+
+    const { sendRequest } = useHttpClient();
+
+
+    const deleteCategoryReq = async (item) => {
+        try {
+            await sendRequest(
+                `http://localhost:5001/api/meals/deleteCategory/${item}`,
+                'DELETE'
+            );
+        } catch (err) { }
+        console.log('remove category with the name: ' + item);
+        setPageChange(true);
+    }
 
 
 
@@ -86,7 +105,12 @@ const Categories = props => {
                     dataSource={CATEGORIES}
                     renderItem={item =>
                         <List.Item>
-                            <Button onClick={() => categoryCtx.changeCategory(item)}>{item}</Button>
+                            <Tooltip className='deleteCategory' title="delete" >
+                                <Button onClick={() => deleteCategoryReq(item)} danger type="primary" shape="circle" icon={<DeleteOutlined />} />
+                            </Tooltip>
+                            <Button className='category' onClick={() => categoryCtx.changeCategory(item)}>
+                                {item}
+                            </Button>
                         </List.Item>}
                 >
                     {props.isAdmin && <List.Item >
@@ -95,7 +119,7 @@ const Categories = props => {
                 </List>
                 {addCategoryOn && props.isAdmin && <AddCategory onClose={hideAddCategoryOn} />}
             </div >
-        </React.Fragment>
+        </React.Fragment >
 
     );
 };
