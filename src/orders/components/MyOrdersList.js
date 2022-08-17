@@ -1,15 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 
-import OrderContext from '../../store/orders-context';
 import MyOrderItem from './MyOrderItem';
 import { List } from 'antd';
-import { useHttpClient } from '../../shared/hooks/http-hook';
 
-import AuthContext from '../../store/auth-context';
 
 
 
 const MyOrdersList = props => {
+
+
+
     console.log(JSON.stringify(props.loadedOrders) + ' JSON.stringify(props.loadedOrders)');
 
     if (!props.loadedOrders) {

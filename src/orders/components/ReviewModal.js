@@ -1,4 +1,6 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
 
 import { Rate } from 'antd';
 import "antd/dist/antd.css";
@@ -8,6 +10,8 @@ import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const ReviewModal = props => {
     const { sendRequest } = useHttpClient();
+    const history = useHistory();
+
 
     const reviewUpdate = async (reviewNum) => {
         try {
@@ -22,7 +26,18 @@ const ReviewModal = props => {
                 }
             );
             props.onClose();
+            await sendRequest(
+                `http://localhost:5001/api/orders/update-is-reviewed/${props.orderId}/${props.mealInOrderId}`,
+                'PATCH',
+                {
+                    'Content-Type': 'application/json'
+                }
+            );
+            history.push("/loading");
+            history.push("/u1/orders");
+
         } catch (err) { console.log(err); }
+
     }
 
 

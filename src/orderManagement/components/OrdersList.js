@@ -286,6 +286,8 @@ const OrdersList = props => {
                             keys.push(record.id);
                         }
                         setCurrentRows(keys);
+                        console.log('!!!!!!!!!!!!!!!!');
+                        console.log(record);
                         convertMealsIdToName(record.meals)
                     }
 
