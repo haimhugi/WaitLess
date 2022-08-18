@@ -1,14 +1,4 @@
-.ant-list-item {
-  display: flex;
-  text-align: center !important;
-  background-color: transparent;
-  align-items: stretch;
-  text-align: center;
-  border: dimgray;
-  width: -10%;
-  height: -10%;
-}
-.ant-list-item button {
+.category {
   border: #4059ad;
   background-color: #4059ad;
   text-align: center;
@@ -22,6 +12,11 @@
   direction: rtl;
   flex: 1;
 }
+
+.deleteCategory {
+  margin-right: 10%;
+}
+
 .ant-list-item button:hover {
   background-color: transparent;
   color: #4059ad;

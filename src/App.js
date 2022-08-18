@@ -22,6 +22,7 @@ import { AuthContext } from './store/auth-context';
 import RegisterContext from './store/register-context';
 import OrderContext from './store/orders-context';
 import CartContext from './store/cart-context';
+import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
 
 
 const App = () => {
@@ -142,6 +143,9 @@ const App = () => {
                   <MainNavigation isAdmin={isAdmin} TablePickToTrue={changeTablePickToTrue} />
                 </Route>
                 <main>
+                  <Route path="/loading" exact >
+                    <LoadingSpinner />
+                  </Route>
                   <Route path="/meals" exact >
                     <Grid isAdmin={isAdmin} />
                     {pickTableIsShown && !isAdmin && <TablePick onClose={hideTablePick} />}

@@ -71,6 +71,12 @@ const Cart = () => {
                 amount--;
             }
         })
+        let mealsWithIsReviewed = [];
+
+        cartCtxIdsArr.forEach(element => {
+            mealsWithIsReviewed.push({ mealId: element, isReviewed: false })
+        });
+        console.log(mealsWithIsReviewed);
         try {
             await sendRequest(
                 'http://localhost:5001/api/orders',
@@ -80,7 +86,7 @@ const Cart = () => {
                     mealsNumber: mealsNum.toString(),
                     totalPrice: cartCtx.totalAmount.toString(),
                     date: new Date().toLocaleString() + "",
-                    meals: cartCtxIdsArr,
+                    meals: mealsWithIsReviewed,
                     onTable: respo,
                     creator: AuthCtx.userId
                 }),
@@ -93,9 +99,21 @@ const Cart = () => {
         }
         // setIsOpen(false);
         // setPageChange(true);
-        let size = cartCtx.items.length
-        for (let i = 0; i < size; i++) {
-            cartCtx.removeItem(cartCtx.items[i].id);
+        let size = 0;
+        let arrLength = cartCtx.items.length;
+
+        cartCtx.items.forEach(item => { size += item.amount })
+
+        for (let i = 0, z = 0; i < size && z < arrLength;) {
+            let j = 0;
+            let amountInItem = cartCtx.items[z].amount;
+            while (amountInItem > 0) {
+                cartCtx.removeItem(cartCtx.items[z].id);
+                amountInItem--;
+                j++
+            }
+            i = j;
+            z++;
         }
         history.push("/u1/orders");
     }

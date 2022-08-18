@@ -78,36 +78,10 @@ const OrderManagement = props => {
         setPageChange(false);
     }, [pageChange]);
 
-    useEffect(() => { console.log("ORDERSSSSSSSSSSSSSSSS IS " + ORDERS); }, [ORDERS]);
 
-
-
-
-
-
-
-    //////////////////////////
     const statusCtx = useContext(StatusContext);
 
 
-
-
-    /*
-    
-    const numWins = {
-  'BUF': 11,
-  'MIA': 9,
-  'NE': 6,
-  'NYJ': 1
-};
-
-const filteredOrders = _.flow([
-  Object.entries,
-  arr => arr.filter(([key, value]) => value >= statusCtx.pickedOrderStatus),
-  Object.fromEntries
-])(ORDERS);
-
-    */
     if (statusCtx.pickedOrderStatus !== 'all') {
         let filteredOrders = Object.values(ORDERS);
         let filteredOrders1 = filteredOrders.filter(order => { return order.status === statusCtx.pickedOrderStatus })

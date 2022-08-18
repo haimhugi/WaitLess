@@ -71,20 +71,45 @@ const OrdersList = props => {
     };
 
     const save = async (key) => {
+
         try {
             const row = await form.validateFields();
             const newData = [...data];
             const index = newData.findIndex((item) => key === item.id);
 
+
             if (index > -1) {
                 const item = newData[index];
                 newData.splice(index, 1, { ...item, ...row });
                 setData(newData);
+                await sendRequest(
+                    `http://localhost:5001/api/orders/update-status/${key}`,
+                    'PATCH',
+                    JSON.stringify({
+                        status: newData[0].status
+                    }),
+                    {
+                        'Content-Type': 'application/json'
+                    }
+                );
                 setEditingKey("");
+                props.setPageChange(true);
             } else {
                 newData.push(row);
                 setData(newData);
+                await sendRequest(
+                    `http://localhost:5001/api/orders/update-status/${key}`,
+                    'PATCH',
+                    JSON.stringify({
+                        status: newData[0].status
+                    }),
+                    {
+                        'Content-Type': 'application/json'
+                    }
+                );
                 setEditingKey("");
+                props.setPageChange(true);
+
             }
         } catch (errInfo) {
             console.log("Validate Failed:", errInfo);
@@ -107,25 +132,7 @@ const OrdersList = props => {
         props.setPageChange(true);
     }
 
-    // const [mealsNameList, setMealsNameList] = useState([]);
 
-    // useEffect(() => {
-
-    //     const sendRequest1 = async () => {
-
-    //         props.items.meals.forEach(async mealId => {
-    //             try {
-    //                 const response = await fetch(`http://localhost:5001/api/meals/${mealId}`);
-    //                 const responseData = await response.json();
-    //                 setMealsNameList(oldArray => [...oldArray, JSON.stringify(responseData.name)]);
-    //                 //mealsNameList.push(JSON.stringify(responseData.name));
-    //             } catch (err) {
-    //                 console.log(err);
-    //             }
-    //         });
-    //     };
-    //     sendRequest1();
-    // }, []);
 
     const [mealsNameList, setMealsNameList] = useState([]);
 
@@ -142,22 +149,6 @@ const OrdersList = props => {
             }
         });
 
-
-        //     const sendRequest1 = async () => {
-
-        //         props.items.meals.forEach(async mealId => {
-        //             try {
-        //                 const response = await fetch(`http://localhost:5001/api/meals/${mealId}`);
-        //                 const responseData = await response.json();
-        //                 setMealsNameList(oldArray => [...oldArray, JSON.stringify(responseData.name)]);
-        //                 //mealsNameList.push(JSON.stringify(responseData.name));
-        //             } catch (err) {
-        //                 console.log(err);
-        //             }
-        //         });
-        //     };
-        //     sendRequest1();
-        // }, []);
     }
 
 
@@ -186,6 +177,8 @@ const OrdersList = props => {
             dataIndex: 'date',
             key: 'date',
             editable: false,
+            defaultSortOrder: 'descend',
+            sorter: (a, b) => a.date > b.date,
         },
 
         {
@@ -263,10 +256,6 @@ const OrdersList = props => {
             })
         };
     });
-    console.log("props.items.meals");
-    console.log(props.items);
-    props.items.meals = mealsNameList;
-    console.log(props.items.meals);
 
     if (props.items.length === 0) {
         return <div className="center">
@@ -297,6 +286,8 @@ const OrdersList = props => {
                             keys.push(record.id);
                         }
                         setCurrentRows(keys);
+                        console.log('!!!!!!!!!!!!!!!!');
+                        console.log(record);
                         convertMealsIdToName(record.meals)
                     }
 

@@ -38,6 +38,7 @@ const cartReducer = (state, action) => {
 
     }
     if (action.type === 'REMOVE') {
+        console.log("REMOVEEEEEEEEEEEEEEEEE");
         const existingCartItemIndex = state.items.findIndex(
             (item) => item.id === action.id
         );
