@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { Space, Form, Input, InputNumber, Popconfirm, Table, Typography } from "antd";
+import { DownOutlined } from '@ant-design/icons';
+import { Space, Form, Table, Dropdown, Menu, Typography } from "antd";
 import 'antd/dist/antd.css';
 
 
@@ -8,41 +9,20 @@ import Card from '../../shared/components/UIElements/Card';
 import { useHttpClient } from '../../shared/hooks/http-hook'
 
 
-
-const EditableCell = ({
-    editing,
-    dataIndex,
-    title,
-    inputType,
-    record,
-    index,
-    children,
-    ...restProps
-}) => {
-    const inputNode = inputType === "number" ? <InputNumber /> : <Input />;
-    return (
-        <td {...restProps}>
-            {editing ? (
-                <Form.Item
-                    name={dataIndex}
-                    style={{
-                        margin: 0
-                    }}
-                    rules={[
-                        {
-                            required: true,
-                            message: `Please Input ${title}!`
-                        }
-                    ]}
-                >
-                    {inputNode}
-                </Form.Item>
-            ) : (
-                children
-            )}
-        </td>
-    );
-};
+const menu = (
+    <Menu
+        items={[
+            {
+                key: '1',
+                label: 'הסתיים',
+            },
+            {
+                key: '2',
+                label: 'בהכנה',
+            },
+        ]}
+    />
+);
 
 
 const OrdersList = props => {
@@ -52,65 +32,36 @@ const OrdersList = props => {
 
     const [form] = Form.useForm();
     const [data, setData] = useState(props.items);
-    const [editingKey, setEditingKey] = useState("");
 
-    const isEditing = (record) => record.id === editingKey;
 
-    const edit = (record) => {
-        console.log("record");
-        console.log(record);
-        form.setFieldsValue({
-            status: "",
-            ...record
-        });
-        setEditingKey(record.id);
-    };
+    // const edit = (record) => {
+    //     console.log("record");
+    //     console.log(record);
+    //     form.setFieldsValue({
+    //         status: "",
+    //         ...record
+    //     });
+    //     setEditingKey(record.id);
+    // };
 
-    const cancel = () => {
-        setEditingKey("");
-    };
+    // const cancel = () => {
+    //     setEditingKey("");
+    // };
 
-    const save = async (key) => {
-
+    const save = async (id, updateStatus) => {
         try {
-            const row = await form.validateFields();
-            const newData = [...data];
-            const index = newData.findIndex((item) => key === item.id);
+            await sendRequest(
+                `http://localhost:5001/api/orders/update-status/${id}`,
+                'PATCH',
+                JSON.stringify({
+                    status: updateStatus
+                }),
+                {
+                    'Content-Type': 'application/json'
+                }
+            );
+            props.setPageChange(true);
 
-
-            if (index > -1) {
-                const item = newData[index];
-                newData.splice(index, 1, { ...item, ...row });
-                setData(newData);
-                await sendRequest(
-                    `http://localhost:5001/api/orders/update-status/${key}`,
-                    'PATCH',
-                    JSON.stringify({
-                        status: newData[0].status
-                    }),
-                    {
-                        'Content-Type': 'application/json'
-                    }
-                );
-                setEditingKey("");
-                props.setPageChange(true);
-            } else {
-                newData.push(row);
-                setData(newData);
-                await sendRequest(
-                    `http://localhost:5001/api/orders/update-status/${key}`,
-                    'PATCH',
-                    JSON.stringify({
-                        status: newData[0].status
-                    }),
-                    {
-                        'Content-Type': 'application/json'
-                    }
-                );
-                setEditingKey("");
-                props.setPageChange(true);
-
-            }
         } catch (errInfo) {
             console.log("Validate Failed:", errInfo);
         }
@@ -158,25 +109,21 @@ const OrdersList = props => {
             title: 'מספר הזמנה',
             dataIndex: 'orderNumber',
             key: 'orderNumber',
-            editable: false,
         },
         {
             title: 'מספר מוצרים בהזמנה',
             dataIndex: 'mealsNumber',
             key: 'mealsNumber',
-            editable: false,
         },
         {
             title: 'מחיר כולל סופי',
             dataIndex: 'totalPrice',
             key: 'totalPrice',
-            editable: false,
         },
         {
             title: 'תאריך',
             dataIndex: 'date',
             key: 'date',
-            editable: false,
             defaultSortOrder: 'descend',
             sorter: (a, b) => a.date > b.date,
         },
@@ -185,24 +132,22 @@ const OrdersList = props => {
             title: 'הזמנה משולחן',
             dataIndex: 'onTable',
             key: 'onTable',
-            editable: false,
         },
         {
             title: 'סטטוס ההזמנה',
             dataIndex: 'status',
             key: 'status',
-            editable: true,
         },
         {
             title: 'יוצר ההזמנה',
             dataIndex: 'creator',
             key: 'creator',
-            editable: false,
         },
 
         {
             title: 'Action',
             key: 'action',
+
             render: (_, record) => (
                 <Space size="middle">
                     <a onClick={() => { deleteOrder(record.id) }}>Delete</a>
@@ -212,59 +157,54 @@ const OrdersList = props => {
         {
             title: "operation",
             dataIndex: "operation",
-            render: (_, record) => {
-                const editable = isEditing(record);
-                return editable ? (
-                    <span>
-                        <Typography.Link
-                            onClick={() => save(record.id)}
-                            style={{
-                                marginRight: 8
-                            }}
-                        >
-                            Save
-                        </Typography.Link>
-                        <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-                            <a>Cancel</a>
-                        </Popconfirm>
-                    </span>
-                ) : (
-                    <Typography.Link
-                        disabled={editingKey !== ""}
-                        onClick={() => edit(record)}
-                    >
-                        Edit
-                    </Typography.Link>
-                );
-            }
+            render: () => (
+                <Space>
+                    <Dropdown overlay={menu}>
+                        <a>
+                            שינוי סטטוס הזמנה <DownOutlined />
+                        </a>
+                    </Dropdown>
+                </Space>
+            ),
+            // render: (_, record) => {
+            //     const editable = isEditing(record);
+            //     return editable ? (
+            //         <span>
+            //             <Typography.Link
+            //                 onClick={() => save(record.id)}
+            //                 style={{
+            //                     marginRight: 8
+            //                 }}
+            //             >
+            //                 Save
+            //             </Typography.Link>
+            //             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+            //                 <a>Cancel</a>
+            //             </Popconfirm>
+            //         </span>
+            //     ) : (
+            //         <Typography.Link
+            //             disabled={editingKey !== ""}
+            //             onClick={() => edit(record)}
+            //         >
+            //             Edit
+            //         </Typography.Link>
+            //     );
+            // }
         },
     ];
 
-    const mergedColumns = columns.map((col) => {
-        if (!col.editable) {
-            return col;
-        }
-
-        return {
-            ...col,
-            onCell: (record) => ({
-                record,
-                inputType: col.dataIndex === "age" ? "number" : "text",
-                dataIndex: col.dataIndex,
-                title: col.title,
-                editing: isEditing(record)
-            })
-        };
-    });
+    const mergedColumns = columns;
 
     if (props.items.length === 0) {
         return <div className="center">
             <Card>
-                <h2>No orders found.</h2>
+                <h2>לא נמצאו הזמנות</h2>
             </Card>
         </div>
     }
     return (
+
         //<Table rowKey="orderNumber" columns={columns} dataSource={props.items} />
         <Form form={form} component={false}>
             <Table expandedRowKeys={currentRows}
@@ -297,18 +237,22 @@ const OrdersList = props => {
                     x: 1500,
                     y: 300,
                 }}
-                components={{
-                    body: {
-                        cell: EditableCell
-                    }
-                }}
                 bordered
                 columns={mergedColumns}
-                rowClassName="editable-row"
-                pagination={{
-                    onChange: cancel
-                }}
                 rowKey={record => record.id}
+                onRow={(record, rowIndex) => {
+                    return {
+                        onClick: event => {
+                            if (event.target.className === 'ant-dropdown-menu-title-content') {
+                                console.log(record.id);
+                                console.log(event.target.innerHTML);
+                                if (event.target.innerHTML === 'הסתיים') { save(record.id, 'done') }
+                                if (event.target.innerHTML === 'בהכנה') { save(record.id, 'in preparation') }
+                            }
+                        },
+
+                    };
+                }}
             />
         </Form>
     );
