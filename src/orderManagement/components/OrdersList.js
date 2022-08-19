@@ -141,7 +141,7 @@ const OrdersList = props => {
         setMealsNameList([]);
         arrMealsId.forEach(async mealId => {
             try {
-                const response = await fetch(`http://localhost:5001/api/meals/${mealId}`);
+                const response = await fetch(`http://localhost:5001/api/meals/${mealId.mealId}`);
                 const responseData = await response.json();
                 setMealsNameList(oldArray => [...oldArray, JSON.stringify(responseData.name)]);
             } catch (err) {
