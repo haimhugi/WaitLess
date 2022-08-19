@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Button, Form, Input, Select } from 'antd';
+import { Button, Form, Input, Select, InputNumber } from 'antd';
 import "antd/dist/antd.css";
 
 import Modal from '../../shared/components/UIElements/Modal';
@@ -110,7 +110,9 @@ const EditMeal = props => {
                     ]}
                     initialValue={props.price}
                 >
-                    <Input />
+                    <InputNumber
+                        prefix="₪"
+                    />
                 </Form.Item>
                 <Form.Item
                     name="category"
