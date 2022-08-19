@@ -139,7 +139,7 @@ const Meals = props => {
                     onClose={hideCreateForm}
                     onSubmit={submitNewMeal}
                 />}
-                <MealsList isAdmin={props.isAdmin} items={filteredMeals} />
+                <MealsList isAdmin={props.isAdmin} items={filteredMeals} setPageChange={setPageChange} />
             </Card>
         </React.Fragment>
     }

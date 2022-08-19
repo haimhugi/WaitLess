@@ -1,11 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Select } from 'antd';
 import "antd/dist/antd.css";
 
 import Modal from '../../shared/components/UIElements/Modal';
+const { Option } = Select;
 
 const EditMeal = props => {
+
+    const [pageChange, setPageChange] = useState(false);
+    const [CATEGORIES, setCATEGORIES] = useState([]);
+
+    useEffect(() => {
+        const sendRequest = async () => {
+            try {
+                const response = await fetch('http://localhost:5001/api/meals/categories');
+                const responseData = await response.json();
+                let arr = [];
+                for (let prop in responseData.categories) {
+                    if (responseData.categories[prop].name !== 'הכל') {
+                        arr.push(responseData.categories[prop].name)
+                    }
+                }
+                setCATEGORIES(arr);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        sendRequest();
+        setPageChange(false);
+    }, [pageChange]);
+
+
 
     const onFinish = (values) => {
         console.log('Success:', values);
@@ -87,17 +113,20 @@ const EditMeal = props => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    label="קטגוריית המנה"
                     name="category"
+                    label="קטגוריה"
                     rules={[
                         {
                             required: true,
                             message: 'בבקשה הכנס את קטגוריית המנה',
                         },
                     ]}
-                    initialValue={props.category}
                 >
-                    <Input />
+                    <Select placeholder="בחר את הקטגוריה הרצויה">
+                        {CATEGORIES.map((item) => (
+                            <Option value={item} >{item}</Option>
+                        ))}
+                    </Select>
                 </Form.Item>
 
                 <Form.Item

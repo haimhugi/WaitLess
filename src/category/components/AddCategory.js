@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Button, Form, Input } from 'antd';
 import "antd/dist/antd.css";
@@ -8,7 +8,7 @@ import Modal from '../../shared/components/UIElements/Modal';
 
 const AddCategory = props => {
 
-    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    const { sendRequest } = useHttpClient();
 
     const onFinish = async (values) => {
         console.log('Success:', values.name);
@@ -26,8 +26,8 @@ const AddCategory = props => {
 
             console.log('Received values of form: ', values);
         } catch (err) {
-            console.log('add catagory error: ', err);
-         }
+            console.log('add category error: ', err);
+        }
         props.onClose();
     };
 
@@ -53,7 +53,6 @@ const AddCategory = props => {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
             >
-
                 <Form.Item
                     label="שם הקטגוריה"
                     name="name"

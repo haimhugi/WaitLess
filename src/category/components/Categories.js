@@ -119,7 +119,7 @@ const Categories = props => {
                         <Button className='addCategory' onClick={showAddCategoryOn}>הוסף קטגוריה</Button>
                     </List.Item>}
                 </List>
-                {addCategoryOn && props.isAdmin && <AddCategory onClose={hideAddCategoryOn} />}
+                {addCategoryOn && props.isAdmin && <AddCategory onClose={hideAddCategoryOn} CATEGORIES={CATEGORIES} />}
             </div >
         </React.Fragment >
 
