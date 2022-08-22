@@ -1,0 +1,14 @@
+.login-main {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    border-color: #4059AD;
+    border-style: solid;
+    border-width: medium;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.login-form {
+    left: 50%;
+}

@@ -14,7 +14,7 @@ import RegisterContext from '../../store/register-context';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
-
+import './Login.css';
 
 
 
@@ -102,9 +102,9 @@ const Login = () => {
     };
 
     return (
-        <React.Fragment>
+        <React.Fragment className="login-main">
             <ErrorModal error={error} onClear={clearError} />
-            <Card>
+            <Card className="login-main">
                 {isLoading && <LoadingSpinner asOverlay />}
                 <Form
                     name="normal_login"

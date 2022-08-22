@@ -1,1 +1,27 @@
 @import '~antd/dist/antd.css';
+
+/* .main-body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 94vh;
+} */
+
+.main-body {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('./genral_restaurant2.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+}
+
+.footer {
+    background-color: black;
+    height: 50px;
+}

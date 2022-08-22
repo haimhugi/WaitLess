@@ -10,6 +10,7 @@ import RegisterContext from '../../store/register-context';
 
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import './Register.css';
 
 const formItemLayout = {
     labelCol: {
@@ -81,7 +82,7 @@ const Register = () => {
     };
 
     return (
-        <Form
+        <Form className='register-form'
             {...formItemLayout}
             form={form}
             name="register"
