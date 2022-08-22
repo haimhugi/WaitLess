@@ -1,6 +1,14 @@
 .about-para {
     margin: 1cm;
     padding: 1cm;
-    text-align: center;
+    left: 20%;
     direction: rtl;
+    position: fixed;
+    background: rgba(193, 193, 255, 0.479);
+}
+
+h1,
+h3 {
+    color: rgba(2, 85, 115, 0.991);
+    text-align: center;
 }
