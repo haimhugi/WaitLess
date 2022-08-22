@@ -31,22 +31,9 @@ const OrdersList = props => {
 
 
     const [form] = Form.useForm();
-    const [data, setData] = useState(props.items);
+    // const [data, setData] = useState(props.items);
 
 
-    // const edit = (record) => {
-    //     console.log("record");
-    //     console.log(record);
-    //     form.setFieldsValue({
-    //         status: "",
-    //         ...record
-    //     });
-    //     setEditingKey(record.id);
-    // };
-
-    // const cancel = () => {
-    //     setEditingKey("");
-    // };
 
     const save = async (id, updateStatus) => {
         try {
@@ -166,31 +153,6 @@ const OrdersList = props => {
                     </Dropdown>
                 </Space>
             ),
-            // render: (_, record) => {
-            //     const editable = isEditing(record);
-            //     return editable ? (
-            //         <span>
-            //             <Typography.Link
-            //                 onClick={() => save(record.id)}
-            //                 style={{
-            //                     marginRight: 8
-            //                 }}
-            //             >
-            //                 Save
-            //             </Typography.Link>
-            //             <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
-            //                 <a>Cancel</a>
-            //             </Popconfirm>
-            //         </span>
-            //     ) : (
-            //         <Typography.Link
-            //             disabled={editingKey !== ""}
-            //             onClick={() => edit(record)}
-            //         >
-            //             Edit
-            //         </Typography.Link>
-            //     );
-            // }
         },
     ];
 
