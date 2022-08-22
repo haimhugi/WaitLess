@@ -11,6 +11,7 @@ import RegisterContext from '../../store/register-context';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import './Register.css';
+import validator from 'validator';
 
 const formItemLayout = {
     labelCol: {
@@ -131,6 +132,18 @@ const Register = () => {
                         required: true,
                         message: 'Please input your password!',
                     },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (validator.isStrongPassword(value, {
+                                minLength: 6, minLowercase: 0,
+                                minUppercase: 0, minNumbers: 0, minSymbols: 0
+                              })) {
+                                return Promise.resolve();
+                            }
+
+                            return Promise.reject(new Error('The password that you does not meet requirements!'));
+                        },
+                    })
                 ]}
                 hasFeedback
             >
