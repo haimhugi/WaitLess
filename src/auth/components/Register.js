@@ -45,8 +45,7 @@ const tailFormItemLayout = {
 };
 
 const Register = () => {
-    const CartCtx = useContext(CategoryContext);
-    const history = useHistory();
+
     const AuthCtx = useContext(AuthContext);
     const RegisterCtx = useContext(RegisterContext);
 
@@ -71,9 +70,6 @@ const Register = () => {
 
             AuthCtx.changeToLoggedOut();
             console.log('Received values of form: ', values);
-            //   AuthCtx.changeToLoggedIn(response._id, false);
-            //   CartCtx.changeCategory("הכל");
-            //   history.push("/meals");
             changeRegisterToFalse();
         } catch (err) { }
     };
@@ -135,13 +131,13 @@ const Register = () => {
                     ({ getFieldValue }) => ({
                         validator(_, value) {
                             if (validator.isStrongPassword(value, {
-                                minLength: 6, minLowercase: 0,
-                                minUppercase: 0, minNumbers: 0, minSymbols: 0
-                              })) {
+                                minLength: 8, minLowercase: 4,
+                                minUppercase: 0, minNumbers: 4, minSymbols: 0
+                            })) {
                                 return Promise.resolve();
                             }
 
-                            return Promise.reject(new Error('The password that you does not meet requirements!'));
+                            return Promise.reject(new Error('בבקשה הכנס סיסמה באורך 8 תווים  4 אותיות באנגלית ו4 מספרים'));
                         },
                     })
                 ]}
@@ -166,7 +162,7 @@ const Register = () => {
                                 return Promise.resolve();
                             }
 
-                            return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                            return Promise.reject(new Error('שתי הסיסמאות שהכנסת לא תואמות'));
                         },
                     }),
                 ]}

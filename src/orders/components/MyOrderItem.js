@@ -83,7 +83,7 @@ const MyOrderItem = props => {
                                     mealsIsReviewedList[index] && <p style={{ display: "inline" }} key={name + ++i} dir='rtl'> {(name) + ','}</p>
                                 ))}
                                 <p style={{ display: "inline" }} dir='rtl'>{' המוצרים שהזמנת הם: '}</p>
-                                <p dir='rtl'>{'  לכתיבת ביקורת לחץ על שם המנה ⬆'}</p>
+                                <h3 dir='rtl'>{'  לכתיבת ביקורת לחץ על שם המנה ⬆'}</h3>
                             </List>
                         </div>
                     </Card>
