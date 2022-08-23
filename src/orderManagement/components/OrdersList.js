@@ -7,6 +7,7 @@ import 'antd/dist/antd.css';
 
 import Card from '../../shared/components/UIElements/Card';
 import { useHttpClient } from '../../shared/hooks/http-hook'
+import { useEffect } from 'react';
 
 
 const menu = (
@@ -88,7 +89,22 @@ const OrdersList = props => {
         });
 
     }
+    const [usersName, setUsersName] = useState('');
 
+    const convertUserIdToName = async creator => {
+        try {
+            console.log(creator);
+            const response = await fetch(`http://localhost:5001/api/users/${creator}`);
+            const responseData = await response.json();
+            console.log('responseData');
+            console.log(responseData);
+
+            setUsersName(JSON.stringify(responseData.user.name));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    useEffect(() => { console.log(usersName); }, [usersName])
 
     const columns = [
 
@@ -125,11 +141,11 @@ const OrdersList = props => {
             dataIndex: 'status',
             key: 'status',
         },
-        {
-            title: 'יוצר ההזמנה',
-            dataIndex: 'creator',
-            key: 'creator',
-        },
+        // {
+        //     title: 'יוצר ההזמנה',
+        //     dataIndex: 'creator',
+        //     key: 'creator',
+        // },
 
         {
             title: 'Action',
@@ -173,13 +189,25 @@ const OrdersList = props => {
                 //columns={columns}
                 expandable={{
                     expandedRowRender: (record) => (
-                        <p
-                            style={{
+                        <React.Fragment>
+                            <p style={{
                                 margin: 0,
                             }}
-                        >
-                            {mealsNameList}
-                        </p>
+                            >
+                                {usersName}
+                                יוצר ההזמנה:
+
+                            </p>
+
+                            <p
+                                style={{
+                                    margin: 0,
+                                }}
+                            >
+                                המנות שהוזמנו:
+                                {mealsNameList}
+                            </p>
+                        </React.Fragment>
                     ),
                     rowExpandable: (record) => record.name !== 'Not Expandable',
                     onExpand: (expanded, record) => {
@@ -191,6 +219,7 @@ const OrdersList = props => {
                         console.log('!!!!!!!!!!!!!!!!');
                         console.log(record);
                         convertMealsIdToName(record.meals)
+                        convertUserIdToName(record.creator)
                     }
 
                 }}
