@@ -6,7 +6,7 @@ import { Row, Col } from 'antd';
 
 import Card from '../../shared/components/UIElements/Card';
 import PersonalDetailsControl from '../components/PersonalDetailsControl';
-// import CreditCardsControl from '../components/CreditCardsControl';
+import UpdatePassword from '../components/UpdatePassword';
 import DeleteAccountControl from '../components/DeleteAccountControl';
 import AuthContext from '../../store/auth-context';
 
@@ -49,11 +49,11 @@ const MyProfile = () => {
             <Row >
                 <Col span={6} push={18}>
                     <h1><Button onClick={() => pickedValHandler('פרטים אישיים')} >פרטים אישיים</Button></h1>
-                    {/*<h1><Button onClick={() => pickedValHandler('כרטיסי אשראי')} >כרטיסי אשראי</Button></h1>*/}
+                    {<h1><Button onClick={() => pickedValHandler('עדכון סיסמה')} >עדכון סיסמה</Button></h1>}
                     <h1><Button onClick={() => pickedValHandler('מחיקת חשבון')} >מחיקת חשבון</Button> </h1>
                 </Col>
                 {pickedValueInMyProfile === 'פרטים אישיים' && <PersonalDetailsControl userId={AuthCtx.userId} userEmail={userEmail} userName={userName} />}
-                {/*pickedValueInMyProfile === 'כרטיסי אשראי' && <CreditCardsControl />*/}
+                {pickedValueInMyProfile === 'עדכון סיסמה' && <UpdatePassword />}
                 {pickedValueInMyProfile === 'מחיקת חשבון' && <DeleteAccountControl />}
             </Row>
         </Card>
@@ -65,7 +65,7 @@ const MyProfile = () => {
             <Row >
                 <Col span={6} push={18}>
                     <h3>פרטים אישיים</h3>
-                    <h3>כרטיסי אשראי</h3>
+                    <h3>עדכון סיסמה</h3>
                     <h3> מחיקת חשבון</h3>
                     <h3> התנתק</h3>
                 </Col>
