@@ -50,9 +50,9 @@ const NavLinks = props => {
         <li>
             {AuthCtx.isLoggedIn && <NavLink onClick={logoutHandler} to="/auth" >התנתקות</NavLink>}
         </li>
-        {AuthCtx.isLoggedIn && !props.isAdmin && <li>
-            <NavLink to="/about">אודות</NavLink>
-        </li>}
+        <li>
+            {!props.isAdmin && <NavLink to="/about">אודות</NavLink>}
+        </li>
         {AuthCtx.isLoggedIn && !props.isAdmin && <li>
             <NavLink id="cartLink" to="/cart">  <ShoppingCartOutlined /> {cart.items.reduce((a, b) => a = a + b.amount, 0)} עגלה    </NavLink>
         </li>}

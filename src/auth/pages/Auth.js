@@ -15,10 +15,16 @@ const Auth = () => {
     const RegisterCtx = useContext(RegisterContext);
 
     if (!RegisterCtx.wantRegister) return (
-        <Login />
+        <div>
+            <h1 style={{ textAlign: 'left', paddingLeft: '9%', color: 'white' }}>Welcome To WaitLess</h1>
+            <Login />
+        </div >
     );
     else return (
-        <Register />
+        <div>
+            <h1 style={{ textAlign: 'left', paddingLeft: '9%', color: 'white' }}>Welcome To WaitLess</h1>
+            <Register />
+        </div >
     );
 };
 

@@ -142,7 +142,7 @@ const App = () => {
                 <Route >
                   <MainNavigation isAdmin={isAdmin} TablePickToTrue={changeTablePickToTrue} />
                 </Route>
-                <main>
+                <main className='main-body'>
                   <Route path="/loading" exact >
                     <LoadingSpinner />
                   </Route>
@@ -176,7 +176,7 @@ const App = () => {
                       <Redirect to="/auth" />
                     </Route>}
                 </main>
-                <Footer />
+                <Footer className='footer' />
               </StatusContext.Provider>
             </CategoryContext.Provider>
           </CartProvider>
