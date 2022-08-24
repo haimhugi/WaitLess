@@ -7,14 +7,15 @@ import { v4 as uuid } from 'uuid';
 import Card from '../../shared/components/UIElements/Card';
 import CartItem from '../components/CartItem';
 import classes from './Cart.module.css';
-import { useHttpClient } from '../../shared/hooks/http-hook';
-import AuthContext from '../../store/auth-context';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal'
+import { useHttpClient } from '../../shared/hooks/http-hook'; import AuthContext from '../../store/auth-context';
 
 
 
 const Cart = () => {
 
     const AuthCtx = useContext(AuthContext);
+    const { error, sendRequest, clearError } = useHttpClient();
 
 
     const history = useHistory();
@@ -32,8 +33,6 @@ const Cart = () => {
         cartCtx.addItem({ ...item, amount: 1 });
     };
 
-    ///////////////////////////////////////////////
-    const { sendRequest } = useHttpClient();
 
 
 
@@ -43,7 +42,6 @@ const Cart = () => {
             try {
                 const response = await fetch(`http://localhost:5001/api/users/onTable/${AuthCtx.userId}`);
                 const responseData = await response.json();
-                //setUserTable(JSON.stringify(responseData.onTable));
                 return JSON.stringify(responseData.onTable);
             } catch (err) {
                 console.log(err);
@@ -97,8 +95,7 @@ const Cart = () => {
         } catch (err) {
             console.log(err);
         }
-        // setIsOpen(false);
-        // setPageChange(true);
+
         let size = 0;
         let arrLength = cartCtx.items.length;
 
@@ -145,6 +142,7 @@ const Cart = () => {
     };
     if (cartCtx.items.length === 0) {
         return <div style={divStyle}>
+            <ErrorModal error={error} onClear={clearError} />
             <Card>
                 <h2>אין מוצרים בעגלה</h2>
             </Card>
@@ -153,6 +151,7 @@ const Cart = () => {
 
     return (
         <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
             {cartItems}
             <div className={classes.total}>
                 <span>{totalAmount}</span>

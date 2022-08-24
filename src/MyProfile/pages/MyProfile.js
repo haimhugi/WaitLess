@@ -9,12 +9,15 @@ import PersonalDetailsControl from '../components/PersonalDetailsControl';
 import UpdatePassword from '../components/UpdatePassword';
 import DeleteAccountControl from '../components/DeleteAccountControl';
 import AuthContext from '../../store/auth-context';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 
 const MyProfile = () => {
     const AuthCtx = useContext(AuthContext);
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
+    const { error, sendRequest, clearError } = useHttpClient();
 
 
     useEffect(() => {
@@ -44,48 +47,23 @@ const MyProfile = () => {
     }, [pickedValueInMyProfile]);
 
     return (
-        <Card>
-            <h1>איזור אישי</h1>
-            <Row >
-                <Col span={6} push={18}>
-                    <h1><Button onClick={() => pickedValHandler('פרטים אישיים')} >פרטים אישיים</Button></h1>
-                    {<h1><Button onClick={() => pickedValHandler('עדכון סיסמה')} >עדכון סיסמה</Button></h1>}
-                    <h1><Button onClick={() => pickedValHandler('מחיקת חשבון')} >מחיקת חשבון</Button> </h1>
-                </Col>
-                {pickedValueInMyProfile === 'פרטים אישיים' && <PersonalDetailsControl userId={AuthCtx.userId} userEmail={userEmail} userName={userName} />}
-                {pickedValueInMyProfile === 'עדכון סיסמה' && <UpdatePassword />}
-                {pickedValueInMyProfile === 'מחיקת חשבון' && <DeleteAccountControl />}
-            </Row>
-        </Card>
+        <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
+            <Card>
+                <h1>איזור אישי</h1>
+                <Row >
+                    <Col span={6} push={18}>
+                        <h1><Button onClick={() => pickedValHandler('פרטים אישיים')} >פרטים אישיים</Button></h1>
+                        {<h1><Button onClick={() => pickedValHandler('עדכון סיסמה')} >עדכון סיסמה</Button></h1>}
+                        <h1><Button onClick={() => pickedValHandler('מחיקת חשבון')} >מחיקת חשבון</Button> </h1>
+                    </Col>
+                    {pickedValueInMyProfile === 'פרטים אישיים' && <PersonalDetailsControl userId={AuthCtx.userId} userEmail={userEmail} userName={userName} />}
+                    {pickedValueInMyProfile === 'עדכון סיסמה' && <UpdatePassword />}
+                    {pickedValueInMyProfile === 'מחיקת חשבון' && <DeleteAccountControl />}
+                </Row>
+            </Card>
+        </React.Fragment>
     )
-    /*
-    return (
-        <Card>
-            <h1>איזור אישי</h1>
-            <Row >
-                <Col span={6} push={18}>
-                    <h3>פרטים אישיים</h3>
-                    <h3>עדכון סיסמה</h3>
-                    <h3> מחיקת חשבון</h3>
-                    <h3> התנתק</h3>
-                </Col>
-                <Col span={18} pull={6}>
-                    <Row>
-                        <Col span={6} push={18}>
-                            <h3>:שם</h3>
-                            <h3>:כתובת</h3>
-                            <h3>:נייד</h3>
-                        </Col>
-                        <Col span={18} pull={6}>
-                            <h3>ישראל ישראלי</h3>
-                            <h3>ישראלוב 58 תל אביב</h3>
-                            <h3>0546666664</h3>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
-        </Card>
-    );*/
 };
 
 export default MyProfile;

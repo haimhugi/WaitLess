@@ -5,6 +5,7 @@ import MyOrdersList from '../components/MyOrdersList';
 import './Myorders.css'
 import { Divider } from 'antd';
 
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
 import AuthContext from '../../store/auth-context';
@@ -45,7 +46,7 @@ const MY_ORDERS = [
 
 const MyOrders = () => {
 
-    const { sendRequest } = useHttpClient();
+    const { error, sendRequest, clearError } = useHttpClient();
     const [loadedOrders, setLoadedOrders] = useState('');
     const AuthCtx = useContext(AuthContext);
 
@@ -65,10 +66,15 @@ const MyOrders = () => {
     }, []);
 
     return (
-        <Card>
-            <Divider className='divider' orientation='right'>ההזמנות שלי</Divider>
-            <MyOrdersList loadedOrders={loadedOrders} />
-        </Card>);
+        <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
+
+            <Card>
+                <Divider className='divider' orientation='right'>ההזמנות שלי</Divider>
+                <MyOrdersList loadedOrders={loadedOrders} />
+            </Card>
+        </React.Fragment>
+    );
 
 };
 

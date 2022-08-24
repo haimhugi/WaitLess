@@ -8,10 +8,6 @@ import { List } from 'antd';
 
 const MyOrdersList = props => {
 
-
-
-    console.log(JSON.stringify(props.loadedOrders) + ' JSON.stringify(props.loadedOrders)');
-
     if (!props.loadedOrders) {
         return <div className="center">
             <h2>אין הזמנות קודמות</h2>

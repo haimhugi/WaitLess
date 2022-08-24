@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { DownOutlined } from '@ant-design/icons';
 import { Space, Form, Table, Dropdown, Menu, Typography } from "antd";
@@ -6,8 +6,9 @@ import 'antd/dist/antd.css';
 
 
 import Card from '../../shared/components/UIElements/Card';
-import { useHttpClient } from '../../shared/hooks/http-hook'
-import { useEffect } from 'react';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import { useHttpClient } from '../../shared/hooks/http-hook';
+
 
 
 const menu = (
@@ -58,7 +59,7 @@ const OrdersList = props => {
 
 
 
-    const { sendRequest } = useHttpClient();
+    const { error, sendRequest, clearError } = useHttpClient();
 
     const deleteOrder = async id => {
         try {
@@ -182,70 +183,71 @@ const OrdersList = props => {
         </div>
     }
     return (
+        <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
 
-        //<Table rowKey="orderNumber" columns={columns} dataSource={props.items} />
-        <Form form={form} component={false}>
-            <Table expandedRowKeys={currentRows}
-                //columns={columns}
-                expandable={{
-                    expandedRowRender: (record) => (
-                        <React.Fragment>
-                            <p style={{
-                                margin: 0,
-                            }}
-                            >
-                                {usersName}
-                                יוצר ההזמנה:
-
-                            </p>
-
-                            <p
-                                style={{
+            <Form form={form} component={false}>
+                <Table expandedRowKeys={currentRows}
+                    expandable={{
+                        expandedRowRender: (record) => (
+                            <React.Fragment>
+                                <p style={{
                                     margin: 0,
                                 }}
-                            >
-                                המנות שהוזמנו:
-                                {mealsNameList}
-                            </p>
-                        </React.Fragment>
-                    ),
-                    rowExpandable: (record) => record.name !== 'Not Expandable',
-                    onExpand: (expanded, record) => {
-                        const keys = [];
-                        if (expanded) {
-                            keys.push(record.id);
-                        }
-                        setCurrentRows(keys);
-                        console.log('!!!!!!!!!!!!!!!!');
-                        console.log(record);
-                        convertMealsIdToName(record.meals)
-                        convertUserIdToName(record.creator)
-                    }
+                                >
+                                    {usersName}
+                                    יוצר ההזמנה:
 
-                }}
-                dataSource={props.items}
-                scroll={{
-                    x: 1500,
-                    y: 300,
-                }}
-                bordered
-                columns={mergedColumns}
-                rowKey={record => record.id}
-                onRow={(record, rowIndex) => {
-                    return {
-                        onClick: event => {
-                            if (event.target.className === 'ant-dropdown-menu-title-content') {
-                                console.log(record.id);
-                                console.log(event.target.innerHTML);
-                                if (event.target.innerHTML === 'הסתיים') { save(record.id, 'done') }
-                                if (event.target.innerHTML === 'בהכנה') { save(record.id, 'in preparation') }
+                                </p>
+
+                                <p
+                                    style={{
+                                        margin: 0,
+                                    }}
+                                >
+                                    המנות שהוזמנו:
+                                    {mealsNameList}
+                                </p>
+                            </React.Fragment>
+                        ),
+                        rowExpandable: (record) => record.name !== 'Not Expandable',
+                        onExpand: (expanded, record) => {
+                            const keys = [];
+                            if (expanded) {
+                                keys.push(record.id);
                             }
-                        },
+                            setCurrentRows(keys);
+                            console.log('!!!!!!!!!!!!!!!!');
+                            console.log(record);
+                            convertMealsIdToName(record.meals)
+                            convertUserIdToName(record.creator)
+                        }
 
-                    };
-                }}
-            />
-        </Form>
+                    }}
+                    dataSource={props.items}
+                    scroll={{
+                        x: 1500,
+                        y: 300,
+                    }}
+                    bordered
+                    columns={mergedColumns}
+                    rowKey={record => record.id}
+                    onRow={(record, rowIndex) => {
+                        return {
+                            onClick: event => {
+                                if (event.target.className === 'ant-dropdown-menu-title-content') {
+                                    console.log(record.id);
+                                    console.log(event.target.innerHTML);
+                                    if (event.target.innerHTML === 'הסתיים') { save(record.id, 'done') }
+                                    if (event.target.innerHTML === 'בהכנה') { save(record.id, 'in preparation') }
+                                }
+                            },
+
+                        };
+                    }}
+                />
+            </Form>
+        </React.Fragment>
     );
 };
 

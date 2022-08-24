@@ -9,8 +9,8 @@ import './Categories.css'
 import CategoryContext from '../../store/category-context';
 import AddCategory from './AddCategory';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal'
 import { useHttpClient } from '../../shared/hooks/http-hook';
-
 
 
 // const data = [
@@ -74,7 +74,7 @@ const Categories = props => {
     console.log('context is ' + categoryCtx.pickedCategory);
 
 
-    const { sendRequest } = useHttpClient();
+    const { error, sendRequest, clearError } = useHttpClient();
 
 
     const deleteCategoryReq = async (item) => {
@@ -92,6 +92,7 @@ const Categories = props => {
 
     return (
         <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
             {isLoading && (
                 <div className="center">
                     <LoadingSpinner />

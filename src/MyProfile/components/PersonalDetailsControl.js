@@ -3,11 +3,12 @@ import EdiText from 'react-editext'
 
 import { Row, Col } from 'antd';
 
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const PersonalDetailsControl = props => {
 
-    const { sendRequest } = useHttpClient();
+    const { error, sendRequest, clearError } = useHttpClient();
 
     const onSave = async val => {
         if (val.includes('@')) {
@@ -46,28 +47,31 @@ const PersonalDetailsControl = props => {
     }
 
     return (
-        <Col span={18} pull={6}>
-            <Row>
-                <Col span={6} push={18}>
-                    <h1>:שם מלא</h1>
-                    <h1>:אימייל</h1>
-                </Col>
-                <Col span={18} pull={6}>
-                    <EdiText
-                        type='text'
-                        buttonsAlign='before'
-                        value={props.userName}
-                        onSave={onSave}
-                    />
-                    <EdiText
-                        type='text'
-                        buttonsAlign='before'
-                        value={props.userEmail}
-                        onSave={onSave}
-                    />
-                </Col>
-            </Row>
-        </Col>
+        <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
+            <Col span={18} pull={6}>
+                <Row>
+                    <Col span={6} push={18}>
+                        <h1>:שם מלא</h1>
+                        <h1>:אימייל</h1>
+                    </Col>
+                    <Col span={18} pull={6}>
+                        <EdiText
+                            type='text'
+                            buttonsAlign='before'
+                            value={props.userName}
+                            onSave={onSave}
+                        />
+                        <EdiText
+                            type='text'
+                            buttonsAlign='before'
+                            value={props.userEmail}
+                            onSave={onSave}
+                        />
+                    </Col>
+                </Row>
+            </Col>
+        </React.Fragment>
     );
 };
 
