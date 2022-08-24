@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Form, Input, Button, Checkbox } from 'antd';
-import { UserOutlined, LockOutlined, LockFilled } from '@ant-design/icons';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import Card from '../../shared/components/UIElements/Card';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
@@ -28,47 +28,6 @@ const Login = () => {
     const RegisterCtx = useContext(RegisterContext);
 
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
-
-    /*
-        const authSubmitHandler = async event => {
-            event.preventDefault();
-        
-            if (isLoginMode) {
-              try {
-                const responseData = await sendRequest(
-                  'http://localhost:5000/api/users/login',
-                  'POST',
-                  JSON.stringify({
-                    email: formState.inputs.email.value,
-                    password: formState.inputs.password.value
-                  }),
-                  {
-                    'Content-Type': 'application/json'
-                  }
-                );
-                auth.login(responseData.user.id);
-              } catch (err) {}
-            } else {
-              try {
-                const responseData = await sendRequest(
-                  'http://localhost:5000/api/users/signup',
-                  'POST',
-                  JSON.stringify({
-                    name: formState.inputs.name.value,
-                    email: formState.inputs.email.value,
-                    password: formState.inputs.password.value
-                  }),
-                  {
-                    'Content-Type': 'application/json'
-                  }
-                );
-        
-                auth.login(responseData.user.id);
-              } catch (err) {}
-            }
-          };
-    */
 
     const onFinish = async values => {
         try {

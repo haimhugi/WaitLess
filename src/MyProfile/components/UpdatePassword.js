@@ -7,6 +7,7 @@ import { Button, Form, Input } from 'antd';
 import AuthContext from '../../store/auth-context';
 import PasswordChangedModal from './PasswordChangedModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import './UpdatePassword.css';
@@ -52,7 +53,7 @@ const UpdatePassword = () => {
 
     const AuthCtx = useContext(AuthContext);
 
-    const { sendRequest } = useHttpClient();
+    const { error, sendRequest, clearError } = useHttpClient();
 
     const [form] = Form.useForm();
 
@@ -82,15 +83,17 @@ const UpdatePassword = () => {
                     'Content-Type': 'application/json'
                 }
             );
+            showPasswordChangedModal();
         } catch (err) { console.log(err); }
         setIsLoading(false);
-        showPasswordChangedModal();
+
     };
 
 
 
     return (
         <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
             {isLoading && (
                 <div className="center">
                     <LoadingSpinner />
