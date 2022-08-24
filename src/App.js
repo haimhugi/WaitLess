@@ -137,39 +137,42 @@ const App = () => {
                 <Route >
                   <MainNavigation isAdmin={isAdmin} TablePickToTrue={changeTablePickToTrue} />
                 </Route>
-                <main className='main-body'>
-                  <Route path="/loading" exact >
-                    <LoadingSpinner />
-                  </Route>
-                  <Route path="/meals" exact >
-                    <Grid isAdmin={isAdmin} />
-                    {pickTableIsShown && !isAdmin && <TablePick onClose={hideTablePick} />}
-                  </Route>
-                  {!isAdmin && <Route path="/cart" exact>
-                    <Cart />
-                  </Route>}
-                  {!isAdmin && <Route path="/:u1/orders" exact >
-                    <MyOrders />
-                  </Route>}
-                  {!isAdmin && <Route path="/about" >
-                    <About />
-                  </Route>}
-                  {!isAdmin && <Route path="/myProfile" >
-                    <MyProfile />
-                  </Route>}
-                  {isAdmin && <Route path="/OrderManagement" >
-                    <OrderManagement />
-                  </Route>}
-                  <Route path="/auth" >
-                    <Auth />
-                  </Route>
-                  {AuthCtx.isLoggedIn ?
-                    <Route path="/">
-                      <Redirect to="/meals" />
+                <main>
+                  <div className='img'></div>
+                  <div className='main-body'>
+                    <Route path="/loading" exact >
+                      <LoadingSpinner />
                     </Route>
-                    : <Route path="/">
-                      <Redirect to="/auth" />
+                    <Route path="/meals" exact >
+                      <Grid isAdmin={isAdmin} />
+                      {pickTableIsShown && !isAdmin && <TablePick onClose={hideTablePick} />}
+                    </Route>
+                    {!isAdmin && <Route path="/cart" exact>
+                      <Cart />
                     </Route>}
+                    {!isAdmin && <Route path="/:u1/orders" exact >
+                      <MyOrders />
+                    </Route>}
+                    {!isAdmin && <Route path="/about" >
+                      <About />
+                    </Route>}
+                    {!isAdmin && <Route path="/myProfile" >
+                      <MyProfile />
+                    </Route>}
+                    {isAdmin && <Route path="/OrderManagement" >
+                      <OrderManagement />
+                    </Route>}
+                    <Route path="/auth" >
+                      <Auth />
+                    </Route>
+                    {AuthCtx.isLoggedIn ?
+                      <Route path="/">
+                        <Redirect to="/meals" />
+                      </Route>
+                      : <Route path="/">
+                        <Redirect to="/auth" />
+                      </Route>}
+                  </div>
                 </main>
                 <Footer className='footer' />
               </StatusContext.Provider>
