@@ -4,6 +4,8 @@ import { List } from 'antd';
 import Card from '../../shared/components/UIElements/Card';
 import ReviewModal from './ReviewModal';
 
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import { useHttpClient } from '../../shared/hooks/http-hook';
 
 import './MyOrderItem.css'
 
@@ -12,6 +14,8 @@ import './MyOrderItem.css'
 
 let i = 0;
 const MyOrderItem = props => {
+    const { error, sendRequest, clearError } = useHttpClient();
+
 
     const [mealInOrderIdClicked, setMealInOrderIdClicked] = useState('');
     const [mealNameClicked, setMealNameClicked] = useState('');
@@ -54,10 +58,10 @@ const MyOrderItem = props => {
     }, []);
 
 
-    useEffect(() => {
-        console.log('mealsIsReviewedList mealsIsReviewedList mealsIsReviewedList');
-        console.log(mealsIsReviewedList);
-    }, [mealsIsReviewedList]);
+    // useEffect(() => {
+    //     console.log('mealsIsReviewedList mealsIsReviewedList mealsIsReviewedList');
+    //     console.log(mealsIsReviewedList);
+    // }, [mealsIsReviewedList]);
 
 
 
@@ -65,6 +69,8 @@ const MyOrderItem = props => {
     if (props.mealsNumber === 0) return ''
     return (
         <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
+
             {reviewModal && <ReviewModal orderId={props.id} mealName={mealNameClicked} mealInOrderId={mealInOrderIdClicked} onClose={reviewModalOff} />}
             <List>
                 <List.Item>

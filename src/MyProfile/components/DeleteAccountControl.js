@@ -4,13 +4,14 @@ import { useHistory } from 'react-router-dom';
 
 import { Button, Popconfirm } from 'antd';
 
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import AuthContext from '../../store/auth-context';
 
 
 const DeleteAccountControl = () => {
     const history = useHistory();
-    const { sendRequest } = useHttpClient();
+    const { error, sendRequest, clearError } = useHttpClient();
     const AuthCtx = useContext(AuthContext);
 
     const confirm = async () => {
@@ -27,17 +28,18 @@ const DeleteAccountControl = () => {
         history.push("/meals");
     }
     return (
-        <div>
+        <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
             <h1>?האם אתה בטוח שאתה רוצה למחוק את החשבון</h1>
             <Popconfirm
                 title="?בטוח שברצונך רוצה למחוק את החשבון שלך לצמיתות"
                 onConfirm={confirm}
                 onVisibleChange={() => console.log('visible change')}
             >
-                <Button style={{ margin: '10px'}} danger type="primary">מחק</Button>
+                <Button style={{ margin: '10px' }} danger type="primary">מחק</Button>
                 <Button type="primary" onClick={cancel}>בטל</Button>
             </Popconfirm>
-        </div>
+        </React.Fragment>
     );
 };
 

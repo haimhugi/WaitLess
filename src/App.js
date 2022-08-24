@@ -21,14 +21,12 @@ import StatusContext from './store/status-context';
 import { AuthContext } from './store/auth-context';
 import RegisterContext from './store/register-context';
 import OrderContext from './store/orders-context';
-import CartContext from './store/cart-context';
 import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
 
 
 const App = () => {
 
 
-  const cartCtx = useContext(CartContext);
 
   const changeStatusHandler = newStatus => {
     console.log('clicked and get' + newStatus);
@@ -62,9 +60,6 @@ const App = () => {
     setPickTableIsShown(false);
   }, []);
 
-  const isAdminToTrue = () => {
-    setIsAdmin(true);
-  }
 
   const addNewOrderHandler = newOrder => {
     let newOrders = [...ordersList.current];
@@ -101,13 +96,13 @@ const App = () => {
     }, [pickTableIsShown]);
   
   */
-  useEffect(() => {
-    console.log('this is pickedOrderStatus in app after changed ' + JSON.stringify(pickedOrderStatus));
-  }, [pickedOrderStatus]);
+  // useEffect(() => {
+  //   console.log('this is pickedOrderStatus in app after changed ' + JSON.stringify(pickedOrderStatus));
+  // }, [pickedOrderStatus]);
 
-  useEffect(() => {
-    console.log('this is pickTableIsShown in app after changed ' + JSON.stringify(pickTableIsShown));
-  }, [pickTableIsShown]);
+  // useEffect(() => {
+  //   console.log('this is pickTableIsShown in app after changed ' + JSON.stringify(pickTableIsShown));
+  // }, [pickTableIsShown]);
 
 
 

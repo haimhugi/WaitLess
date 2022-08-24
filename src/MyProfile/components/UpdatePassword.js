@@ -8,7 +8,6 @@ import AuthContext from '../../store/auth-context';
 import PasswordChangedModal from './PasswordChangedModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import './UpdatePassword.css';
 import validator from 'validator';

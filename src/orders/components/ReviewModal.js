@@ -6,10 +6,11 @@ import { Rate } from 'antd';
 import "antd/dist/antd.css";
 
 import Modal from '../../shared/components/UIElements/Modal';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
 const ReviewModal = props => {
-    const { sendRequest } = useHttpClient();
+    const { error, sendRequest, clearError } = useHttpClient();
     const history = useHistory();
 
 
@@ -42,11 +43,15 @@ const ReviewModal = props => {
 
 
     return (
-        <Modal onClose={props.onClose}>
-            <h1>דירוג המנה</h1>
-            <p>אנא דרג את לדעתך כמה המנה "{props.mealName}" הייתה טעימה</p>
-            <Rate onChange={(value) => reviewUpdate(value)} allowClear={false} defaultValue={5} />
-        </Modal>
+        <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
+
+            <Modal onClose={props.onClose}>
+                <h1>דירוג המנה</h1>
+                <p>אנא דרג את לדעתך כמה המנה "{props.mealName}" הייתה טעימה</p>
+                <Rate onChange={(value) => reviewUpdate(value)} allowClear={false} defaultValue={5} />
+            </Modal>
+        </React.Fragment>
     );
 };
 

@@ -6,6 +6,7 @@ import 'antd/dist/antd.css';
 import Card from '../../shared/components/UIElements/Card';
 import OrdersList from '../components/OrdersList';
 import StatusContext from '../../store/status-context';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal'
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 
@@ -61,6 +62,7 @@ const OrderManagement = props => {
     const [pageChange, setPageChange] = useState(false);
     const [ORDERS, setOrders] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const { error, sendRequest, clearError } = useHttpClient();
 
     useEffect(() => {
         setIsLoading(true);
@@ -87,6 +89,8 @@ const OrderManagement = props => {
         let filteredOrders1 = filteredOrders.filter(order => { return order.status === statusCtx.pickedOrderStatus })
         return (
             <React.Fragment>
+                <ErrorModal error={error} onClear={clearError} />
+
                 {isLoading && (
                     <div className="center">
                         <LoadingSpinner />
@@ -105,6 +109,8 @@ const OrderManagement = props => {
     }
     return (
         <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
+
             {isLoading && (
                 <div className="center">
                     <LoadingSpinner />
