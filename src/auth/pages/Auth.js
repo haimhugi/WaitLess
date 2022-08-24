@@ -16,13 +16,13 @@ const Auth = () => {
 
     if (!RegisterCtx.wantRegister) return (
         <div>
-            <h1 style={{ textAlign: 'left', paddingLeft: '9%', color: 'white' }}>Welcome To WaitLess</h1>
+            <h1 style={{ textAlign: 'left', paddingLeft: '9%', paddingTop: '1%', color: 'rgba(70, 0, 0, 0.645)' }}>Welcome To WaitLess</h1>
             <Login />
         </div >
     );
     else return (
         <div>
-            <h1 style={{ textAlign: 'left', paddingLeft: '9%', color: 'white' }}>Welcome To WaitLess</h1>
+            <h1 style={{ textAlign: 'left', paddingLeft: '9%', paddingTop: '1%', color: 'rgba(70, 0, 0, 0.645)' }}>Welcome To WaitLess</h1>
             <Register />
         </div >
     );

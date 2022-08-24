@@ -8,6 +8,7 @@ import classes from './MealItemForm.module.css'
 import EditMeal from './EditMeal';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import Modal from '../../shared/components/UIElements/Modal';
 
 const MealItemForm = props => {
@@ -67,9 +68,9 @@ const MealItemForm = props => {
             console.log('Received values of form: ', values);
         } catch (err) {
             console.log("patch meal failed: " + err);
-         }
-         hideEditMealModal();
-         props.setPageChange(true);
+        }
+        hideEditMealModal();
+        props.setPageChange(true);
     }
 
     useEffect(() => {
@@ -95,6 +96,7 @@ const MealItemForm = props => {
 
     return (
         <React.Fragment>
+            <ErrorModal error={error} onClear={clearError} />
             <form className={classes.form} onSubmit={submitHandler}>
                 {!props.isAdmin && <Input
                     label="Amount"

@@ -23,7 +23,8 @@
 }
 
 .meal-item__content {
-  padding: 0;
+  border: 2px solid #9595a0;
+  background: #7a7171e9;
 }
 
 .meal-item__image {
@@ -32,10 +33,10 @@
   margin-right: 1rem;
 }
 
-.meal-item__details{
+.meal-item__details {
   margin: 5px;
   padding: 5px;
-  background-color: rgb(38, 167, 248);
+  background-color: rgba(3, 81, 130, 0.668);
   border-radius: 20px;
 }
 

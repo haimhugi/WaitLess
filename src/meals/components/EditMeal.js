@@ -3,11 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form, Input, Select, InputNumber } from 'antd';
 import "antd/dist/antd.css";
 
+import { useHttpClient } from '../../shared/hooks/http-hook';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+
 import Modal from '../../shared/components/UIElements/Modal';
 const { Option } = Select;
 
 const EditMeal = props => {
 
+    const { error, sendRequest, clearError } = useHttpClient();
     const [pageChange, setPageChange] = useState(false);
     const [CATEGORIES, setCATEGORIES] = useState([]);
 
@@ -44,6 +48,7 @@ const EditMeal = props => {
     };
     return (
         <Modal onClose={props.onClose}>
+            <ErrorModal error={error} onClear={clearError} />
             <Form
                 name="basic"
                 labelCol={{

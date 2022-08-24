@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import { Col, Row, Button } from 'antd';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
-
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 
 import AuthContext from '../../store/auth-context';
 
@@ -38,10 +38,9 @@ const TablePick = props => {
         } catch (err) { }
     }
 
-
-
     return (
         <Modal onClose={props.onClose}>
+            <ErrorModal error={error} onClear={clearError} />
             <h1>בחר שולחן</h1>
             <Row>
                 <Col span={6}>
