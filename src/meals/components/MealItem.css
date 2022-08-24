@@ -2,6 +2,7 @@
   margin: 1rem;
   width: calc(45% - 2rem);
   min-width: 17.5rem;
+  color: #f9f2f2;
 }
 
 .meal-item a {
@@ -28,15 +29,16 @@
 }
 
 .meal-item__image {
-  width: 4rem;
+  width: 100%;
   height: 4rem;
   margin-right: 1rem;
+  color: #f9f2f2;
 }
 
 .meal-item__details {
   margin: 5px;
   padding: 5px;
-  background-color: rgba(3, 81, 130, 0.668);
+  background-color: rgba(13, 14, 14, 0.792);
   border-radius: 20px;
 }
 
@@ -44,7 +46,7 @@
   font-size: 1.5rem;
   margin: 0 0 0.5rem 0;
   font-weight: normal;
-  color: #292929;
+  color: #ffffff;
   right: 100px;
 }
 
@@ -52,11 +54,16 @@
 .meal-item:active h2,
 .meal-item:hover h3,
 .meal-item:active h3 {
-  color: #292929;
+  color: #767776;
 }
 
 .meal-item__info h3 {
   margin: 0;
-  color: #292929;
+  color: #f9f2f2;
   left: 40px;
+}
+
+.ant-rate-star
+.ant-rate-star-full{
+  font-size: 12;
 }

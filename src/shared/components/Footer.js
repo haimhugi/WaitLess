@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <Row style={{
             textAlign: 'center', clear: 'both', position: 'fixed', left: '0px', right: '0px',
-            height: '40px', bottom: '0', backgroundColor: '#4059AD'
+            height: '40px', bottom: '0', backgroundColor: '#080808'
         }}>
             <Col span={8} style={{ color: 'white', top: '20%', fontSize: '20' }} >
                 <NavLink style={{ color: 'white', top: '20%', fontSize: '20' }} to="/about">🛈 אודות</NavLink></Col>

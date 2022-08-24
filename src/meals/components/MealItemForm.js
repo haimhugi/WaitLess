@@ -97,7 +97,7 @@ const MealItemForm = props => {
     return (
         <React.Fragment>
             <ErrorModal error={error} onClear={clearError} />
-            <form className={classes.form} onSubmit={submitHandler}>
+            <form className={classes.form} onSubmit={submitHandler} style={{ margin: '5px'}}>
                 {!props.isAdmin && <Input
                     label="Amount"
                     ref={amountInputRef}

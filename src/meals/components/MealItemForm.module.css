@@ -5,16 +5,21 @@
 .form button {
   font: inherit;
   cursor: pointer;
-  background-color: #4059ad;
-  border: 1px solid #4059ad;
+  background-color: #0a0a0a;
+  border: 1px solid #d7d6d6;
   color: white;
   padding: 0.25rem 2rem;
-  border-radius: 20px;
+  border-radius: 15px;
   font-weight: bold;
+  margin: 0px 15px;
 }
 
 .form button:hover,
 .form button:active {
   background-color: #4059ad;
   border-color: #4059ad;
+}
+
+input{
+  background-color: rgba(18, 18, 18, 0.414);
 }

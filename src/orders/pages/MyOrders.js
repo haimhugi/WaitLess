@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 
 import Card from '../../shared/components/UIElements/Card';
 import MyOrdersList from '../components/MyOrdersList';
-import './Myorders.css'
+import './MyOrders.css'
 import { Divider } from 'antd';
 
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
