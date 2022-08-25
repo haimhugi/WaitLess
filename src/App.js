@@ -29,7 +29,6 @@ const App = () => {
 
 
   const changeStatusHandler = newStatus => {
-    console.log('clicked and get' + newStatus);
     setOrderStatus(newStatus)
   }
 
