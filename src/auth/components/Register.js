@@ -181,15 +181,15 @@ const Register = () => {
                     ]}
                     {...tailFormItemLayout}
                 >
-                    <Checkbox>
-                        I have read the <a href="https://www.law.cornell.edu/wex/agreement" target="_blank" rel="noreferrer noopener">agreement</a>
+                    <Checkbox style={{ color: 'white' }}>
+                        I have read the <a style={{ color: 'lightblue' }} href="https://www.law.cornell.edu/wex/agreement" target="_blank" rel="noreferrer noopener">agreement</a>
                     </Checkbox>
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" style={{ backgroundColor: 'black', borderColor: '#676767de', borderRadius: '6px', margin: '3px' }}>
                         Register
                     </Button>
-                    Or <Button onClick={changeRegisterToFalse}> Login now!</Button>
+                    <Button onClick={changeRegisterToFalse} style={{ backgroundColor: '#e2e2e267', borderColor: '#676767de', color: 'white', borderRadius: '6px', margin: '3px' }}> Login now!</Button>
 
                 </Form.Item>
             </Form>

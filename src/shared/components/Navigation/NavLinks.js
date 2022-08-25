@@ -37,7 +37,9 @@ const NavLinks = props => {
                         'Content-Type': 'application/json'
                     }
                 );
-            } catch (err) { }
+                AuthCtx.isLoggedIn = false;
+            } catch (err) {
+            }
             history.push("/auth");
         }
         else {

@@ -12,8 +12,6 @@ import "./MealDescription.css";
 
 const MealDescription = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
-  console.log("Meal description open");
-  console.log(props);
   return (
     <Card className="desc-card">
       <ErrorModal error={error} onClear={clearError} />
@@ -26,9 +24,7 @@ const MealDescription = (props) => {
       </div>
       <Button
         className="btn-close"
-        type="primary"
-        shape="circle"
-        size="large"
+        style={{ borderRadius: '3px', backgroundColor: 'black', color: 'white', margin: '1px' }}
         onClick={props.onClose}
       >
         Close

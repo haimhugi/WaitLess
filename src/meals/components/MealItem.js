@@ -44,10 +44,10 @@ const MealItem = props => {
             <Card className="meal-item__content">
                 <div className="meal-item__details">
                     <div className="meal-item__image">
-                        <img style={{ height: '100%', width: '100%', borderRadius:'30px', objectFit:"cover" }} src={props.image} alt={props.name} />
+                        <img style={{ height: '100%', width: '100%', borderRadius: '30px', objectFit: "cover" }} src={props.image} alt={props.name} />
                     </div>
                     <div className="meal-item__info">
-                        <Button onClick={showMealDescription} type="text" style={{color:'white'}}>{props.name}</Button>
+                        <Button onClick={showMealDescription} type="text" style={{ color: 'white' }}>{props.name}</Button>
                         {mealDescription && <MealDescription
                             name={props.name}
                             image={props.image}
@@ -73,10 +73,10 @@ const MealItem = props => {
                         setPageChange={props.setPageChange}
                     />
                 </div>
-                <div style={{display:'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                     <Rate character={<StarOutlined />}
                         allowHalf style={{ fontSize: 16, margin: '0px 5px' }} disabled value={props.reviewAverage} />
-                    <h6 style={{ alignItems:"center", paddingTop:'10px'}}>
+                    <h6 style={{ alignItems: "center", paddingTop: '10px', color: 'white' }}>
                         {props.reviewCount} {props.reviewCount === 1 ? 'review' : 'reviews'}
                     </h6>
                 </div>

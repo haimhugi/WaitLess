@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { Button, Form } from 'antd';
 import 'antd/dist/antd.css';
@@ -73,11 +73,6 @@ const MealItemForm = props => {
         props.setPageChange(true);
     }
 
-    useEffect(() => {
-        console.log('this is editMealOn in MealItem after changed ' + JSON.stringify(editMealOn));
-    }, [editMealOn]);
-
-
     const [amountIsValid, setAmountIsValid] = useState(true);
     const amountInputRef = useRef();
     const submitHandler = event => {
@@ -97,7 +92,7 @@ const MealItemForm = props => {
     return (
         <React.Fragment>
             <ErrorModal error={error} onClear={clearError} />
-            <form className={classes.form} onSubmit={submitHandler} style={{ margin: '5px'}}>
+            <form className={classes.form} onSubmit={submitHandler} style={{ margin: '5px' }}>
                 {!props.isAdmin && <Input
                     label="Amount"
                     ref={amountInputRef}

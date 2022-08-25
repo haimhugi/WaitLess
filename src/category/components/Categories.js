@@ -12,23 +12,6 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal'
 import { useHttpClient } from '../../shared/hooks/http-hook';
 
-
-// const data = [
-//     'הכל',
-//     'ארוחות בוקר',
-//     'ארוחות ילדים',
-//     'ראשונות',
-//     'כריכים',
-//     'שקשוקות',
-//     'טוסטים',
-//     'מהתנור',
-//     'סלטים',
-//     'פסטות',
-//     'עיקריות',
-//     'משקאות',
-//     'קינוחים',
-// ];
-
 const Categories = props => {
 
     //load categories data

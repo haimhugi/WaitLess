@@ -61,7 +61,7 @@ const Login = () => {
     };
 
     return (
-        <React.Fragment className="login-main">
+        <React.Fragment>
             <ErrorModal error={error} onClear={clearError} />
             <Card className="login-main">
                 {isLoading && <LoadingSpinner asOverlay />}
@@ -106,10 +106,10 @@ const Login = () => {
                     </Form.Item>
 
                     <Form.Item>
-                        <Button type="primary" htmlType="submit" className="login-form-button">
+                        <Button type="primary" htmlType="submit" style={{ backgroundColor: 'black', borderColor: '#676767de', borderRadius: '6px', margin: '3px' }} className="login-form-button">
                             Log in
                         </Button>
-                        Or <Button onClick={changeRegisterToTrue}>register now!</Button>
+                        <Button style={{ backgroundColor: '#e2e2e267', borderColor: '#676767de', color: 'white', borderRadius: '6px', margin: '3px' }} onClick={changeRegisterToTrue}>register now!</Button>
                     </Form.Item>
                 </Form>
             </Card>
