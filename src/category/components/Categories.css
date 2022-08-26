@@ -9,6 +9,11 @@
   float: right;
 } */
 
+.cat-list {
+  transform: translateX(30%);
+  position: fixed;
+}
+
 .ant-list .ant-spin-container .ant-list-items .ant-spin-nested-loading {
   vertical-align: middle;
   column-count: 1;

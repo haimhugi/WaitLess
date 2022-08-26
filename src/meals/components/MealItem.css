@@ -13,12 +13,12 @@
   text-decoration: none;
   padding: 1rem;
   color: white;
-  background: #2E2C2C;
+  background: #2e2c2c;
 }
 
 .meal-item a:hover,
 .meal-item a:active {
-  background: #D1D1D1;
+  background: #d1d1d1;
   opacity: 0.8;
   transition: 0.5s;
 }
@@ -30,7 +30,7 @@
 
 .meal-item__image {
   width: 100%;
-  height: 4rem;
+  height: 10rem;
   margin-right: 1rem;
   color: #f9f2f2;
 }
@@ -40,6 +40,10 @@
   padding: 5px;
   background-color: rgba(13, 14, 14, 0.792);
   border-radius: 20px;
+}
+
+.meal-item__info {
+  text-align: right;
 }
 
 .meal-item__info h2 {
@@ -62,8 +66,10 @@
   color: #f9f2f2;
   left: 40px;
 }
+.meal-item__price {
+  margin-right: 5%;
+}
 
-.ant-rate-star
-.ant-rate-star-full{
+.ant-rate-star .ant-rate-star-full {
   font-size: 12;
 }

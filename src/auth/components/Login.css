@@ -1,15 +1,19 @@
 .login-main {
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    border-color: #676767de;
-    background-color: #22233667;
-    border-style: solid;
-    border-width: medium;
-    border-radius: 10px;
-    padding: 15px;
+  width: 34vh;
+  margin: 0 auto 10% auto;
+  border-color: #676767de;
+  background-color: #22233667;
+  border-style: solid;
+  border-width: medium;
+  border-radius: 10px;
+  padding: 15px;
 }
 
 .login-form {
-    left: 50%;
+  left: 50%;
+}
+
+.auth-form-btns {
+  display: flex;
+  justify-content: center;
 }

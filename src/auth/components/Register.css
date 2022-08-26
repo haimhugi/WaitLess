@@ -1,25 +1,23 @@
 .register-form {
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    border-color: #676767de;
-    background-color: #22233667;
-    border-style: solid;
-    border-width: medium;
-    border-radius: 10px;
-    padding: 15px;
-    color: azure;
-    background: rgba(32, 32, 33, 0.415);
-    margin: 20px;
+  width: fit-content;
+  border-color: #676767de;
+  background-color: #22233667;
+  border-style: solid;
+  border-width: medium;
+  border-radius: 10px;
+  padding: 15px;
+  color: azure;
+  background: rgba(32, 32, 33, 0.415);
+  margin: auto;
 }
 
-.ant-form-item-label>label {
-    color: white;
-    width: 200px;
+/* .ant-form-item-label > label {
+  color: white;
+  width: 200px;
 }
 
 .ant-col {
-    text-align: left;
-    color: white;
-    width: auto;
-}
+  text-align: left;
+  color: white;
+  width: auto;
+} */

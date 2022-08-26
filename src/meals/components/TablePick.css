@@ -1,0 +1,12 @@
+.table-choose-card h1 {
+  text-align: center;
+}
+
+.table-choose-card .ant-row .ant-col {
+  text-align: center;
+}
+
+.table-choose-card .ant-row .ant-col button {
+  margin: 7%;
+  width: 45px;
+}
