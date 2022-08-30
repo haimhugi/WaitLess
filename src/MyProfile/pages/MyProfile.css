@@ -1,0 +1,10 @@
+.header {
+  direction: rtl;
+}
+
+.deatils {
+  display: flex;
+  width: 63%;
+  direction: rtl;
+  margin: auto;
+}

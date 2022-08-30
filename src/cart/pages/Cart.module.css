@@ -6,13 +6,21 @@
   overflow: auto;
 }
 
+.cart {
+  width: 60%;
+  margin: auto;
+  background-color: rgb(0 0 0 / 68%);
+  padding: 2%;
+}
+
 .total {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
   font-size: 1.5rem;
-  margin: 1rem 0;
+  color: white;
+  padding-bottom: 3%;
 }
 
 .actions {
@@ -41,6 +49,7 @@
 }
 
 .actions .button {
-  background-color: #8a2b06;
+  background-color: #000000;
   color: white;
+  border-color: white;
 }

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-import { Button, Form } from "antd";
+import { Button, Form, notification } from "antd";
 import "antd/dist/antd.css";
 
 import Input from "../../shared/components/UIElements/Input";
@@ -41,6 +41,14 @@ const MealItemForm = (props) => {
   };
   const hideDeleteMealModal = () => {
     setDeleteMealOn(false);
+  };
+
+  const openNotification = () => {
+    const args = {
+      message: "המנה נוספה לעגלה",
+      duration: 3,
+    };
+    notification["success"](args);
   };
 
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -86,6 +94,7 @@ const MealItemForm = (props) => {
       setAmountIsValid(false);
       return;
     }
+    openNotification();
     props.onAddToCart(enteredAmountNumber);
   };
 
