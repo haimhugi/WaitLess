@@ -7,11 +7,15 @@ import ReviewModal from "./ReviewModal";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+
+
 import "./MyOrderItem.css";
 
 let i = 0;
 const MyOrderItem = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [mealInOrderIdClicked, setMealInOrderIdClicked] = useState("");
   const [mealNameClicked, setMealNameClicked] = useState("");
@@ -33,8 +37,9 @@ const MyOrderItem = (props) => {
     setMealInOrderIdList([]);
     setMealsNameList([]);
     setMealsIsReviewedList([]);
-
+    let counter = 0;
     const sendRequest1 = async () => {
+      setIsLoading(true);
       props.mealsList.forEach(async (element) => {
         try {
           const response = await fetch(
@@ -50,23 +55,30 @@ const MyOrderItem = (props) => {
             ...oldArray,
             element.isReviewed,
           ]);
+          counter++;
+          if (props.mealsList.length === counter) {
+            setIsLoading(false);
+          }
         } catch (err) {
           console.log(err);
         }
+
       });
     };
+
     sendRequest1();
   }, []);
 
   // useEffect(() => {
-  //     console.log('mealsIsReviewedList mealsIsReviewedList mealsIsReviewedList');
-  //     console.log(mealsIsReviewedList);
-  // }, [mealsIsReviewedList]);
+  //   console.log('isLoading changed to: ');
+  //   console.log(isLoading);
+  // }, [isLoading]);
 
   if (props.mealsNumber === 0) return "";
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
+      {isLoading && <LoadingSpinner />}
 
       {reviewModal && (
         <ReviewModal
@@ -102,7 +114,7 @@ const MyOrderItem = (props) => {
                 {props.status} {"סטטוס הזמנה"}{" "}
               </p>
               <List>
-                {mealsNameList.map(
+                {!isLoading && mealsNameList.map(
                   (name, index) =>
                     !mealsIsReviewedList[index] && (
                       <a
