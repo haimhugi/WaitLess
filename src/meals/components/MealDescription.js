@@ -15,9 +15,7 @@ const MealDescription = (props) => {
   return (
     <Card className="desc-card">
       <ErrorModal error={error} onClear={clearError} />
-      <div>
-        <Avater image={props.image} alt={props.name} />
-      </div>
+
       <div>
         <h2>{props.name}</h2>
         <h3>{props.description}</h3>

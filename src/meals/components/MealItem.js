@@ -61,7 +61,6 @@ const MealItem = (props) => {
             {mealDescription && (
               <MealDescription
                 name={props.name}
-                image={props.image}
                 description={props.description}
                 onClose={showMealDescription}
               />
