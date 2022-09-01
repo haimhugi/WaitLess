@@ -49,13 +49,13 @@ const MyProfile = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <Card>
+      <div className="my-profile">
         <div className="header">
-          <h1>איזור אישי</h1>
+          <span>איזור אישי</span>
         </div>
 
         <div className="deatils">
-          <div>
+          <div className="deatils-btn">
             <h1>
               <Button onClick={() => pickedValHandler("פרטים אישיים")}>
                 פרטים אישיים
@@ -89,7 +89,8 @@ const MyProfile = () => {
             )}
           </div>
         </div>
-        {/* 
+      </div>
+      {/* 
         <Row>
           <Col span={6} push={18}>
 
@@ -99,7 +100,6 @@ const MyProfile = () => {
 
           </div>
         </Row> */}
-      </Card>
     </React.Fragment>
   );
 };

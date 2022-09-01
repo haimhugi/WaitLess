@@ -84,6 +84,7 @@ const Categories = (props) => {
               {props.isAdmin && (
                 <Tooltip className="deleteCategory" title="delete">
                   <Button
+                    className="delete-cat-btn"
                     onClick={() => deleteCategoryReq(item)}
                     danger
                     type="primary"

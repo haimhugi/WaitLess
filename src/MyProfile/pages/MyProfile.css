@@ -1,5 +1,9 @@
 .header {
   direction: rtl;
+  text-align: center;
+  text-decoration: underline;
+  color: white;
+  font-size: 32px;
 }
 
 .deatils {
@@ -7,4 +11,17 @@
   width: 63%;
   direction: rtl;
   margin: auto;
+}
+
+.deatils-btn {
+  margin-left: 10%;
+}
+
+.my-profile {
+  width: 95vh;
+  background-color: rgba(0, 0, 0, 0.685);
+  border: 1px solid black;
+  border-radius: 4%;
+  margin: auto;
+  height: 50%;
 }

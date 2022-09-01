@@ -47,6 +47,7 @@ const MealItemForm = (props) => {
     const args = {
       message: "המנה נוספה לעגלה",
       duration: 3,
+      placement: "topLeft",
     };
     notification["success"](args);
   };

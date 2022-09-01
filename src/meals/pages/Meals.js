@@ -90,7 +90,7 @@ const Meals = (props) => {
         )}
         <Card>
           {props.isAdmin && (
-            <Button type="primary" danger onClick={openCreateForm}>
+            <Button type="primary" onClick={openCreateForm}>
               הוסף מנה
             </Button>
           )}
@@ -124,7 +124,7 @@ const Meals = (props) => {
       )}{" "}
       <Card>
         {props.isAdmin && (
-          <Button type="primary" danger onClick={openCreateForm}>
+          <Button className="btn-add-meal-admin" onClick={openCreateForm}>
             הוסף מנה
           </Button>
         )}

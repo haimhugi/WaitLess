@@ -14,6 +14,15 @@
   position: fixed;
 }
 
+.cat-list
+  .ant-list
+  .ant-spin-nested-loading
+  .ant-spin-container
+  .ant-list-items
+  .ant-list-item {
+  padding: 14.5px 17px !important;
+}
+
 .ant-list .ant-spin-container .ant-list-items .ant-spin-nested-loading {
   vertical-align: middle;
   column-count: 1;
@@ -38,6 +47,10 @@
 
 .deleteCategory {
   margin-right: 10%;
+}
+
+.delete-cat-btn {
+  width: 10% !important;
 }
 
 .ant-list-item button:hover {

@@ -1,0 +1,19 @@
+.full-name {
+  display: flex;
+  color: white;
+}
+
+.full-name h1 {
+  margin-left: 5%;
+  color: white;
+}
+
+.email-deatils {
+  display: flex;
+  color: white;
+}
+
+.email-deatils h1 {
+  margin-left: 13%;
+  color: white;
+}
