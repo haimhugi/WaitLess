@@ -18,7 +18,7 @@ const MealItemForm = (props) => {
         `http://localhost:5001/api/meals/deleteMeal/${id}`,
         "DELETE"
       );
-    } catch (err) {}
+    } catch (err) { }
     console.log("remove meal with the id: " + id);
     hideDeleteMealModal();
     //NewGET
@@ -165,19 +165,21 @@ const MealItemForm = (props) => {
               }}
               autoComplete="off"
             >
-              <h1>האם אתה בטוח שברצונך למחוק את המנה?</h1>
+              <h1 style={{ direction: "rtl" }}>האם אתה בטוח שברצונך למחוק את המנה?</h1>
               <Form.Item
                 wrapperCol={{
                   offset: 8,
                   span: 16,
                 }}
+                style={{ direction: "rtl" }}
               >
-                <Button type="primary" htmlType="submit">
-                  כן
-                </Button>
                 <Button type="danger" onClick={hideDeleteMealModal}>
                   לא
                 </Button>
+                <Button type="primary" htmlType="submit">
+                  כן
+                </Button>
+
               </Form.Item>
             </Form>
           </Modal>

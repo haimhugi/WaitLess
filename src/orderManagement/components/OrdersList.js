@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { DownOutlined } from "@ant-design/icons";
-import { Space, Form, Table, Dropdown, Menu, Typography } from "antd";
+import { Space, Form, Table, Dropdown, Menu, Popconfirm } from "antd";
 import "antd/dist/antd.css";
 
 import Card from "../../shared/components/UIElements/Card";
@@ -153,15 +153,17 @@ const OrdersList = (props) => {
       key: "action",
 
       render: (_, record) => (
-        <Space size="middle">
-          <a
-            onClick={() => {
-              deleteOrder(record.id);
-            }}
-          >
-            Delete
-          </a>
-        </Space>
+        <Popconfirm
+          title="?בטוח שברצונך רוצה למחוק את ההזמנה הזאת"
+          onConfirm={() => {
+            deleteOrder(record.id);
+          }}
+          onVisibleChange={() => console.log("visible change")}
+        >
+          <Space size="middle">
+            <a>Delete</a>
+          </Space>
+        </Popconfirm>
       ),
     },
     {

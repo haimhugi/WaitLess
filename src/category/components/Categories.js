@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext, useState, useEffect } from "react";
 
-import { List, Button, Tooltip } from "antd";
+import { List, Button, Tooltip, Popconfirm } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 
 import "./Categories.css";
@@ -82,16 +82,23 @@ const Categories = (props) => {
           renderItem={(item) => (
             <List.Item>
               {props.isAdmin && (
-                item !== 'הכל' && <Tooltip className="deleteCategory" title="delete">
-                  <Button
-                    className="delete-cat-btn"
-                    onClick={() => deleteCategoryReq(item)}
-                    danger
-                    type="primary"
-                    shape="circle"
-                    icon={<DeleteOutlined />}
-                  />
-                </Tooltip>
+                item !== 'הכל' &&
+                <Popconfirm
+                  title="?בטוח שברצונך רוצה למחוק את הקטגוריה הזאת"
+                  onConfirm={() => deleteCategoryReq(item)}
+                  onVisibleChange={() => console.log("visible change")}
+                >
+                  <Tooltip className="deleteCategory">
+                    <Button
+                      className="delete-cat-btn"
+                      danger
+                      type="primary"
+                      shape="circle"
+                      icon={<DeleteOutlined />}
+                    />
+                  </Tooltip>
+                </Popconfirm>
+
               )}
               {props.isAdmin && (
                 item === 'הכל' && <Tooltip className="deleteCategory">
@@ -100,6 +107,7 @@ const Categories = (props) => {
                   />
                 </Tooltip>
               )}
+
               <Button
                 className="category"
                 onClick={() => categoryCtx.changeCategory(item)}
