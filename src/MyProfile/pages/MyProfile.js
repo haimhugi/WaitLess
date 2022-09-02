@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button } from "antd";
-import { Row, Col } from "antd";
 
-import Card from "../../shared/components/UIElements/Card";
 import PersonalDetailsControl from "../components/PersonalDetailsControl";
 import UpdatePassword from "../components/UpdatePassword";
 import DeleteAccountControl from "../components/DeleteAccountControl";
@@ -15,7 +13,9 @@ const MyProfile = () => {
   const AuthCtx = useContext(AuthContext);
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const { error, sendRequest, clearError } = useHttpClient();
+  const { error, clearError } = useHttpClient();
+  const [pageChange, setPageChange] = useState(false);
+
 
   useEffect(() => {
     const sendRequest = async () => {
@@ -33,22 +33,26 @@ const MyProfile = () => {
       }
     };
     sendRequest();
-  }, []);
+    setPageChange(false);
+
+  }, [pageChange]);
 
   const pickedValHandler = (newPickedVal) => {
     setPickedValueInMyProfile(newPickedVal);
+    setPageChange(true);
   };
 
   const [pickedValueInMyProfile, setPickedValueInMyProfile] =
     useState("פרטים אישיים");
 
-  useEffect(() => {
-    console.log("changed to " + pickedValueInMyProfile);
-  }, [pickedValueInMyProfile]);
+  // useEffect(() => {
+  //   console.log("changed to " + pickedValueInMyProfile);
+  // }, [pickedValueInMyProfile]);
 
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
+
       <div className="my-profile">
         <div className="header">
           <span>איזור אישי</span>
@@ -57,19 +61,19 @@ const MyProfile = () => {
         <div className="deatils">
           <div className="deatils-btn">
             <h1>
-              <Button onClick={() => pickedValHandler("פרטים אישיים")}>
+              <Button style={{ width: "100%" }} onClick={() => pickedValHandler("פרטים אישיים")}>
                 פרטים אישיים
               </Button>
             </h1>
             {
               <h1>
-                <Button onClick={() => pickedValHandler("עדכון סיסמה")}>
+                <Button style={{ width: "100%" }} onClick={() => pickedValHandler("עדכון סיסמה")}>
                   עדכון סיסמה
                 </Button>
               </h1>
             }
             <h1>
-              <Button onClick={() => pickedValHandler("מחיקת חשבון")}>
+              <Button style={{ width: "100%" }} onClick={() => pickedValHandler("מחיקת חשבון")}>
                 מחיקת חשבון
               </Button>{" "}
             </h1>
@@ -90,16 +94,6 @@ const MyProfile = () => {
           </div>
         </div>
       </div>
-      {/* 
-        <Row>
-          <Col span={6} push={18}>
-
-          </Col>
-
-          <div className="my-deatils">
-
-          </div>
-        </Row> */}
     </React.Fragment>
   );
 };

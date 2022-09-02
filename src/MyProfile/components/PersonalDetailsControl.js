@@ -4,6 +4,7 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import "./PersonalDetailsControl.css";
 
+
 const PersonalDetailsControl = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
 
@@ -39,8 +40,6 @@ const PersonalDetailsControl = (props) => {
         console.log(err);
       }
     }
-
-    console.log("Edited Value -> ", val);
   };
 
   return (
