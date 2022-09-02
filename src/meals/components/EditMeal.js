@@ -125,6 +125,8 @@ const EditMeal = (props) => {
               message: "בבקשה הכנס את קטגוריית המנה",
             },
           ]}
+          initialValue={props.category}
+
         >
           <Select placeholder="בחר את הקטגוריה הרצויה">
             {CATEGORIES.map((item) => (
