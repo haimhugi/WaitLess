@@ -7,3 +7,10 @@
   margin: auto;
   display: flex;
 }
+
+.card-meal:hover h2 {
+  color: white !important;
+}
+.card-meal:hover h3 {
+  color: white !important;
+}

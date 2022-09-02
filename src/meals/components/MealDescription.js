@@ -11,11 +11,10 @@ import "antd/dist/antd.css";
 import "./MealDescription.css";
 
 const MealDescription = (props) => {
-  const { error, sendRequest, clearError } = useHttpClient();
+  const { error, clearError } = useHttpClient();
   return (
     <Card className="desc-card">
       <ErrorModal error={error} onClear={clearError} />
-
       <div>
         <h2>{props.name}</h2>
         <h3>{props.description}</h3>

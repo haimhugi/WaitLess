@@ -122,7 +122,7 @@ const Meals = (props) => {
           <LoadingSpinner />
         </div>
       )}{" "}
-      <Card>
+      <Card className={"card-meal"}>
         {props.isAdmin && (
           <Button className="btn-add-meal-admin" onClick={openCreateForm}>
             הוסף מנה

@@ -121,17 +121,19 @@ const OrderManagement = (props) => {
         </div>
       )}
       <Card>
-        <Radio.Group
-          defaultValue="in preparation"
-          buttonStyle="solid"
-          onChange={(event) => {
-            statusCtx.changeStatus(event.target.value);
-          }}
-        >
-          <Radio.Button value="done">הזמנות שהושלמו</Radio.Button>
-          <Radio.Button value="in preparation">הזמנות בהכנה</Radio.Button>
-          <Radio.Button value="all">הכל</Radio.Button>
-        </Radio.Group>
+        <div style={{ direction: "rtl" }}>
+          <Radio.Group
+            defaultValue="in preparation"
+            buttonStyle="solid"
+            onChange={(event) => {
+              statusCtx.changeStatus(event.target.value);
+            }}
+          >
+            <Radio.Button value="done">הזמנות שהושלמו</Radio.Button>
+            <Radio.Button value="in preparation">הזמנות בהכנה</Radio.Button>
+            <Radio.Button value="all">הכל</Radio.Button>
+          </Radio.Group>
+        </div>
         <OrdersList setPageChange={setPageChange} items={ORDERS} />
       </Card>
     </React.Fragment>
