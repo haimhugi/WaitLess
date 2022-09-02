@@ -5,7 +5,6 @@ import "antd/dist/antd.css";
 import { StarOutlined } from "@ant-design/icons";
 
 import "./MealItem.css";
-import Avater from "../../shared/components/UIElements/Avatar";
 import Card from "../../shared/components/UIElements/Card";
 import MealItemForm from "./MealItemForm";
 import CartContext from "../../store/cart-context";
@@ -67,7 +66,6 @@ const MealItem = (props) => {
             )}
 
             <div className="meal-item__price">{price}</div>
-            {/* <h2>{props.name}</h2> */}
           </div>
         </div>
         <div>

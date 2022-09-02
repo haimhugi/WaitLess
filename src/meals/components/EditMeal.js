@@ -10,7 +10,7 @@ import Modal from "../../shared/components/UIElements/Modal";
 const { Option } = Select;
 
 const EditMeal = (props) => {
-  const { error, sendRequest, clearError } = useHttpClient();
+  const { error, clearError } = useHttpClient();
   const [pageChange, setPageChange] = useState(false);
   const [CATEGORIES, setCATEGORIES] = useState([]);
 
@@ -114,7 +114,9 @@ const EditMeal = (props) => {
           ]}
           initialValue={props.price}
         >
-          <InputNumber prefix="₪" />
+          <InputNumber
+            min="1"
+            prefix="₪" />
         </Form.Item>
         <Form.Item
           name="category"

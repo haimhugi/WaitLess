@@ -52,7 +52,7 @@ const MealItemForm = (props) => {
     notification["success"](args);
   };
 
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { error, sendRequest, clearError } = useHttpClient();
 
   const patchMeal = async (values) => {
     try {
