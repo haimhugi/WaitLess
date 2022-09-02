@@ -50,6 +50,7 @@ const App = () => {
   const logout = useCallback(() => {
     setLoggedIn(false);
     setUserId(null);
+    setIsAdmin(false);
   }, []);
 
   const changeRegisterHandler = newState => {
