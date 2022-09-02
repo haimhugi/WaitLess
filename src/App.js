@@ -22,10 +22,15 @@ import { AuthContext } from './store/auth-context';
 import RegisterContext from './store/register-context';
 import OrderContext from './store/orders-context';
 import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
+import ErrorModal from './shared/components/UIElements/ErrorModal';
+import { useHttpClient } from "./shared/hooks/http-hook";
+
+
 
 
 const App = () => {
 
+  const { error, clearError } = useHttpClient();
 
 
   const changeStatusHandler = newStatus => {
@@ -109,77 +114,80 @@ const App = () => {
 
 
   return (
-    <AuthContext.Provider value={{
-      isLoggedIn: loggedIn,
-      userId: userId,
-      isAdmin: isAdmin,
-      changeToLoggedIn: login,
-      changeToLoggedOut: logout
-    }}>
-      <RegisterContext.Provider value={{
-        wantRegister: register,
-        changeRegister: changeRegisterHandler
+    <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
+      <AuthContext.Provider value={{
+        isLoggedIn: loggedIn,
+        userId: userId,
+        isAdmin: isAdmin,
+        changeToLoggedIn: login,
+        changeToLoggedOut: logout
       }}>
-        <OrderContext.Provider
-          value={{
-            ordersList: ordersList
-          }}>
-          <CartProvider>
-            <CategoryContext.Provider value={{
-              pickedCategory: pickedCategory,
-              changeCategory: changeCategoryHandler
+        <RegisterContext.Provider value={{
+          wantRegister: register,
+          changeRegister: changeRegisterHandler
+        }}>
+          <OrderContext.Provider
+            value={{
+              ordersList: ordersList
             }}>
-              <StatusContext.Provider value={{
-                pickedOrderStatus: pickedOrderStatus,
-                changeStatus: changeStatusHandler
+            <CartProvider>
+              <CategoryContext.Provider value={{
+                pickedCategory: pickedCategory,
+                changeCategory: changeCategoryHandler
               }}>
-                <Route >
-                  <MainNavigation isAdmin={isAdmin} TablePickToTrue={changeTablePickToTrue} />
-                </Route>
-                <main>
-                  <div className='img'></div>
-                  <div className='main-body'>
-                    <Route path="/loading" exact >
-                      <LoadingSpinner />
-                    </Route>
-                    <Route path="/meals" exact >
-                      <Grid isAdmin={isAdmin} />
-                      {pickTableIsShown && !isAdmin && <TablePick onClose={hideTablePick} />}
-                    </Route>
-                    {!isAdmin && <Route path="/cart" exact>
-                      <Cart />
-                    </Route>}
-                    {!isAdmin && <Route path="/:u1/orders" exact >
-                      <MyOrders />
-                    </Route>}
-                    {!isAdmin && <Route path="/about" >
-                      <About />
-                    </Route>}
-                    {!isAdmin && <Route path="/myProfile" >
-                      <MyProfile />
-                    </Route>}
-                    {isAdmin && <Route path="/OrderManagement" >
-                      <OrderManagement />
-                    </Route>}
-                    <Route path="/auth" >
-                      <Auth />
-                    </Route>
-                    {AuthCtx.isLoggedIn ?
-                      <Route path="/">
-                        <Redirect to="/meals" />
+                <StatusContext.Provider value={{
+                  pickedOrderStatus: pickedOrderStatus,
+                  changeStatus: changeStatusHandler
+                }}>
+                  <Route >
+                    <MainNavigation isAdmin={isAdmin} TablePickToTrue={changeTablePickToTrue} />
+                  </Route>
+                  <main>
+                    <div className='img'></div>
+                    <div className='main-body'>
+                      <Route path="/loading" exact >
+                        <LoadingSpinner />
                       </Route>
-                      : <Route path="/">
-                        <Redirect to="/auth" />
+                      <Route path="/meals" exact >
+                        <Grid isAdmin={isAdmin} />
+                        {pickTableIsShown && !isAdmin && <TablePick onClose={hideTablePick} />}
+                      </Route>
+                      {!isAdmin && <Route path="/cart" exact>
+                        <Cart />
                       </Route>}
-                  </div>
-                </main>
-                <Footer className='footer' />
-              </StatusContext.Provider>
-            </CategoryContext.Provider>
-          </CartProvider>
-        </OrderContext.Provider>
-      </RegisterContext.Provider>
-    </AuthContext.Provider>
+                      {!isAdmin && <Route path="/:u1/orders" exact >
+                        <MyOrders />
+                      </Route>}
+                      {!isAdmin && <Route path="/about" >
+                        <About />
+                      </Route>}
+                      {!isAdmin && <Route path="/myProfile" >
+                        <MyProfile />
+                      </Route>}
+                      {isAdmin && <Route path="/OrderManagement" >
+                        <OrderManagement />
+                      </Route>}
+                      <Route path="/auth" >
+                        <Auth />
+                      </Route>
+                      {AuthCtx.isLoggedIn ?
+                        <Route path="/">
+                          <Redirect to="/meals" />
+                        </Route>
+                        : <Route path="/">
+                          <Redirect to="/auth" />
+                        </Route>}
+                    </div>
+                  </main>
+                  <Footer className='footer' />
+                </StatusContext.Provider>
+              </CategoryContext.Provider>
+            </CartProvider>
+          </OrderContext.Provider>
+        </RegisterContext.Provider>
+      </AuthContext.Provider>
+    </React.Fragment>
 
   );
 };

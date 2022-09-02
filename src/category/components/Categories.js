@@ -61,7 +61,7 @@ const Categories = (props) => {
         `http://localhost:5001/api/meals/deleteCategory/${item}`,
         "DELETE"
       );
-    } catch (err) {}
+    } catch (err) { }
     console.log("remove category with the name: " + item);
     setPageChange(true);
   };
@@ -82,7 +82,7 @@ const Categories = (props) => {
           renderItem={(item) => (
             <List.Item>
               {props.isAdmin && (
-                <Tooltip className="deleteCategory" title="delete">
+                item !== 'הכל' && <Tooltip className="deleteCategory" title="delete">
                   <Button
                     className="delete-cat-btn"
                     onClick={() => deleteCategoryReq(item)}
@@ -90,6 +90,13 @@ const Categories = (props) => {
                     type="primary"
                     shape="circle"
                     icon={<DeleteOutlined />}
+                  />
+                </Tooltip>
+              )}
+              {props.isAdmin && (
+                item === 'הכל' && <Tooltip className="deleteCategory">
+                  <Button
+                    shape="circle"
                   />
                 </Tooltip>
               )}

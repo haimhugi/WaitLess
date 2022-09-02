@@ -7,6 +7,7 @@ import "antd/dist/antd.css";
 import Card from "../../shared/components/UIElements/Card";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 const menu = (
   <Menu
@@ -52,16 +53,22 @@ const OrdersList = (props) => {
   const deleteOrder = async (id) => {
     try {
       await sendRequest(`http://localhost:5001/api/orders/${id}`, "DELETE");
-    } catch (err) {}
+    } catch (err) { }
     console.log("remove meal with the id: " + id);
     props.setPageChange(true);
   };
 
   const [mealsNameList, setMealsNameList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const convertMealsIdToName = (arrMealsId) => {
+    setIsLoading(true);
+
     setMealsNameList([]);
+    let counter = 0;
+
     arrMealsId.forEach(async (mealId) => {
+
       try {
         const response = await fetch(
           `http://localhost:5001/api/meals/${mealId.mealId}`
@@ -71,6 +78,10 @@ const OrdersList = (props) => {
           ...oldArray,
           JSON.stringify(responseData.name),
         ]);
+        counter++;
+        if (arrMealsId.length === counter) {
+          setIsLoading(false);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -199,7 +210,6 @@ const OrdersList = (props) => {
                     יוצר ההזמנה: &nbsp;
                   </span>
                   <span style={{ fontWeight: "normal" }}>{usersName}</span>
-
                   <div>
                     <span
                       style={{
@@ -208,9 +218,10 @@ const OrdersList = (props) => {
                     >
                       המנות שהוזמנו: &nbsp;
                     </span>
-                    <span style={{ fontWeight: "normal" }}>
+                    {isLoading && <LoadingSpinner />}
+                    {!isLoading && <span style={{ fontWeight: "normal" }}>
                       {mealsNameList}
-                    </span>
+                    </span>}
                   </div>
                 </div>
               </React.Fragment>
