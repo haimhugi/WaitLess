@@ -12,6 +12,8 @@
 .cat-list {
   transform: translateX(30%);
   position: fixed;
+  overflow-y: scroll;
+  height: 85%;
 }
 
 .cat-list
