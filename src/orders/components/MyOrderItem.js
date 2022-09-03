@@ -9,7 +9,6 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
-
 import "./MyOrderItem.css";
 
 let i = 0;
@@ -62,7 +61,6 @@ const MyOrderItem = (props) => {
         } catch (err) {
           console.log(err);
         }
-
       });
     };
 
@@ -88,6 +86,7 @@ const MyOrderItem = (props) => {
           onClose={reviewModalOff}
         />
       )}
+
       <List>
         <List.Item>
           <Card style={{ width: "100%", textAlign: "right", fontSize: "100%" }}>
@@ -114,23 +113,24 @@ const MyOrderItem = (props) => {
                 {props.status} {"סטטוס הזמנה"}{" "}
               </p>
               <List>
-                {!isLoading && mealsNameList.map(
-                  (name, index) =>
-                    !mealsIsReviewedList[index] && (
-                      <a
-                        onClick={() => {
-                          setMealInOrderIdClicked(mealInOrderIdList[index]);
-                          setMealNameClicked(name.replaceAll('"', ""));
-                          reviewModalOn();
-                        }}
-                        style={{ display: "inline" }}
-                        key={name + ++i}
-                        dir="rtl"
-                      >
-                        {name + ","}
-                      </a>
-                    )
-                )}
+                {!isLoading &&
+                  mealsNameList.map(
+                    (name, index) =>
+                      !mealsIsReviewedList[index] && (
+                        <a
+                          onClick={() => {
+                            setMealInOrderIdClicked(mealInOrderIdList[index]);
+                            setMealNameClicked(name.replaceAll('"', ""));
+                            reviewModalOn();
+                          }}
+                          style={{ display: "inline" }}
+                          key={name + ++i}
+                          dir="rtl"
+                        >
+                          {name + ","}
+                        </a>
+                      )
+                  )}
                 {mealsNameList.map(
                   (name, index) =>
                     mealsIsReviewedList[index] && (
