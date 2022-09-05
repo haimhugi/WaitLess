@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 
 import { Rate } from 'antd';
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 
 import Modal from '../../shared/components/UIElements/Modal';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';

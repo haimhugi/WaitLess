@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { DownOutlined } from "@ant-design/icons";
 import { Space, Form, Table, Dropdown, Menu, Popconfirm } from "antd";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 
 import Card from "../../shared/components/UIElements/Card";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
@@ -28,7 +28,6 @@ const OrdersList = (props) => {
   const [currentRows, setCurrentRows] = useState([]);
 
   const [form] = Form.useForm();
-  // const [data, setData] = useState(props.items);
 
   const save = async (id, updateStatus) => {
     try {
@@ -134,12 +133,6 @@ const OrdersList = (props) => {
       dataIndex: "status",
       key: "status",
     },
-    // {
-    //     title: 'יוצר ההזמנה',
-    //     dataIndex: 'creator',
-    //     key: 'creator',
-    // },
-
     {
       title: "Action",
       key: "action",
@@ -152,7 +145,7 @@ const OrdersList = (props) => {
           }}
         >
           <Space size="middle">
-            <a>Delete</a>
+            <label style={{ color: "red", cursor: 'pointer'}}>Delete</label>
           </Space>
         </Popconfirm>
       ),
@@ -163,9 +156,9 @@ const OrdersList = (props) => {
       render: () => (
         <Space>
           <Dropdown overlay={menu}>
-            <a>
+            <label>
               שינוי סטטוס הזמנה <DownOutlined />
-            </a>
+            </label>
           </Dropdown>
         </Space>
       ),

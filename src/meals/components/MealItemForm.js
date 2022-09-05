@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 
 import { Button, Form, notification } from "antd";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 
 import Input from "../../shared/components/UIElements/Input";
 import classes from "./MealItemForm.module.css";
@@ -20,7 +20,6 @@ const MealItemForm = (props) => {
       );
     } catch (err) { }
     hideDeleteMealModal();
-    //NewGET
     props.setPageChange(true);
   };
 

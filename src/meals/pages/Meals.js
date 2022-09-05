@@ -12,7 +12,6 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import "./Meals.css";
 
 const Meals = (props) => {
-  //load meals data
   const [pageChange, setPageChange] = useState(false);
 
   const [MEALS, setMeals] = useState("");

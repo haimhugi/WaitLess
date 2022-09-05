@@ -2,7 +2,7 @@ import CartContext from '../../../store/cart-context';
 import AuthContext from '../../../store/auth-context';
 
 import React, { useContext, useState, useEffect } from 'react';
-import { NavLink, useParams, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import ErrorModal from '../UIElements/ErrorModal';
 import LoadingSpinner from '../UIElements/LoadingSpinner';
 
@@ -16,7 +16,6 @@ import './NavLinks.css';
 const NavLinks = props => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const userId = useParams().userId;
     const history = useHistory();
 
     const { error, sendRequest, clearError } = useHttpClient();

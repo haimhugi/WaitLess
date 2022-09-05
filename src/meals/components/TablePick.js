@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { Col, Row, Button } from "antd";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
@@ -14,7 +14,7 @@ import "./TablePick.css";
 
 const TablePick = (props) => {
   const AuthCtx = useContext(AuthContext);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { error, sendRequest, clearError } = useHttpClient();
 
   const tablePickHandler = async (tableNum) => {
     try {

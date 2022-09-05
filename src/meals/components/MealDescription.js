@@ -1,13 +1,12 @@
 import React from "react";
 
-import { Button, Form, Input } from "antd";
-import Avater from "../../shared/components/UIElements/Avatar";
+import { Button } from "antd";
 import Card from "../../shared/components/UIElements/Card";
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import "./MealDescription.css";
 
 const MealDescription = (props) => {

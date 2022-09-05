@@ -13,7 +13,7 @@ import "./MyOrderItem.css";
 
 let i = 0;
 const MyOrderItem = (props) => {
-  const { error, sendRequest, clearError } = useHttpClient();
+  const { error, clearError } = useHttpClient();
   const [isLoading, setIsLoading] = useState(false);
 
   const [mealInOrderIdClicked, setMealInOrderIdClicked] = useState("");

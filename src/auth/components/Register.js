@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import { Button, Checkbox, Form, Input } from 'antd';
 
 import AuthContext from '../../store/auth-context';
@@ -47,7 +47,7 @@ const Register = () => {
     const AuthCtx = useContext(AuthContext);
     const RegisterCtx = useContext(RegisterContext);
 
-    const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    const { error, sendRequest, clearError } = useHttpClient();
 
     const [form] = Form.useForm();
 

@@ -2,13 +2,6 @@
   box-sizing: border-box;
 }
 
-/* 
-.ant-list-item {
-  width: 40%;
-  text-align: right;
-  float: right;
-} */
-
 .cat-list {
   transform: translateX(30%);
   position: fixed;
@@ -44,7 +37,6 @@
   width: 200px;
   height: auto;
   direction: rtl;
-  /* flex: 1; */
 }
 
 .deleteCategory {

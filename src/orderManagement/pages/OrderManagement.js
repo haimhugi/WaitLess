@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 
 import { Radio } from "antd";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 
 import Card from "../../shared/components/UIElements/Card";
 import OrdersList from "../components/OrdersList";
@@ -54,11 +54,10 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 // ]
 
 const OrderManagement = (props) => {
-  //load orders data
   const [pageChange, setPageChange] = useState(false);
   const [ORDERS, setOrders] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { error, sendRequest, clearError } = useHttpClient();
+  const { error, clearError } = useHttpClient();
 
   useEffect(() => {
     setIsLoading(true);

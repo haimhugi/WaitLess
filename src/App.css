@@ -1,14 +1,7 @@
-@import '~antd/dist/antd.css';
+@import '~antd/dist/antd.min.css';
 
-/* .main-body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 94vh;
-} */
 .img {
     background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('./genral_restaurant2.jpg');
-    /* background: url('../assets/test_pic.jpg'); */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -25,7 +18,6 @@
     top: 70px;
     width: 100%;
     height: 100%;
-    /* background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('./genral_restaurant2.jpg') fixed; */
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: cover;

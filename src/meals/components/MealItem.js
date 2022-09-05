@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import { Rate } from "antd";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { StarOutlined } from "@ant-design/icons";
 
 import "./MealItem.css";

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 import { Button, Form, Input } from "antd";
 
 import AuthContext from "../../store/auth-context";
@@ -46,7 +46,6 @@ const tailFormItemLayout = {
 const UpdatePassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordChangedModal, setPasswordChangedModal] = useState(false);
-  // const [pageChange, setPageChange] = useState(false);
   const history = useHistory();
 
   const AuthCtx = useContext(AuthContext);
@@ -56,13 +55,11 @@ const UpdatePassword = () => {
   const [form] = Form.useForm();
 
   const hidePasswordChangedModal = () => {
-    // setPageChange(true);
     setPasswordChangedModal(false);
     history.push("/meals");
   };
 
   const showPasswordChangedModal = () => {
-    // setPageChange(true);
     setPasswordChangedModal(true);
   };
 

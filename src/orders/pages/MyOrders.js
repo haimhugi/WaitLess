@@ -46,7 +46,7 @@ const MY_ORDERS = [
 
 const MyOrders = () => {
 
-    const { error, sendRequest, clearError } = useHttpClient();
+    const { error, clearError } = useHttpClient();
     const [loadedOrders, setLoadedOrders] = useState('');
     const AuthCtx = useContext(AuthContext);
 
@@ -61,7 +61,7 @@ const MyOrders = () => {
             }
         };
         sendRequest();
-    }, []);
+    }, [AuthCtx.userId]);
 
     return (
         <React.Fragment>

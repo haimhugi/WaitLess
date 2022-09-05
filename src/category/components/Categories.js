@@ -12,7 +12,6 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
 const Categories = (props) => {
-  //load categories data
   const [pageChange, setPageChange] = useState(false);
 
   const [CATEGORIES, setCATEGORIES] = useState([]);
@@ -83,7 +82,6 @@ const Categories = (props) => {
                 <Popconfirm
                   title="?בטוח שברצונך רוצה למחוק את הקטגוריה הזאת"
                   onConfirm={() => deleteCategoryReq(item)}
-                  }
                 >
                   <Tooltip className="deleteCategory">
                     <Button

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, Form, Input, Select, InputNumber } from "antd";
-import "antd/dist/antd.css";
+import "antd/dist/antd.min.css";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
