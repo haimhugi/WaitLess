@@ -26,7 +26,6 @@ const Meals = (props) => {
         const responseData = await response.json();
         setMeals(responseData.meals);
       } catch (err) {
-        console.log(err);
       }
       setIsLoading(false);
     };
@@ -35,7 +34,6 @@ const Meals = (props) => {
   }, [pageChange]);
 
   useEffect(() => {
-    console.log(MEALS);
   }, [MEALS]);
 
   const [open, setIsOpen] = useState(false);
@@ -46,7 +44,6 @@ const Meals = (props) => {
   const { sendRequest, error, clearError } = useHttpClient();
 
   const submitNewMeal = async (values) => {
-    console.log(values, "val");
     try {
       await sendRequest(
         "http://localhost:5001/api/meals/add-meal",
@@ -63,7 +60,6 @@ const Meals = (props) => {
         }
       );
     } catch (err) {
-      console.log(err);
     }
 
     setIsOpen(false);
@@ -79,7 +75,6 @@ const Meals = (props) => {
     let filteredMeals = MEALS.filter((meal) => {
       return meal.category === categoryCtx.pickedCategory;
     });
-    console.log(filteredMeals + " filteredMeals");
     return (
       <React.Fragment>
         <ErrorModal error={error} onClear={clearError} />

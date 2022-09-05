@@ -67,7 +67,6 @@ const Register = () => {
             );
 
             AuthCtx.changeToLoggedOut();
-            console.log('Received values of form: ', values);
             changeRegisterToFalse();
         } catch (err) { }
     };

@@ -56,10 +56,8 @@ const MyOrders = () => {
             try {
                 const response = await fetch(`http://localhost:5001/api/orders/user/${AuthCtx.userId}`);
                 const responseData = await response.json();
-                console.log(responseData);
                 setLoadedOrders(responseData.orders);
             } catch (err) {
-                console.log(err);
             }
         };
         sendRequest();

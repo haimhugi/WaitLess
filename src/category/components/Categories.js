@@ -32,7 +32,6 @@ const Categories = (props) => {
         }
         setCATEGORIES(arr);
       } catch (err) {
-        console.log(err);
       }
       setIsLoading(false);
     };
@@ -51,7 +50,6 @@ const Categories = (props) => {
   };
 
   const categoryCtx = useContext(CategoryContext);
-  console.log("context is " + categoryCtx.pickedCategory);
 
   const { error, sendRequest, clearError } = useHttpClient();
 
@@ -62,7 +60,6 @@ const Categories = (props) => {
         "DELETE"
       );
     } catch (err) { }
-    console.log("remove category with the name: " + item);
     setPageChange(true);
   };
 
@@ -86,7 +83,7 @@ const Categories = (props) => {
                 <Popconfirm
                   title="?בטוח שברצונך רוצה למחוק את הקטגוריה הזאת"
                   onConfirm={() => deleteCategoryReq(item)}
-                  onVisibleChange={() => console.log("visible change")}
+                  }
                 >
                   <Tooltip className="deleteCategory">
                     <Button

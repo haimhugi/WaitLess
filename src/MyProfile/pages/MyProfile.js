@@ -29,7 +29,6 @@ const MyProfile = () => {
           JSON.stringify(responseData.user.email).replaceAll('"', "")
         );
       } catch (err) {
-        console.log(err);
       }
     };
     sendRequest();
@@ -44,10 +43,6 @@ const MyProfile = () => {
 
   const [pickedValueInMyProfile, setPickedValueInMyProfile] =
     useState("פרטים אישיים");
-
-  // useEffect(() => {
-  //   console.log("changed to " + pickedValueInMyProfile);
-  // }, [pickedValueInMyProfile]);
 
   return (
     <React.Fragment>

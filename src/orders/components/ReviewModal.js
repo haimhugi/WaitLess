@@ -37,7 +37,7 @@ const ReviewModal = props => {
             history.push("/loading");
             history.push("/u1/orders");
 
-        } catch (err) { console.log(err); }
+        } catch (err) {  }
 
     }
 

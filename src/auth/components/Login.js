@@ -37,20 +37,16 @@ const Login = () => {
                     "Content-Type": "application/json",
                 }
             );
-            console.log(responseData.user);
             AuthCtx.changeToLoggedIn(responseData.user.id, responseData.user.isAdmin);
             CartCtx.changeCategory("הכל");
             history.push("/meals");
-            console.log("Success");
         } catch (err) {
-            //add Try Again modal(?)
-            console.log(err);
         }
     };
 
     const changeRegisterToTrue = () => {
         RegisterCtx.changeRegister(true);
-        console.log("changeRegisterToTrue run");
+
     };
 
     return (

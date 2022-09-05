@@ -29,7 +29,6 @@ const EditMeal = (props) => {
         }
         setCATEGORIES(arr);
       } catch (err) {
-        console.log(err);
       }
     };
     sendRequest();
@@ -37,13 +36,11 @@ const EditMeal = (props) => {
   }, [pageChange]);
 
   const onFinish = (values) => {
-    console.log("Success:", values);
     props.onSubmit(values);
     props.onClose();
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
   return (
     <Modal onClose={props.onClose}>

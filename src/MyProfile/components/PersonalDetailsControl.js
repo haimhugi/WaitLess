@@ -22,7 +22,6 @@ const PersonalDetailsControl = (props) => {
           }
         );
       } catch (err) {
-        console.log(err);
       }
     } else {
       try {
@@ -37,7 +36,6 @@ const PersonalDetailsControl = (props) => {
           }
         );
       } catch (err) {
-        console.log(err);
       }
     }
   };

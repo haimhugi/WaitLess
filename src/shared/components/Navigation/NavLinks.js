@@ -26,7 +26,6 @@ const NavLinks = props => {
     const logoutHandler = async () => {
 
         if (await window.confirm("Are you sure you want to logout?")) {
-            console.log('yes');
             props.TablePickToTrue();
 
             try {
@@ -52,13 +51,11 @@ const NavLinks = props => {
             history.push("/auth");
         }
         else {
-            console.log('no');
             history.goBack();
         }
     }
 
     useEffect(() => {
-        console.log('this is cartCtx in app after changed' + JSON.stringify(AuthCtx));
     }, [AuthCtx]);
 
     return (

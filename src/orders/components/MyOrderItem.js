@@ -59,18 +59,12 @@ const MyOrderItem = (props) => {
             setIsLoading(false);
           }
         } catch (err) {
-          console.log(err);
         }
       });
     };
 
     sendRequest1();
   }, []);
-
-  // useEffect(() => {
-  //   console.log('isLoading changed to: ');
-  //   console.log(isLoading);
-  // }, [isLoading]);
 
   if (props.mealsNumber === 0) return "";
   return (

@@ -44,7 +44,6 @@ const OrdersList = (props) => {
       );
       props.setPageChange(true);
     } catch (errInfo) {
-      console.log("Validate Failed:", errInfo);
     }
   };
 
@@ -54,7 +53,6 @@ const OrdersList = (props) => {
     try {
       await sendRequest(`http://localhost:5001/api/orders/${id}`, "DELETE");
     } catch (err) { }
-    console.log("remove meal with the id: " + id);
     props.setPageChange(true);
   };
 
@@ -83,7 +81,6 @@ const OrdersList = (props) => {
           setIsLoading(false);
         }
       } catch (err) {
-        console.log(err);
       }
     });
   };
@@ -91,21 +88,16 @@ const OrdersList = (props) => {
 
   const convertUserIdToName = async (creator) => {
     try {
-      console.log(creator);
       const response = await fetch(
         `http://localhost:5001/api/users/${creator}`
       );
       const responseData = await response.json();
-      console.log("responseData");
-      console.log(responseData);
 
       setUsersName(JSON.stringify(responseData.user.name));
     } catch (err) {
-      console.log(err);
     }
   };
   useEffect(() => {
-    console.log(usersName);
   }, [usersName]);
 
   const columns = [
@@ -158,7 +150,6 @@ const OrdersList = (props) => {
           onConfirm={() => {
             deleteOrder(record.id);
           }}
-          onVisibleChange={() => console.log("visible change")}
         >
           <Space size="middle">
             <a>Delete</a>
@@ -235,8 +226,6 @@ const OrdersList = (props) => {
                 keys.push(record.id);
               }
               setCurrentRows(keys);
-              console.log("!!!!!!!!!!!!!!!!");
-              console.log(record);
               convertMealsIdToName(record.meals);
               convertUserIdToName(record.creator);
             },
@@ -251,8 +240,6 @@ const OrdersList = (props) => {
                 if (
                   event.target.className === "ant-dropdown-menu-title-content"
                 ) {
-                  console.log(record.id);
-                  console.log(event.target.innerHTML);
                   if (event.target.innerHTML === "הסתיים") {
                     save(record.id, "done");
                   }

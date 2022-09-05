@@ -25,7 +25,6 @@ const MealItem = (props) => {
     });
   };
 
-  console.log(props.reviewCount + "props.reviewCount");
 
   const [mealDescription, openMealDescription] = useState(false);
 

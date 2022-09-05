@@ -82,7 +82,6 @@ const UpdatePassword = () => {
       );
       showPasswordChangedModal();
     } catch (err) {
-      console.log(err);
     }
     setIsLoading(false);
   };

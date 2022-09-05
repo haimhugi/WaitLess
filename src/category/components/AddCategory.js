@@ -10,7 +10,6 @@ const AddCategory = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
 
   const onFinish = async (values) => {
-    console.log("Success:", values.name);
     try {
       await sendRequest(
         "http://localhost:5001/api/meals/add-category",
@@ -23,15 +22,12 @@ const AddCategory = (props) => {
         }
       );
 
-      console.log("Received values of form: ", values);
     } catch (err) {
-      console.log("add category error: ", err);
     }
     props.onClose();
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (

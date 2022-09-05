@@ -28,7 +28,6 @@ const TablePick = (props) => {
           "Content-Type": "application/json",
         }
       );
-      console.log(tableNum);
       props.onClose();
     } catch (err) {}
   };

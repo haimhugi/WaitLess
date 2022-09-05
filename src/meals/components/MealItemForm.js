@@ -19,7 +19,6 @@ const MealItemForm = (props) => {
         "DELETE"
       );
     } catch (err) { }
-    console.log("remove meal with the id: " + id);
     hideDeleteMealModal();
     //NewGET
     props.setPageChange(true);
@@ -71,9 +70,7 @@ const MealItemForm = (props) => {
         }
       );
 
-      console.log("Received values of form: ", values);
     } catch (err) {
-      console.log("patch meal failed: " + err);
     }
     hideEditMealModal();
     props.setPageChange(true);

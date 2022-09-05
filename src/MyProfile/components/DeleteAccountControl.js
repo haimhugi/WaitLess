@@ -19,7 +19,6 @@ const DeleteAccountControl = () => {
         "DELETE"
       );
     } catch (err) {
-      console.log(err);
     }
     AuthCtx.changeToLoggedOut();
     history.push("/auth");
@@ -36,7 +35,6 @@ const DeleteAccountControl = () => {
       <Popconfirm
         title="?בטוח שברצונך רוצה למחוק את החשבון שלך לצמיתות"
         onConfirm={confirm}
-        onVisibleChange={() => console.log("visible change")}
       >
         <Button style={{ margin: "10px" }} danger type="primary">
           מחק

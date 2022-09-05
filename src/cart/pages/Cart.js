@@ -39,13 +39,12 @@ const Cart = () => {
         const responseData = await response.json();
         return JSON.stringify(responseData.onTable);
       } catch (err) {
-        console.log(err);
+
       }
     };
     const resp = await sendRequest1();
     const respo = resp.replaceAll('"', "");
 
-    console.log(values, "val1");
     const unique_id = uuid();
     const cartCtxIdsArr = [];
     cartCtx.items.map((item) => {
@@ -68,7 +67,6 @@ const Cart = () => {
     cartCtxIdsArr.forEach((element) => {
       mealsWithIsReviewed.push({ mealId: element, isReviewed: false });
     });
-    console.log(mealsWithIsReviewed);
     try {
       await sendRequest(
         "http://localhost:5001/api/orders",
@@ -87,7 +85,6 @@ const Cart = () => {
         }
       );
     } catch (err) {
-      console.log(err);
     }
 
     let size = 0;
@@ -111,12 +108,8 @@ const Cart = () => {
     history.push("/u1/orders");
   };
 
-  // useEffect(() => {
-  //     console.log('this is userTable' + userTable);
-  // }, [userTable]);
 
   useEffect(() => {
-    console.log("this is cartCtx in cart" + JSON.stringify(cartCtx));
   }, [cartCtx]);
 
   const cartItems = (

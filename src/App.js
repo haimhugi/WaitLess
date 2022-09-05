@@ -91,25 +91,6 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
 
 
-  /*
-    useEffect(() => {
-      console.log('this is cartCtx in app after changed' + JSON.stringify(cartCtx));
-    }, [cartCtx]);
-  
-    useEffect(() => {
-      console.log('this is pickTableIsShown in app after changed ' + JSON.stringify(pickTableIsShown));
-    }, [pickTableIsShown]);
-  
-  */
-  // useEffect(() => {
-  //   console.log('this is pickedOrderStatus in app after changed ' + JSON.stringify(pickedOrderStatus));
-  // }, [pickedOrderStatus]);
-
-  // useEffect(() => {
-  //   console.log('this is pickTableIsShown in app after changed ' + JSON.stringify(pickTableIsShown));
-  // }, [pickTableIsShown]);
-
-
 
   const AuthCtx = useContext(AuthContext);
 

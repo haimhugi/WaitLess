@@ -68,7 +68,6 @@ const OrderManagement = (props) => {
         const responseData = await response.json();
         setOrders(responseData.orders);
       } catch (err) {
-        console.log(err);
       }
       setIsLoading(false);
     };
