@@ -134,7 +134,7 @@ const OrdersList = (props) => {
       key: "status",
     },
     {
-      title: "Action",
+      title: "פעולה",
       key: "action",
 
       render: (_, record) => (
@@ -145,13 +145,13 @@ const OrdersList = (props) => {
           }}
         >
           <Space size="middle">
-            <label style={{ color: "red", cursor: 'pointer'}}>Delete</label>
+            <label style={{ color: "red", cursor: 'pointer' }}>הסר</label>
           </Space>
         </Popconfirm>
       ),
     },
     {
-      title: "operation",
+      title: " סטטוס הזמנה",
       dataIndex: "operation",
       render: () => (
         <Space>

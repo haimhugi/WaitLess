@@ -9,7 +9,8 @@ const MealsList = props => {
     if (props.items.length === 0) {
         return <div className="center">
             <Card>
-                <h2>No meals found.</h2>
+                <h2>לא נמצאו מנות</h2>
+                <h1>😞</h1>
             </Card>
         </div>
     }
