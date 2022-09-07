@@ -9,6 +9,20 @@
   height: 85%;
 }
 
+.cat-list::-webkit-scrollbar {
+  width: 4px;
+  height: 0px;
+}
+.cat-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.cat-list::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.cat-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .cat-list
   .ant-list
   .ant-spin-nested-loading
