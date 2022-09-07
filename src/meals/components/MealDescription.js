@@ -23,7 +23,7 @@ const MealDescription = (props) => {
         style={{ borderRadius: '3px', backgroundColor: 'black', color: 'white', margin: '1px' }}
         onClick={props.onClose}
       >
-        Close
+        סגור
       </Button>
     </Card>
   );

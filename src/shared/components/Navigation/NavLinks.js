@@ -24,7 +24,7 @@ const NavLinks = props => {
     const AuthCtx = useContext(AuthContext);
     const logoutHandler = async () => {
 
-        if (await window.confirm("Are you sure you want to logout?")) {
+        if (await window.confirm("האם אתה בטוח שאתה רוצה להתנתק?")) {
             props.TablePickToTrue();
 
             try {
